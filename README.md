@@ -4,7 +4,7 @@ Design patterns final assignment made with Java swing UI.
 
 Start: 10/03/2022
 
-## Memebers
+## Members
 
 * Thomas koops
 * Ramon Gonzalez
