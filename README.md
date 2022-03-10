@@ -9,3 +9,5 @@ Start: 10/03/2022
 * Thomas koops
 * Ramon Gonzalez
 * Ian Donker
+
+![Class diagram](SolitaireDiagram.pdf)
