@@ -6,6 +6,6 @@ Start: 10/03/2022
 
 ## Memebers
 
-Thomas koops
-Ramon Gonzalez
-Ian Donker
+* Thomas koops
+* Ramon Gonzalez
+* Ian Donker
