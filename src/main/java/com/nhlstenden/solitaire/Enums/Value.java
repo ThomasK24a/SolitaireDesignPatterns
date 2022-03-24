@@ -1,4 +1,4 @@
-package main.java.com.nhlstenden.solitaire.enums;
+package main.java.com.nhlstenden.solitaire.Enums;
 
 public enum Value {
     ACE ,
