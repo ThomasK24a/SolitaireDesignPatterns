@@ -2,6 +2,10 @@ package main.java.com.nhlstenden.solitaire.Classes;
 
 import java.util.ArrayList;
 import main.java.com.nhlstenden.solitaire.Classes.Factory.BoardFactory;
+import main.java.com.nhlstenden.solitaire.Classes.Stacks.BoardStack;
+import main.java.com.nhlstenden.solitaire.Classes.Stacks.DeckStack;
+import main.java.com.nhlstenden.solitaire.Classes.Stacks.FinishStack;
+import main.java.com.nhlstenden.solitaire.Classes.Stacks.WasteStack;
 import main.java.com.nhlstenden.solitaire.Enums.Suit;
 
 public class GameBoard {

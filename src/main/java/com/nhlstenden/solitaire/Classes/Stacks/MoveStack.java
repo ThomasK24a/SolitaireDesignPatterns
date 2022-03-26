@@ -1,11 +1,11 @@
-package main.java.com.nhlstenden.solitaire.Classes;
+package main.java.com.nhlstenden.solitaire.Classes.Stacks;
 
 import main.java.com.nhlstenden.solitaire.Abstract.CardStack;
 import main.java.com.nhlstenden.solitaire.Interfaces.ICard;
 
 import java.util.ArrayList;
 
-public class WasteStack extends CardStack {
+public class MoveStack extends CardStack {
     @Override
     public boolean canAcceptStack(ArrayList<ICard> cardStack) {
         return false;

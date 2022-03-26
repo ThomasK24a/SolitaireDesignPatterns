@@ -1,4 +1,4 @@
-package main.java.com.nhlstenden.solitaire.Classes;
+package main.java.com.nhlstenden.solitaire.Classes.Stacks;
 
 import main.java.com.nhlstenden.solitaire.Abstract.CardStack;
 import main.java.com.nhlstenden.solitaire.Enums.Suit;

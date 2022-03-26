@@ -1,8 +1,8 @@
 package main.java.com.nhlstenden.solitaire.Classes.Factory;
 
-import main.java.com.nhlstenden.solitaire.Classes.BoardStack;
+import main.java.com.nhlstenden.solitaire.Classes.Stacks.BoardStack;
 import main.java.com.nhlstenden.solitaire.Classes.Card;
-import main.java.com.nhlstenden.solitaire.Classes.DeckStack;
+import main.java.com.nhlstenden.solitaire.Classes.Stacks.DeckStack;
 import main.java.com.nhlstenden.solitaire.Classes.ObjectPool.CardObjectPool;
 
 import java.util.ArrayList;
