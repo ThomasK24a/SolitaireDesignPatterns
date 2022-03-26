@@ -16,17 +16,11 @@ public class MainMenu {
     public MainMenu() {
 
         ImageIcon icon = new ImageIcon("images/clock.png");
-
-        JButton button = new JButton(icon);
-
-        button.setPreferredSize(new Dimension(20, 20));
-        button.setMaximumSize(new Dimension(20, 20));
-
         startButton.setBounds(50, 50, 300, 50);
         startButton.setIcon(icon);
+
         mainframe = new JFrame("Solitaire");
-        mainframe.add(button);
-        mainframe.revalidate();
+
         mainframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainframe.setContentPane(this.mainPanel);
         mainframe.setSize(800,500);
@@ -56,8 +50,16 @@ public class MainMenu {
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new GameBoardFrame();
+                new GameBoard();
             }
         });
     }
+}
+class JCardComponent extends JComponent {
+
+    public void paint(Graphics g) {
+        g.setColor(Color.green);
+        g.fillRect(30, 30, 100, 100);
+    }
+
 }
