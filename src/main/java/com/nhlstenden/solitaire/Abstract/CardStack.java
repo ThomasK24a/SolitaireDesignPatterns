@@ -6,4 +6,12 @@ import java.util.ArrayList;
 
 public abstract class CardStack {
     private ArrayList<Card> cards;
+
+    public CardStack() {
+        this.cards = new ArrayList<>();
+    }
+
+    public void addCards(ArrayList<Card> cards) {
+        this.cards.addAll(cards);
+    }
 }
