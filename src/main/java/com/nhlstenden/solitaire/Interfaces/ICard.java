@@ -9,4 +9,8 @@ public interface ICard {
     Value getValue();
 
     boolean isFaceUp();
+
+    boolean isBlack();
+
+    boolean isNextValue(Value value);
 }

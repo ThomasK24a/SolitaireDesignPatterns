@@ -23,11 +23,9 @@ public class CardDecorator {
     public void decorateCard(Card card){
     }
 
-    private Color getColorFromSuit(Suit suit){
-        //if suit is clubs or spades return black
-        if(suit.equals(Suit.CLUB) || suit.equals(Suit.SPADE)) return Color.BLACK;
-        //if suit is hearts or diamonds return red
-        return Color.RED;
+    private Color getColor(Card card){
+        if(card.isBlack()) return Color.BLACK;
+        else return Color.RED;
     }
 
     private void fillSuitIconMap(){
