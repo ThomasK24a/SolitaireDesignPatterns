@@ -36,6 +36,9 @@ public class BoardStack extends CardStack {
 
     @Override
     public boolean isIntractable(int cardIndex) {
+        if(cards.get(cardIndex).isFaceUp()){
+            return isStackInOrder(cardIndex);
+        }
         return false;
     }
 }

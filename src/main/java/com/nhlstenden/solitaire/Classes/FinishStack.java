@@ -29,6 +29,7 @@ public class FinishStack extends CardStack {
 
     @Override
     public boolean isIntractable(int cardIndex) {
-        return false;
+        //only the last card is intractable
+        return cardIndex == cards.size() - 1;
     }
 }
