@@ -8,8 +8,9 @@ import java.awt.event.ActionListener;
 public class GameBoard extends JFrame implements ActionListener {
 
     JButton b1,b2,b3,b4,b5,b6,b7,b8,b9,sample,starB;
-
     Icon star;
+
+    CardPanel panel = new CardPanel();
 
     Icon ic0=new ImageIcon("pic/starB0.jpg");
     Icon ic10=new ImageIcon("pic/starB10.jpg");
@@ -100,8 +101,14 @@ public class GameBoard extends JFrame implements ActionListener {
         starB.setBounds(330,5,50,50);
         star=b9.getIcon();
 
-        add(b1);add(b2);add(b3);add(b4);add(b5);add(b6);add(b7);add(b8);
-        add(b9);add(sample);add(l1);add(l2);add(starB);add(l3);
+
+
+        add(panel);
+
+        setLayout(null);
+        setVisible(true);
+//        add(b1);add(b2);add(b3);add(b4);add(b5);add(b6);add(b7);add(b8);
+//        add(b9);add(sample);add(l1);add(l2);add(starB);add(l3);
 
         b1.addActionListener(this); b2.addActionListener(this);
         b3.addActionListener(this); b4.addActionListener(this);
@@ -289,4 +296,3 @@ public class GameBoard extends JFrame implements ActionListener {
 //        }
     }//end of actionPerformed
 }//end of class
-
