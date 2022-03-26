@@ -2,17 +2,23 @@ package main.java.com.nhlstenden.solitaire.Classes.Stacks;
 
 import main.java.com.nhlstenden.solitaire.Abstract.CardStack;
 import main.java.com.nhlstenden.solitaire.Interfaces.ICard;
+import main.java.com.nhlstenden.solitaire.Interfaces.IOrderedStack;
 
 import java.util.ArrayList;
 
-public class MoveStack extends CardStack {
+public class MoveStack implements IOrderedStack {
+    protected ArrayList<ICard> cards;
+
     @Override
-    public boolean canAcceptStack(ArrayList<ICard> cardStack) {
+    public boolean isStackInOrder(int startingIndex) {
         return false;
     }
 
-    @Override
-    public boolean isIntractable(int cardIndex) {
-        return false;
+    public ICard getFirstCard(){
+        return cards.get(0);
+    }
+
+    public int size(){
+        return cards.size();
     }
 }

@@ -1,18 +1,16 @@
 package main.java.com.nhlstenden.solitaire.Classes.Stacks;
 
 import main.java.com.nhlstenden.solitaire.Abstract.CardStack;
-import main.java.com.nhlstenden.solitaire.Interfaces.ICard;
-
-import java.util.ArrayList;
 
 public class DeckStack extends CardStack {
     @Override
-    public boolean canAcceptStack(ArrayList<ICard> cardStack) {
+    public boolean canAcceptStack(MoveStack moveStack) {
         return false;
     }
 
     @Override
     public boolean isIntractable(int cardIndex) {
-        return false;
+        //only the last card is intractable and needs to be face up
+        return cardIndex == cards.size() - 1 && cards.get(cardIndex).isFaceUp();
     }
 }

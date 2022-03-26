@@ -2,21 +2,23 @@ package main.java.com.nhlstenden.solitaire.Classes.Stacks;
 
 import main.java.com.nhlstenden.solitaire.Abstract.CardStack;
 import main.java.com.nhlstenden.solitaire.Interfaces.ICard;
+import main.java.com.nhlstenden.solitaire.Interfaces.IOrderedStack;
 
 import java.util.ArrayList;
 
-public class BoardStack extends CardStack {
+public class BoardStack extends CardStack implements IOrderedStack {
 
-    public ArrayList<ICard> getAllBelow(int startingIndex){
+    public MoveStack getAllBelow(int startingIndex){
         if(isStackInOrder(startingIndex)) {
             throw new RuntimeException(); //TODO: do something with this
         }
-        ArrayList<ICard> cardsToMove = (ArrayList<ICard>) cards.subList(startingIndex, cards.size());
+        MoveStack moveStack = new MoveStack();
+        moveStack.cards.addAll(cards.subList(startingIndex, cards.size()));
         cards = (ArrayList<ICard>) cards.subList(0, startingIndex);
-        return cardsToMove;
+        return moveStack;
     }
 
-    private boolean isStackInOrder(int startingIndex){
+    public boolean isStackInOrder(int startingIndex){
         ArrayList<ICard> toCheckStack = (ArrayList<ICard>) cards.subList(startingIndex, cards.size());
         //set is last card black to the opposite of the first card, so it always passes the check;
         boolean isLastCardBlack = !cards.get(startingIndex).isBlack();
@@ -30,8 +32,8 @@ public class BoardStack extends CardStack {
     }
 
     @Override
-    public boolean canAcceptStack(ArrayList<ICard> cardStack) {
-        return false;
+    public boolean canAcceptStack(MoveStack moveStack) {
+        return moveStack.getFirstCard().isBlack() != cards.get(cards.size() - 1).isBlack();
     }
 
     @Override

@@ -4,22 +4,20 @@ import main.java.com.nhlstenden.solitaire.Abstract.CardStack;
 import main.java.com.nhlstenden.solitaire.Enums.Suit;
 import main.java.com.nhlstenden.solitaire.Interfaces.ICard;
 
-import java.util.ArrayList;
-
 public class FinishStack extends CardStack {
-    private Suit suit;
+    private final Suit suit;
 
     public FinishStack(Suit suit) {
-
+        this.suit = suit;
     }
 
     @Override
-    public boolean canAcceptStack(ArrayList<ICard> cardStack) {
+    public boolean canAcceptStack(MoveStack moveStack) {
         //Can only accept single cards
-        if(cardStack.size() != 1){
+        if(moveStack.size() != 1){
             return false;
         }
-        ICard cardToAdd = cardStack.get(0);
+        ICard cardToAdd = moveStack.getFirstCard();
         //Can only accept cards with the same suit as the finish stack
         if(!cardToAdd.getSuit().equals(suit)){
             return false;
