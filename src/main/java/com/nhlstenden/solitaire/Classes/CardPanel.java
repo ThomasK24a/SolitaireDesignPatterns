@@ -5,6 +5,7 @@ import java.awt.*;
 
 public class CardPanel extends JPanel {
     public CardPanel() {
+
         Icon ic0=new ImageIcon("pic/starB0.jpg");
         Icon ic10=new ImageIcon("pic/starB10.jpg");
 

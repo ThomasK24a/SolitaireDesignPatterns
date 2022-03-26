@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import main.java.com.nhlstenden.solitaire.Classes.Factory.BoardFactory;
 import main.java.com.nhlstenden.solitaire.Enums.Suit;
 
-public class GameBoard {
+import javax.swing.*;
+
+public class GameBoard extends JFrame {
+
     private final int BOARD_STACKS_AMOUNT = 7;
 
     private ArrayList<BoardStack> boardStacks;
