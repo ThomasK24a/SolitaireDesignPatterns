@@ -13,4 +13,6 @@ public interface ICard {
     boolean isBlack();
 
     boolean isNextValue(Value value);
+
+    void setPosition(int x, int y);
 }

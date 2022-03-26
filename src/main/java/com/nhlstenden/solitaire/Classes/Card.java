@@ -11,6 +11,12 @@ public class Card extends JPanel implements ICard {
     private final Suit suit;
     private final Value value;
     private boolean isFaceUp;
+    private Icon valueSprite;
+    private Icon suitSprite;
+
+    private final JLabel suitLabel;
+    private final JLabel valueLabel;
+
     private static Icon backSprite;
 
     public Card(Suit suit, Value value, boolean isFaceUp) {
@@ -18,21 +24,14 @@ public class Card extends JPanel implements ICard {
         this.value = value;
         this.isFaceUp = isFaceUp;
 
+        suitLabel = new JLabel();
+        valueLabel = new JLabel();
 
-        Icon ic0=new ImageIcon("pic/starB0.jpg");
-        Icon ic10=new ImageIcon("pic/starB10.jpg");
+        valueSprite = new ImageIcon("pic/starB20.jpg");
+        suitSprite = new ImageIcon("pic/starB10.jpg");
 
-        setBounds(40, 80, 200, 200);
-        JLabel b1 = new JLabel("Button 1");
-        b1.setBounds(50, 100, 80, 30);
-        b1.setIcon(ic0);
-        setBounds(40,80,200,200);
-        setBackground(Color.black);
-        JLabel b2 = new JLabel("Button 2");
-        b2.setIcon(ic10);
-        b2.setBounds(100, 100, 80, 30);
-        add(b1);
-        add(b2);
+        this.setPosition(0, 0);
+
     }
 
 
@@ -56,6 +55,7 @@ public class Card extends JPanel implements ICard {
      * Check if the given value is the next value after this card's value,
      * if this card is an ace the next value will be a two, three is after two, etc.
      * Jack is after ten, queen after jack, king and queen and after king there is no next value
+     *
      * @param value value of the card to check
      * @return return true if the given value is the next value
      */
@@ -64,5 +64,22 @@ public class Card extends JPanel implements ICard {
         int intValue = getValue().ordinal();
         int intValueToCompare = value.ordinal();
         return intValue == intValueToCompare + 1;
+    }
+
+    @Override
+    public void setPosition(int x, int y) {
+
+        this.valueLabel.setBounds(50, 100, 10, 20);
+        this.suitLabel.setBounds(0, 100, 10, 20);
+
+        suitLabel.setIcon(valueSprite);
+        valueLabel.setIcon(suitSprite);
+
+        add(suitLabel);
+        add(valueLabel);
+
+        setBounds(x, y, 100, 100);
+        setBackground(Color.darkGray);
+        revalidate();
     }
 }

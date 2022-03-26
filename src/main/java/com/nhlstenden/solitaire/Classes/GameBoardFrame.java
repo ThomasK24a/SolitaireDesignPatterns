@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 public class GameBoardFrame extends JFrame implements ActionListener {
 
     JButton b1,b2,b3,b4,b5,b6,b7,b8,b9,sample,starB;
-    CardPanel card = new CardPanel();
+    Card card = new Card(Suit.SPADE, Value.ACE, false);
     Icon star;
 
     Icon ic0=new ImageIcon("pic/starB0.jpg");
@@ -102,7 +102,7 @@ public class GameBoardFrame extends JFrame implements ActionListener {
         starB=new JButton(ic0);
         starB.setBounds(330,5,50,50);
         star=b9.getIcon();
-add(card);
+        add(card);
         add(b1);add(b2);add(b3);add(b4);add(b5);add(b6);add(b7);add(b8);
         add(b9);add(sample);add(l1);add(l2);add(starB);add(l3);
 

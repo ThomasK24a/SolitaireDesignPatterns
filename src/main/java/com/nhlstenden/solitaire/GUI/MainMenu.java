@@ -12,7 +12,6 @@ public class MainMenu {
     private JButton startButton;
     private JPanel mainPanel;
     private JButton exitButton;
-    JCardComponent cardComponent = new JCardComponent();
 
     public MainMenu() {
 
@@ -21,8 +20,6 @@ public class MainMenu {
         startButton.setIcon(icon);
 
         mainframe = new JFrame("Solitaire");
-
-        mainframe.add(cardComponent);
 
         mainframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainframe.setContentPane(this.mainPanel);
@@ -53,7 +50,7 @@ public class MainMenu {
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new GameBoardFrame();
+                new GameBoard();
             }
         });
     }
