@@ -1,4 +1,6 @@
 package main.java.com.nhlstenden.solitaire.Classes;
 
-public class WasteStack {
+import main.java.com.nhlstenden.solitaire.Abstract.CardStack;
+
+public class WasteStack extends CardStack {
 }

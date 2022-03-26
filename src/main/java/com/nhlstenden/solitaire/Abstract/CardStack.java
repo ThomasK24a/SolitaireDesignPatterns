@@ -14,4 +14,12 @@ public abstract class CardStack {
     public void addCards(ArrayList<Card> cards) {
         this.cards.addAll(cards);
     }
+
+    public boolean canAcceptStack(ArrayList<Card> cardStack){
+        return false;
+    }
+
+    public Boolean isInteractable(int cardIndex){
+        return false;
+    }
 }

@@ -1,4 +1,6 @@
 package main.java.com.nhlstenden.solitaire.Classes;
 
-public class DeckStack {
+import main.java.com.nhlstenden.solitaire.Abstract.CardStack;
+
+public class DeckStack extends CardStack {
 }
