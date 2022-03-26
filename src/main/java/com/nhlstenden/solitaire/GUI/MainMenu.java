@@ -56,7 +56,7 @@ public class MainMenu {
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new GameBoard();
+                new GameBoardFrame();
             }
         });
     }

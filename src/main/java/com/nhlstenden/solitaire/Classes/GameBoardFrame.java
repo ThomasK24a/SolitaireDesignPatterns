@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class GameBoard extends JFrame implements ActionListener {
+public class GameBoardFrame extends JFrame implements ActionListener {
 
     JButton b1,b2,b3,b4,b5,b6,b7,b8,b9,sample,starB;
 
@@ -49,7 +49,7 @@ public class GameBoard extends JFrame implements ActionListener {
     Icon ic28=new ImageIcon("pic/22.jpg");
     Icon ic29=new ImageIcon("pic/26.jpg");
 
-    public GameBoard(){
+    public GameBoardFrame(){
 
         super("pic puzzle");
 
