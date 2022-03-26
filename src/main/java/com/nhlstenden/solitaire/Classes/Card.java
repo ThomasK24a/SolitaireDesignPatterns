@@ -4,10 +4,13 @@ import main.java.com.nhlstenden.solitaire.Enums.Suit;
 import main.java.com.nhlstenden.solitaire.Enums.Value;
 import main.java.com.nhlstenden.solitaire.Interfaces.ICard;
 
-public class Card implements ICard {
-    private Suit suit;
-    private Value value;
+import javax.swing.*;
+
+public class Card extends JComponent implements ICard {
+    private final Suit suit;
+    private final Value value;
     private boolean isFaceUp;
+    private static ImageIcon backSprite;
 
     public Card(Suit suit, Value value, boolean isFaceUp) {
         this.suit = suit;

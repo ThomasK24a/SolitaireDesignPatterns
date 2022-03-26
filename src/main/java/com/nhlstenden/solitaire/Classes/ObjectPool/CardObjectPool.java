@@ -3,17 +3,18 @@ package main.java.com.nhlstenden.solitaire.Classes.ObjectPool;
 import main.java.com.nhlstenden.solitaire.Classes.Card;
 import main.java.com.nhlstenden.solitaire.Enums.Suit;
 import main.java.com.nhlstenden.solitaire.Enums.Value;
+import main.java.com.nhlstenden.solitaire.Classes.Decorator.CardDecorator;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Random;
 
 public class CardObjectPool {
     private final ArrayList<Card> pool;
+    private final CardDecorator decorator;
 
     public CardObjectPool() {
         pool = createFullDeck();
-        Collections.shuffle(pool);
+        decorator = new CardDecorator();
     }
 
     public ArrayList<Card> getRandomCardStack(int cardStackSize){
@@ -37,20 +38,35 @@ public class CardObjectPool {
         Card card = pool.get(randomCardIndex);
         //remove the card from the pool
         pool.remove(randomCardIndex);
+
         return card;
+    }
+
+    public ArrayList<Card> getRemainingCards(){
+        return getRandomCardStack(pool.size());
     }
 
     public void returnCard(Card card){
         pool.add(card);
     }
 
+    public void returnCards(ArrayList<Card> cards){
+        pool.addAll(cards);
+    }
+
     private ArrayList<Card> createFullDeck(){
         ArrayList<Card> deck = new ArrayList<>();
         for(Suit suit : Suit.class.getEnumConstants()){
             for(Value value : Value.class.getEnumConstants()){
-                deck.add(new Card(suit, value, false));
+                deck.add(createDecoratedCard(suit, value));
             }
         }
         return deck;
+    }
+
+    private Card createDecoratedCard(Suit suit, Value value){
+        Card card = new Card(suit, value, false);
+        decorator.decorateCard(card);
+        return card;
     }
 }
