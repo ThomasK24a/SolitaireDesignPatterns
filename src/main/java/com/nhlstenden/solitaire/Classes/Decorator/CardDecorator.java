@@ -23,7 +23,10 @@ public class CardDecorator {
     }
 
     public void decorateCard(Card card) {
+
         card.setSuitSprite(getIcon(suitIconMap.get(card.getSuit())));
+
+        System.out.println(card.getSuit());
 
         if (card.isBlack()) {
             card.setValueSprite(getIcon(valueIconBlackMap.get(card.getValue())));
@@ -41,10 +44,10 @@ public class CardDecorator {
     }
 
     private void fillSuitIconMap() {
-        suitIconMap.put(Suit.CLUB, "club.png");
-        suitIconMap.put(Suit.HEART, "hear.png");
-        suitIconMap.put(Suit.DIAMOND, "diamond.png");
+        suitIconMap.put(Suit.HEART, "heart.png");
         suitIconMap.put(Suit.SPADE, "spade.png");
+        suitIconMap.put(Suit.DIAMOND, "diamond.png");
+        suitIconMap.put(Suit.CLUB, "club.png");
     }
 
     private void fillValueIconMap(String mapColor, EnumMap<Value, String> valueMap) {
@@ -65,11 +68,10 @@ public class CardDecorator {
     }
 
     private ImageIcon getIcon(String imageName) {
-        URL imgURL = getClass().getResource("src/resources/card_sprites/" + imageName);
-        if (imgURL == null) {
-            throw new RuntimeException();
-        } else {
-            return new ImageIcon(imgURL);
-        }
+        String imgURL = "src/resources/card_sprites/" + imageName;
+        System.out.println(imgURL);
+
+        return new ImageIcon(imgURL);
+
     }
 }

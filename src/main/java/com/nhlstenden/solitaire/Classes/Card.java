@@ -50,9 +50,9 @@ public class Card extends JPanel implements ICard {
         faceDownLabel.setIcon(backSprite);
 
         Border border = BorderUIResource.getBlackLineBorderUIResource();
-        valueSprite = new ImageIcon("src/resources/card_sprites/ace_red.png");
-
-        suitSprite = new ImageIcon("src/resources/card_sprites/club.png");
+//        valueSprite = new ImageIcon("src/resources/card_sprites/ace_red.png");
+//
+//        suitSprite = new ImageIcon("src/resources/card_sprites/club.png");
         setBorder(border);
         validate();
         setFaceDown(isFaceUp);
@@ -62,11 +62,13 @@ public class Card extends JPanel implements ICard {
 
     public void setValueSprite(Icon valueSprite) {
         this.valueSprite = valueSprite;
+        valueLabel.setIcon(valueSprite);
         validate();
     }
 
     public void setSuitSprite(Icon suitSprite) {
         this.suitSprite = suitSprite;
+        suitButton.setIcon(this.suitSprite);
         validate();
     }
 
