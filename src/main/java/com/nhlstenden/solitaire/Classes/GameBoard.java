@@ -1,8 +1,5 @@
 package main.java.com.nhlstenden.solitaire.Classes;
 
-import java.awt.*;
-import java.util.ArrayList;
-
 import main.java.com.nhlstenden.solitaire.Abstract.CardStack;
 import main.java.com.nhlstenden.solitaire.Classes.Factory.BoardFactory;
 import main.java.com.nhlstenden.solitaire.Classes.Stacks.BoardStack;
@@ -12,23 +9,27 @@ import main.java.com.nhlstenden.solitaire.Classes.Stacks.WasteStack;
 import main.java.com.nhlstenden.solitaire.Enums.Suit;
 import main.java.com.nhlstenden.solitaire.Enums.Value;
 import main.java.com.nhlstenden.solitaire.Interfaces.ICard;
+import main.java.com.nhlstenden.solitaire.Interfaces.ICard;
 import org.w3c.dom.css.RGBColor;
 
 import javax.swing.*;
 import javax.swing.plaf.ColorUIResource;
+import java.awt.*;
+import java.util.ArrayList;
 
 public class GameBoard extends JFrame {
 
     private final int BOARD_STACKS_AMOUNT = 7;
 
 
-    private ArrayList<BoardStack> boardStacks;
-    private ArrayList<FinishStack> finishStacks;
-    private DeckStack deck;
-    private WasteStack waste;
-    private BoardFactory boardFactory;
+    private final ArrayList<BoardStack> boardStacks;
+    private final ArrayList<FinishStack> finishStacks;
+    private final DeckStack deck;
+    private final WasteStack waste;
+    private final BoardFactory boardFactory;
+    private CardLocation selectedCardLocation;
 
-    private JButton playerCardsButton;
+    private final JButton playerCardsButton;
 
     public GameBoard() {
         super("Solitaire");
@@ -61,6 +62,8 @@ public class GameBoard extends JFrame {
 
         add(playerCardsButton);
         createPlayingBoard();
+
+
 
         setLayout(null);
         setBackground(Color.cyan);
@@ -96,6 +99,13 @@ public class GameBoard extends JFrame {
             finishStacks.add(new FinishStack(suit));
         }
         return finishStacks;
+    }
+
+    private void onSelectCard(ICard card){
+        CardStack stackLocation = card.getStackLocation();
+        int index = stackLocation.findCardIndex(card);
+        if(index == -1) throw new RuntimeException(); // TODO: add custom exception
+        selectedCardLocation = new CardLocation(stackLocation, index);
     }
 
     private void createPlayingBoard() {

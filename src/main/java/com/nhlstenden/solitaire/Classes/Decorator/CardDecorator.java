@@ -3,12 +3,10 @@ package main.java.com.nhlstenden.solitaire.Classes.Decorator;
 import main.java.com.nhlstenden.solitaire.Classes.Card;
 import main.java.com.nhlstenden.solitaire.Enums.Suit;
 import main.java.com.nhlstenden.solitaire.Enums.Value;
+import main.java.com.nhlstenden.solitaire.Exceptions.ResourceNotFoundException;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
 import java.util.EnumMap;
 
@@ -68,7 +66,7 @@ public class CardDecorator {
     private ImageIcon getIcon(String imageName) {
         URL imgURL = this.getClass().getClassLoader().getResource("card_sprites/" + imageName);
         if (imgURL == null) {
-            throw new RuntimeException(imageName);
+            throw new ResourceNotFoundException(imageName + "sprite");
         } else {
             return new ImageIcon(imgURL);
         }
