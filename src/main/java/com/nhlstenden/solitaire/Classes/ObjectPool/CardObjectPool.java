@@ -13,8 +13,9 @@ public class CardObjectPool {
     private final CardDecorator decorator;
 
     public CardObjectPool() {
-        pool = createFullDeck();
         decorator = new CardDecorator();
+        
+        pool = createFullDeck();
     }
 
     public ArrayList<Card> getRandomCardStack(int cardStackSize){
