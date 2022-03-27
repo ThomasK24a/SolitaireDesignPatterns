@@ -1,12 +1,14 @@
 package main.java.com.nhlstenden.solitaire.Classes.Decorator;
 
 import main.java.com.nhlstenden.solitaire.Classes.Card;
-import main.java.com.nhlstenden.solitaire.Classes.CardPanel;
 import main.java.com.nhlstenden.solitaire.Enums.Suit;
 import main.java.com.nhlstenden.solitaire.Enums.Value;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.EnumMap;
 
@@ -26,15 +28,12 @@ public class CardDecorator {
 
         card.setSuitSprite(getIcon(suitIconMap.get(card.getSuit())));
 
-        System.out.println(card.getSuit());
-
         if (card.isBlack()) {
             card.setValueSprite(getIcon(valueIconBlackMap.get(card.getValue())));
-
             return;
         }
-
         card.setValueSprite(getIcon(valueIconRedMap.get(card.getValue())));
+
 
     }
 
@@ -51,10 +50,9 @@ public class CardDecorator {
     }
 
     private void fillValueIconMap(String mapColor, EnumMap<Value, String> valueMap) {
-
-        valueMap.put(Value.THREE, "3_" + mapColor);
         valueMap.put(Value.ACE, "ace_" + mapColor);
         valueMap.put(Value.TWO, "2_" + mapColor);
+        valueMap.put(Value.THREE, "3_" + mapColor);
         valueMap.put(Value.FOUR, "4_" + mapColor);
         valueMap.put(Value.FIVE, "5_" + mapColor);
         valueMap.put(Value.SIX, "6_" + mapColor);
@@ -68,10 +66,11 @@ public class CardDecorator {
     }
 
     private ImageIcon getIcon(String imageName) {
-        String imgURL = "src/resources/card_sprites/" + imageName;
-        System.out.println(imgURL);
-
-        return new ImageIcon(imgURL);
-
+        URL imgURL = this.getClass().getClassLoader().getResource("card_sprites/" + imageName);
+        if (imgURL == null) {
+            throw new RuntimeException(imageName);
+        } else {
+            return new ImageIcon(imgURL);
+        }
     }
 }
