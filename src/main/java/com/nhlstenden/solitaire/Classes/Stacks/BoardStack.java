@@ -1,6 +1,7 @@
 package main.java.com.nhlstenden.solitaire.Classes.Stacks;
 
 import main.java.com.nhlstenden.solitaire.Abstract.CardStack;
+import main.java.com.nhlstenden.solitaire.Enums.Value;
 import main.java.com.nhlstenden.solitaire.Interfaces.ICard;
 import main.java.com.nhlstenden.solitaire.Interfaces.IOrderedStack;
 
@@ -33,7 +34,11 @@ public class BoardStack extends CardStack implements IOrderedStack {
 
     @Override
     public boolean canAcceptStack(MoveStack moveStack) {
-        return moveStack.getFirstCard().isBlack() != cards.get(cards.size() - 1).isBlack();
+        if(getLastCard() == null){
+            return moveStack.getFirstCard().isNextValue(Value.NONE);
+        }
+        return moveStack.getFirstCard().isNextValue(getLastCard().getValue()) &&
+             moveStack.getFirstCard().isBlack() != getLastCard().isBlack();
     }
 
     @Override
@@ -42,5 +47,14 @@ public class BoardStack extends CardStack implements IOrderedStack {
             return isStackInOrder(cardIndex);
         }
         return false;
+    }
+
+    /**
+     * Will get the last card from this board stack
+     * @return the last card, null if the stack is empty
+     */
+    private ICard getLastCard(){
+        if(cards.size() == 0) return null;
+        return cards.get(cards.size() - 1);
     }
 }
