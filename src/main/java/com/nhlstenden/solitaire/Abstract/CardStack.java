@@ -15,6 +15,10 @@ public abstract class CardStack {
     }
 
     public void addCards(List<ICard> cards) {
+        for(ICard card : cards){
+            card.onCardMove(this);
+        }
+
         this.cards.addAll(cards);
     }
 

@@ -1,5 +1,6 @@
 package main.java.com.nhlstenden.solitaire.Classes;
 
+import main.java.com.nhlstenden.solitaire.Abstract.CardStack;
 import main.java.com.nhlstenden.solitaire.Enums.Suit;
 import main.java.com.nhlstenden.solitaire.Enums.Value;
 import main.java.com.nhlstenden.solitaire.Interfaces.ICard;
@@ -23,6 +24,8 @@ public class Card extends JPanel implements ICard {
 
     private Icon valueSprite;
     private Icon suitSprite;
+
+    private CardStack stackLocation;
 
     private static Icon backSprite = new ImageIcon("src/resources/card_sprites/back_red_basic.png");
     private static Icon faceUpSprite = new ImageIcon("src/resources/card_sprites/total_blank_front.png");
@@ -90,7 +93,8 @@ public class Card extends JPanel implements ICard {
     /**
      * Check if the given value is the next value after this card's value,
      * if this card is an ace the next value will be a two, three is after two, etc.
-     * Ace is after None, jack is after ten, queen after jack, king and queen and after king there is no next value
+     * Ace is after None, jack is after ten, queen after jack, king and queen
+     * for king the method will return true if the next value is none
      * @param value value of the card to check
      * @return return true if the given value is the next value
      */
@@ -118,5 +122,8 @@ public class Card extends JPanel implements ICard {
         revalidate();
     }
 
-
+    @Override
+    public void onCardMove(CardStack cardStack){
+        this.stackLocation = cardStack;
+    }
 }
