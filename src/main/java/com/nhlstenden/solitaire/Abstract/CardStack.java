@@ -1,6 +1,5 @@
 package main.java.com.nhlstenden.solitaire.Abstract;
 
-import main.java.com.nhlstenden.solitaire.Classes.Card;
 import main.java.com.nhlstenden.solitaire.Classes.Stacks.MoveStack;
 import main.java.com.nhlstenden.solitaire.Interfaces.ICard;
 
@@ -26,4 +25,12 @@ public abstract class CardStack {
 
     public abstract boolean isIntractable(int cardIndex);
 
+    public int findCardIndex(ICard cardToFind){
+        int i = 0;
+        for(ICard card : cards){
+            if(card == cardToFind) return i;
+            i++;
+        }
+        return -1;
+    }
 }

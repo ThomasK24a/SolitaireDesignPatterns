@@ -31,8 +31,8 @@ public class Card extends JPanel implements ICard {
 
     private CardStack stackLocation;
 
-    private static Icon backSprite = new ImageIcon("src/resources/card_sprites/back_red_basic.png");
-    private static Icon faceUpSprite = new ImageIcon("src/resources/card_sprites/total_blank_front.png");
+    private static final Icon backSprite = new ImageIcon("src/resources/card_sprites/back_red_basic.png");
+    private static final Icon faceUpSprite = new ImageIcon("src/resources/card_sprites/total_blank_front.png");
 
 
     public Card(Suit suit, Value value, boolean isFaceUp) {
@@ -150,5 +150,10 @@ public class Card extends JPanel implements ICard {
     @Override
     public void onCardMove(CardStack cardStack){
         this.stackLocation = cardStack;
+    }
+
+    @Override
+    public CardStack getStackLocation() {
+        return this.stackLocation;
     }
 }

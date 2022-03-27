@@ -20,4 +20,6 @@ public interface ICard {
     void setPosition(int x, int y);
 
     void onCardMove(CardStack cardStack);
+
+    CardStack getStackLocation();
 }
