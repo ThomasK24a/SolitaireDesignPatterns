@@ -5,6 +5,7 @@ import main.java.com.nhlstenden.solitaire.Classes.Stacks.MoveStack;
 import main.java.com.nhlstenden.solitaire.Interfaces.ICard;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public abstract class CardStack {
     protected ArrayList<ICard> cards;
@@ -13,7 +14,7 @@ public abstract class CardStack {
         this.cards = new ArrayList<>();
     }
 
-    public void addCards(ArrayList<Card> cards) {
+    public void addCards(List<ICard> cards) {
         this.cards.addAll(cards);
     }
 

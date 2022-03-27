@@ -1,6 +1,7 @@
 package main.java.com.nhlstenden.solitaire.Enums;
 
 public enum Value {
+    NONE,
     ACE ,
     TWO,
     THREE,
