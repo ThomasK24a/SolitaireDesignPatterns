@@ -8,8 +8,7 @@ import main.java.com.nhlstenden.solitaire.Classes.Stacks.FinishStack;
 import main.java.com.nhlstenden.solitaire.Classes.Stacks.WasteStack;
 import main.java.com.nhlstenden.solitaire.Enums.Suit;
 import main.java.com.nhlstenden.solitaire.Enums.Value;
-import main.java.com.nhlstenden.solitaire.Interfaces.ICard;
-import main.java.com.nhlstenden.solitaire.Interfaces.ICard;
+
 import org.w3c.dom.css.RGBColor;
 
 import javax.swing.*;
@@ -101,7 +100,7 @@ public class GameBoard extends JFrame {
         return finishStacks;
     }
 
-    private void onSelectCard(ICard card){
+    private void onSelectCard(Card card){
         CardStack stackLocation = card.getStackLocation();
         int index = stackLocation.findCardIndex(card);
         if(index == -1) throw new RuntimeException(); // TODO: add custom exception
