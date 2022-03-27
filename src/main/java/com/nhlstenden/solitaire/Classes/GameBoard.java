@@ -1,6 +1,8 @@
 package main.java.com.nhlstenden.solitaire.Classes;
 
 import java.util.ArrayList;
+
+import main.java.com.nhlstenden.solitaire.Abstract.CardStack;
 import main.java.com.nhlstenden.solitaire.Classes.Factory.BoardFactory;
 import main.java.com.nhlstenden.solitaire.Classes.Stacks.BoardStack;
 import main.java.com.nhlstenden.solitaire.Classes.Stacks.DeckStack;
@@ -35,11 +37,24 @@ public class GameBoard extends JFrame {
         finishStacks = createFinishStacks();
         boardFactory = new BoardFactory();
         waste = new WasteStack();
-        deck = new DeckStack();
+        deck = new DeckStack(waste);
 
         boardFactory.fillDeck(deck);
         boardFactory.fillBoardStacks(boardStacks);
 
+    }
+
+    public void onCardMoved(){
+        if(areFinishStacksComplete()){
+            //set state to post game state
+        }
+    }
+
+    public boolean areFinishStacksComplete(){
+        for(FinishStack finishStack : finishStacks){
+            if(!finishStack.isComplete()) return false;
+        }
+        return true;
     }
 
     private ArrayList<BoardStack> createBoardStacks(){

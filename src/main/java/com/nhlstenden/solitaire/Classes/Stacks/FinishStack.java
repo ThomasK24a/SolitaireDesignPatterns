@@ -1,7 +1,9 @@
 package main.java.com.nhlstenden.solitaire.Classes.Stacks;
 
 import main.java.com.nhlstenden.solitaire.Abstract.CardStack;
+import main.java.com.nhlstenden.solitaire.Classes.Card;
 import main.java.com.nhlstenden.solitaire.Enums.Suit;
+import main.java.com.nhlstenden.solitaire.Enums.Value;
 import main.java.com.nhlstenden.solitaire.Interfaces.ICard;
 
 public class FinishStack extends CardStack {
@@ -29,5 +31,10 @@ public class FinishStack extends CardStack {
     public boolean isIntractable(int cardIndex) {
         //only the last card is intractable
         return cardIndex == cards.size() - 1;
+    }
+
+    public boolean isComplete(){
+        ICard lastCard = cards.get(cards.size() - 1);
+        return lastCard.getValue().equals(Value.KING);
     }
 }

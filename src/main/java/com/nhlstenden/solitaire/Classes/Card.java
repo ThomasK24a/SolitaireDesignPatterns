@@ -54,8 +54,7 @@ public class Card extends JPanel implements ICard {
     /**
      * Check if the given value is the next value after this card's value,
      * if this card is an ace the next value will be a two, three is after two, etc.
-     * Jack is after ten, queen after jack, king and queen and after king there is no next value
-     *
+     * Ace is after None, jack is after ten, queen after jack, king and queen and after king there is no next value
      * @param value value of the card to check
      * @return return true if the given value is the next value
      */
