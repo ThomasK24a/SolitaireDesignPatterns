@@ -6,7 +6,11 @@ import main.java.com.nhlstenden.solitaire.Enums.Value;
 import main.java.com.nhlstenden.solitaire.Interfaces.ICard;
 
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.plaf.BorderUIResource;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Card extends JPanel implements ICard {
     private final int CARD_SIZE_WIDTH = 65;
@@ -45,16 +49,35 @@ public class Card extends JPanel implements ICard {
 
         faceDownLabel.setIcon(backSprite);
 
+        Border border = BorderUIResource.getBlackLineBorderUIResource();
+        valueSprite = new ImageIcon("src/resources/card_sprites/ace_red.png");
 
-        valueSprite = new ImageIcon("src/resources/card_sprites/ace_black.png");
-        suitSprite = new ImageIcon("src/resources/card_sprites/ace_clubs.png");
+        suitSprite = new ImageIcon("src/resources/card_sprites/club.png");
+        setBorder(border);
         validate();
         setFaceDown(isFaceUp);
-        setPosition(200, 100);
+        createButton();
 
     }
 
+    public void setValueSprite(Icon valueSprite) {
+        this.valueSprite = valueSprite;
+        validate();
+    }
 
+    public void setSuitSprite(Icon suitSprite) {
+        this.suitSprite = suitSprite;
+        validate();
+    }
+
+    public void createButton() {
+       suitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setPosition(400,400);
+            }
+        });
+    }
     public Suit getSuit() {
         return suit;
     }

@@ -13,49 +13,62 @@ import java.util.EnumMap;
 public class CardDecorator {
 
     EnumMap<Suit, String> suitIconMap = new EnumMap<>(Suit.class);
-    EnumMap<Value, String> valueIconMap = new EnumMap<>(Value.class);
+    EnumMap<Value, String> valueIconRedMap = new EnumMap<>(Value.class);
+    EnumMap<Value, String> valueIconBlackMap = new EnumMap<>(Value.class);
 
     public CardDecorator() {
         fillSuitIconMap();
-        fillValueIconMap();
+        fillValueIconMap("red.png", valueIconRedMap);
+        fillValueIconMap("black.png", valueIconBlackMap);
     }
 
-    public void decorateCard(Card card){
+    public void decorateCard(Card card) {
+        card.setSuitSprite(getIcon(suitIconMap.get(card.getSuit())));
+
+        if (card.isBlack()) {
+            card.setValueSprite(getIcon(valueIconBlackMap.get(card.getValue())));
+
+            return;
+        }
+
+        card.setValueSprite(getIcon(valueIconRedMap.get(card.getValue())));
+
     }
 
-    private Color getColor(Card card){
-        if(card.isBlack()) return Color.BLACK;
+    private Color getColor(Card card) {
+        if (card.isBlack()) return Color.BLACK;
         else return Color.RED;
     }
 
-    private void fillSuitIconMap(){
-        suitIconMap.put(Suit.CLUB, "");
-        suitIconMap.put(Suit.HEART, "");
-        suitIconMap.put(Suit.DIAMOND, "");
-        suitIconMap.put(Suit.SPADE, "");
+    private void fillSuitIconMap() {
+        suitIconMap.put(Suit.CLUB, "club.png");
+        suitIconMap.put(Suit.HEART, "hear.png");
+        suitIconMap.put(Suit.DIAMOND, "diamond.png");
+        suitIconMap.put(Suit.SPADE, "spade.png");
     }
 
-    private void fillValueIconMap(){
-        valueIconMap.put(Value.THREE, "");
-        valueIconMap.put(Value.ACE, "");
-        valueIconMap.put(Value.TWO, "");
-        valueIconMap.put(Value.FOUR, "");
-        valueIconMap.put(Value.FIVE, "");
-        valueIconMap.put(Value.SIX, "");
-        valueIconMap.put(Value.SEVEN, "");
-        valueIconMap.put(Value.EIGHT, "");
-        valueIconMap.put(Value.NINE, "");
-        valueIconMap.put(Value.TEN, "");
-        valueIconMap.put(Value.JACK, "");
-        valueIconMap.put(Value.QUEEN, "");
-        valueIconMap.put(Value.KING, "");
+    private void fillValueIconMap(String mapColor, EnumMap<Value, String> valueMap) {
+
+        valueMap.put(Value.THREE, "3_" + mapColor);
+        valueMap.put(Value.ACE, "ace_" + mapColor);
+        valueMap.put(Value.TWO, "2_" + mapColor);
+        valueMap.put(Value.FOUR, "4_" + mapColor);
+        valueMap.put(Value.FIVE, "5_" + mapColor);
+        valueMap.put(Value.SIX, "6_" + mapColor);
+        valueMap.put(Value.SEVEN, "7_" + mapColor);
+        valueMap.put(Value.EIGHT, "8_" + mapColor);
+        valueMap.put(Value.NINE, "9_" + mapColor);
+        valueMap.put(Value.TEN, "10_" + mapColor);
+        valueMap.put(Value.JACK, "jack_" + mapColor);
+        valueMap.put(Value.QUEEN, "queen_" + mapColor);
+        valueMap.put(Value.KING, "king_" + mapColor);
     }
 
-    private ImageIcon getIcon(String imageName){
+    private ImageIcon getIcon(String imageName) {
         URL imgURL = getClass().getResource("src/resources/card_sprites/" + imageName);
-        if(imgURL == null){
+        if (imgURL == null) {
             throw new RuntimeException();
-        }else{
+        } else {
             return new ImageIcon(imgURL);
         }
     }

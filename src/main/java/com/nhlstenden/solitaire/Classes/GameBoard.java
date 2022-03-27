@@ -32,7 +32,12 @@ public class GameBoard extends JFrame {
     public GameBoard() {
         super("Solitaire");
 
-        Card cardPanel = new Card(Suit.SPADE, Value.ACE, true);
+        Card card0 = new Card(Suit.SPADE, Value.ACE, true);
+        Card card1 = new Card(Suit.SPADE, Value.ACE, true);
+        Card card2 = new Card(Suit.SPADE, Value.ACE, true);
+
+        card0.setPosition(10,60);
+        card1.setPosition(10,0);
 
         boardStacks = createBoardStacks();
         finishStacks = createFinishStacks();
@@ -49,12 +54,13 @@ public class GameBoard extends JFrame {
         playerCardsButton.setVisible(true);
         playerCardsButton.setBounds(100,50,65,90);
 
-        JPanel backGroundPanel = new JPanel();
+        JLayeredPane backGroundPanel = new JLayeredPane();
         backGroundPanel.setBackground(new ColorUIResource(0,153,153));
         setContentPane(backGroundPanel);
 
         add(playerCardsButton);
-        add(cardPanel);
+        add(card1, 2);
+        add(card0, 1);
 
         setLayout(null);
         setBackground(Color.darkGray);
@@ -90,5 +96,9 @@ public class GameBoard extends JFrame {
             finishStacks.add(new FinishStack(suit));
         }
         return finishStacks;
+    }
+
+    private void createGame(){
+
     }
 }
