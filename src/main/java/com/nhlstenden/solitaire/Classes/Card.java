@@ -8,29 +8,46 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Card extends JPanel implements ICard {
+    private final int CARD_SIZE_WIDTH = 65;
+    private final int CARD_SIZE_HEIGHT = 90;
+
+    private final JButton suitButton;
+    private final JLabel valueLabel;
+    private final JLabel faceDownLabel;
+    private final JLabel faceUpLabel;
+
+
     private final Suit suit;
     private final Value value;
     private boolean isFaceUp;
+
     private Icon valueSprite;
     private Icon suitSprite;
 
-    private final JLabel suitLabel;
-    private final JLabel valueLabel;
+    private static Icon backSprite = new ImageIcon("src/resources/card_sprites/back_red_basic.png");
+    private static Icon faceUpSprite = new ImageIcon("src/resources/card_sprites/total_blank_front.png");
 
-    private static Icon backSprite;
 
     public Card(Suit suit, Value value, boolean isFaceUp) {
         this.suit = suit;
         this.value = value;
         this.isFaceUp = isFaceUp;
 
-        suitLabel = new JLabel();
+        suitButton = new JButton();
         valueLabel = new JLabel();
+        faceDownLabel = new JLabel();
 
-        valueSprite = new ImageIcon("pic/starB20.jpg");
-        suitSprite = new ImageIcon("pic/starB10.jpg");
+        faceUpLabel = new JLabel();
+        faceDownLabel.setBounds(0, 0, CARD_SIZE_WIDTH, CARD_SIZE_HEIGHT);
 
-        this.setPosition(0, 0);
+        faceDownLabel.setIcon(backSprite);
+
+
+        valueSprite = new ImageIcon("src/resources/card_sprites/ace_black.png");
+        suitSprite = new ImageIcon("src/resources/card_sprites/ace_clubs.png");
+        validate();
+        setFaceDown(isFaceUp);
+        setPosition(200, 100);
 
     }
 
@@ -45,6 +62,25 @@ public class Card extends JPanel implements ICard {
 
     public boolean isFaceUp() {
         return isFaceUp;
+    }
+
+    @Override
+    public void setFaceDown(boolean isFaceUp) {
+        this.isFaceUp = isFaceUp;
+
+        suitButton.setVisible(isFaceUp);
+        valueLabel.setVisible(isFaceUp);
+        if (isFaceUp) {
+            faceDownLabel.setVisible(false);
+
+            return;
+        }
+
+        suitButton.setVisible(false);
+        valueLabel.setVisible(false);
+        faceDownLabel.setVisible(true);
+
+        validate();
     }
 
     public boolean isBlack() {
@@ -68,18 +104,20 @@ public class Card extends JPanel implements ICard {
 
     @Override
     public void setPosition(int x, int y) {
+        valueLabel.setBounds(0, 0, 50, 20);
+        suitButton.setBounds(50, 50, 50, 20);
 
-        this.valueLabel.setBounds(50, 100, 10, 20);
-        this.suitLabel.setBounds(0, 100, 10, 20);
+        suitButton.setIcon(suitSprite);
+        valueLabel.setIcon(valueSprite);
 
-        suitLabel.setIcon(valueSprite);
-        valueLabel.setIcon(suitSprite);
-
-        add(suitLabel);
         add(valueLabel);
+        add(suitButton);
+        add(faceDownLabel);
 
-        setBounds(x, y, 100, 100);
-        setBackground(Color.darkGray);
+        setBounds(x, y, CARD_SIZE_WIDTH, CARD_SIZE_HEIGHT);
+        setBackground(Color.lightGray);
         revalidate();
     }
+
+
 }
