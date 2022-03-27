@@ -10,6 +10,8 @@ public interface ICard {
 
     boolean isFaceUp();
 
+    void setFaceDown(boolean isFaceUp);
+
     boolean isBlack();
 
     boolean isNextValue(Value value);
