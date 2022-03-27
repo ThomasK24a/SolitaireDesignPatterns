@@ -30,4 +30,8 @@ public class DeckStack extends CardStack {
         wasteStack.addCards(drawnCards);
         cards = (ArrayList<ICard>) newDeck;
     }
+
+    public void addWasteStack(){
+        cards.addAll(wasteStack.getAndClearAll());
+    }
 }
