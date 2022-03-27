@@ -4,13 +4,12 @@ import main.java.com.nhlstenden.solitaire.Classes.Card;
 import main.java.com.nhlstenden.solitaire.Enums.Suit;
 import main.java.com.nhlstenden.solitaire.Enums.Value;
 import main.java.com.nhlstenden.solitaire.Classes.Decorator.CardDecorator;
-import main.java.com.nhlstenden.solitaire.Interfaces.ICard;
 
 import java.util.ArrayList;
 import java.util.Random;
 
 public class CardObjectPool {
-    private final ArrayList<ICard> pool;
+    private final ArrayList<Card> pool;
     private final CardDecorator decorator;
 
     public CardObjectPool() {
@@ -19,8 +18,8 @@ public class CardObjectPool {
         pool = createFullDeck();
     }
 
-    public ArrayList<ICard> getRandomCardStack(int cardStackSize){
-        ArrayList<ICard> cards = new ArrayList<>();
+    public ArrayList<Card> getRandomCardStack(int cardStackSize){
+        ArrayList<Card> cards = new ArrayList<>();
         for(int i = 0; i < cardStackSize; i++){
             //if pool is empty return the cards gotten so far
             if (pool.size() == 0) return cards;
@@ -30,34 +29,34 @@ public class CardObjectPool {
         return cards;
     }
 
-    public ICard getRandomCard(){
+    public Card getRandomCard(){
         //return null if pool is empty
         if(pool.size() == 0) return null;
         //get a random index of the pool
         Random random = new Random();
         int randomCardIndex = random.nextInt(pool.size());
 
-        ICard card = pool.get(randomCardIndex);
+        Card card = pool.get(randomCardIndex);
         //remove the card from the pool
         pool.remove(randomCardIndex);
 
         return card;
     }
 
-    public ArrayList<ICard> getRemainingCards(){
+    public ArrayList<Card> getRemainingCards(){
         return getRandomCardStack(pool.size());
     }
 
-    public void returnCard(ICard card){
+    public void returnCard(Card card){
         pool.add(card);
     }
 
-    public void returnCards(ArrayList<ICard> cards){
+    public void returnCards(ArrayList<Card> cards){
         pool.addAll(cards);
     }
 
-    private ArrayList<ICard> createFullDeck(){
-        ArrayList<ICard> deck = new ArrayList<>();
+    private ArrayList<Card> createFullDeck(){
+        ArrayList<Card> deck = new ArrayList<>();
         for(Suit suit : Suit.class.getEnumConstants()){
             for(Value value : Value.class.getEnumConstants()){
                 if(!value.equals(Value.NONE)){

@@ -32,14 +32,6 @@ public class MainMenu {
 
     }
 
-    public JFrame getMainframe() {
-        return mainframe;
-    }
-
-    public JPanel getMainPanel() {
-        return mainPanel;
-    }
-
     public void createExitButton() {
         exitButton.addActionListener(e ->
                 System.exit(0)

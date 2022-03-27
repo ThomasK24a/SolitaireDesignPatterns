@@ -12,7 +12,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Card extends JPanel implements ICard {
+public class Card extends JPanel {
     private final int CARD_SIZE_WIDTH = 65;
     private final int CARD_SIZE_HEIGHT = 90;
 
@@ -87,7 +87,6 @@ public class Card extends JPanel implements ICard {
         return isFaceUp;
     }
 
-    @Override
     public void setFaceDown(boolean isFaceUp) {
         this.isFaceUp = isFaceUp;
 
@@ -119,14 +118,14 @@ public class Card extends JPanel implements ICard {
      * @param value value of the card to check
      * @return return true if the given value is the next value
      */
-    @Override
+
     public boolean isNextValue(Value value) {
         int intValue = getValue().ordinal();
         int intValueToCompare = value.ordinal();
         return intValue == intValueToCompare + 1;
     }
 
-    @Override
+
     public void setPosition(int x, int y) {
         valueLabel.setBounds(0, 0, 50, 20);
         suitButton.setBounds(50, 50, 50, 20);
@@ -143,7 +142,7 @@ public class Card extends JPanel implements ICard {
         revalidate();
     }
 
-    @Override
+
     public void onCardMove(CardStack cardStack) {
         this.stackLocation = cardStack;
     }

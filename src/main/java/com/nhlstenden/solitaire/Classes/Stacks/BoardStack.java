@@ -1,8 +1,8 @@
 package main.java.com.nhlstenden.solitaire.Classes.Stacks;
 
 import main.java.com.nhlstenden.solitaire.Abstract.CardStack;
+import main.java.com.nhlstenden.solitaire.Classes.Card;
 import main.java.com.nhlstenden.solitaire.Enums.Value;
-import main.java.com.nhlstenden.solitaire.Interfaces.ICard;
 import main.java.com.nhlstenden.solitaire.Interfaces.IOrderedStack;
 
 import java.util.ArrayList;
@@ -15,15 +15,15 @@ public class BoardStack extends CardStack implements IOrderedStack {
         }
         MoveStack moveStack = new MoveStack();
         moveStack.cards.addAll(cards.subList(startingIndex, cards.size()));
-        cards = (ArrayList<ICard>) cards.subList(0, startingIndex);
+        cards = (ArrayList<Card>) cards.subList(0, startingIndex);
         return moveStack;
     }
 
     public boolean isStackInOrder(int startingIndex){
-        ArrayList<ICard> toCheckStack = (ArrayList<ICard>) cards.subList(startingIndex, cards.size());
+        ArrayList<Card> toCheckStack = (ArrayList<Card>) cards.subList(startingIndex, cards.size());
         //set is last card black to the opposite of the first card, so it always passes the check;
         boolean isLastCardBlack = !cards.get(startingIndex).isBlack();
-        for(ICard card : toCheckStack){
+        for(Card card : toCheckStack){
             //will be true if both cards are black or both cards are red
             if(card.isBlack() == isLastCardBlack){
                 return false;
@@ -53,7 +53,7 @@ public class BoardStack extends CardStack implements IOrderedStack {
      * Will get the last card from this board stack
      * @return the last card, null if the stack is empty
      */
-    private ICard getLastCard(){
+    private Card getLastCard(){
         if(cards.size() == 0) return null;
         return cards.get(cards.size() - 1);
     }

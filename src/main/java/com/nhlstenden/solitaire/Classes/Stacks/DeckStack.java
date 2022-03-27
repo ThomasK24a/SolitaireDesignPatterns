@@ -1,6 +1,7 @@
 package main.java.com.nhlstenden.solitaire.Classes.Stacks;
 
 import main.java.com.nhlstenden.solitaire.Abstract.CardStack;
+import main.java.com.nhlstenden.solitaire.Classes.Card;
 import main.java.com.nhlstenden.solitaire.Interfaces.ICard;
 
 import java.util.ArrayList;
@@ -25,10 +26,10 @@ public class DeckStack extends CardStack {
     }
 
     public void drawThree(){
-        List<ICard> newDeck = cards.subList(0, cards.size() - 3);
-        List<ICard> drawnCards = cards.subList(cards.size() - 3, cards.size());
+        List<Card> newDeck = cards.subList(0, cards.size() - 3);
+        List<Card> drawnCards = cards.subList(cards.size() - 3, cards.size());
         wasteStack.addCards(drawnCards);
-        cards = (ArrayList<ICard>) newDeck;
+        cards = (ArrayList<Card>) newDeck;
     }
 
     public void addWasteStack(){

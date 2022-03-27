@@ -22,7 +22,7 @@ public class BoardFactory {
     public void fillBoardStacks(ArrayList<BoardStack> boardStacks) {
         for(int i = 0; i < boardStacks.size(); i++){
             BoardStack boardStack = boardStacks.get(i);
-            ArrayList<ICard> cardsToAdd = cardObjectPool.getRandomCardStack(i + 1);
+            ArrayList<Card> cardsToAdd = cardObjectPool.getRandomCardStack(i + 1);
             boardStack.addCards(cardsToAdd);
         }
     }
