@@ -147,7 +147,6 @@ public class Card extends JPanel {
         this.stackLocation = cardStack;
     }
 
-    @Override
     public CardStack getStackLocation() {
         return this.stackLocation;
     }
