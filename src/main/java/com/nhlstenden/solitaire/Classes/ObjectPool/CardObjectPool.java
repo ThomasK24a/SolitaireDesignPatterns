@@ -18,48 +18,53 @@ public class CardObjectPool {
         pool = createFullDeck();
     }
 
-    public ArrayList<Card> getRandomCardStack(int cardStackSize){
+    public ArrayList<Card> getRandomCardStack(int cardStackSize) {
         ArrayList<Card> cards = new ArrayList<>();
-        for(int i = 0; i < cardStackSize; i++){
+
+        System.out.println(cardStackSize);
+        for (int i = 0; i < cardStackSize; i++) {
             //if pool is empty return the cards gotten so far
             if (pool.size() == 0) return cards;
 
             cards.add(getRandomCard());
         }
+
         return cards;
     }
 
-    public Card getRandomCard(){
+    public Card getRandomCard() {
         //return null if pool is empty
-        if(pool.size() == 0) return null;
+        if (pool.size() == 0) return null;
+
         //get a random index of the pool
         Random random = new Random();
         int randomCardIndex = random.nextInt(pool.size());
 
         Card card = pool.get(randomCardIndex);
+
         //remove the card from the pool
         pool.remove(randomCardIndex);
 
         return card;
     }
 
-    public ArrayList<Card> getRemainingCards(){
+    public ArrayList<Card> getRemainingCards() {
         return getRandomCardStack(pool.size());
     }
 
-    public void returnCard(Card card){
+    public void returnCard(Card card) {
         pool.add(card);
     }
 
-    public void returnCards(ArrayList<Card> cards){
+    public void returnCards(ArrayList<Card> cards) {
         pool.addAll(cards);
     }
 
-    private ArrayList<Card> createFullDeck(){
+    private ArrayList<Card> createFullDeck() {
         ArrayList<Card> deck = new ArrayList<>();
-        for(Suit suit : Suit.class.getEnumConstants()){
-            for(Value value : Value.class.getEnumConstants()){
-                if(!value.equals(Value.NONE)){
+        for (Suit suit : Suit.class.getEnumConstants()) {
+            for (Value value : Value.class.getEnumConstants()) {
+                if (!value.equals(Value.NONE)) {
                     deck.add(createDecoratedCard(suit, value));
                 }
             }
@@ -67,7 +72,7 @@ public class CardObjectPool {
         return deck;
     }
 
-    private Card createDecoratedCard(Suit suit, Value value){
+    private Card createDecoratedCard(Suit suit, Value value) {
         Card card = new Card(suit, value, false);
         decorator.decorateCard(card);
         return card;

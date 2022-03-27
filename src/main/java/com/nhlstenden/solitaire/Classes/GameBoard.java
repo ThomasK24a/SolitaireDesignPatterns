@@ -9,8 +9,6 @@ import main.java.com.nhlstenden.solitaire.Classes.Stacks.WasteStack;
 import main.java.com.nhlstenden.solitaire.Enums.Suit;
 import main.java.com.nhlstenden.solitaire.Enums.Value;
 
-import org.w3c.dom.css.RGBColor;
-
 import javax.swing.*;
 import javax.swing.plaf.ColorUIResource;
 import java.awt.*;
@@ -33,21 +31,14 @@ public class GameBoard extends JFrame {
     public GameBoard() {
         super("Solitaire");
 
-        Card card0 = new Card(Suit.SPADE, Value.ACE, true);
-        Card card1 = new Card(Suit.SPADE, Value.ACE, true);
-        Card card2 = new Card(Suit.SPADE, Value.ACE, true);
-
-        card0.setPosition(10, 60);
-        card1.setPosition(10, 0);
-
         boardStacks = createBoardStacks();
         finishStacks = createFinishStacks();
         boardFactory = new BoardFactory();
         waste = new WasteStack();
         deck = new DeckStack(waste);
 
-        boardFactory.fillDeck(deck);
         boardFactory.fillBoardStacks(boardStacks);
+        boardFactory.fillDeck(deck);
 
         Icon cardsButton = new ImageIcon("src/resources/card_sprites/back_red_basic.png");
         playerCardsButton = new JButton();
@@ -61,8 +52,6 @@ public class GameBoard extends JFrame {
 
         add(playerCardsButton);
         createPlayingBoard();
-
-
 
         setLayout(null);
         setBackground(Color.cyan);
@@ -100,21 +89,20 @@ public class GameBoard extends JFrame {
         return finishStacks;
     }
 
-    private void onSelectCard(Card card){
+    private void onSelectCard(Card card) {
         CardStack stackLocation = card.getStackLocation();
         int index = stackLocation.findCardIndex(card);
-        if(index == -1) throw new RuntimeException(); // TODO: add custom exception
+        if (index == -1) throw new RuntimeException(); // TODO: add custom exception
         selectedCardLocation = new CardLocation(stackLocation, index);
     }
 
     private void createPlayingBoard() {
 
-        System.out.println(boardStacks.size());
         for (BoardStack stack : boardStacks) {
-            System.out.println(stack.getCards().size());
-            for (Card card : stack.getCards()) {
-                card.setPosition(100, 100);
-                this.add(card, 1);
+            for (int i = stack.getCards().size(); i > 0; i--) {
+                stack.getCards().get(i-1).setPosition(200, 200 + (60 * i + 1));
+                add(stack.getCards().get(i-1), stack.getCards().size() - i);
+                stack.getCards().get(i-1).flipCard(true);
             }
         }
         validate();

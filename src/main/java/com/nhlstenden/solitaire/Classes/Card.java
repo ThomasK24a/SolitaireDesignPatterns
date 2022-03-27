@@ -3,7 +3,6 @@ package main.java.com.nhlstenden.solitaire.Classes;
 import main.java.com.nhlstenden.solitaire.Abstract.CardStack;
 import main.java.com.nhlstenden.solitaire.Enums.Suit;
 import main.java.com.nhlstenden.solitaire.Enums.Value;
-import main.java.com.nhlstenden.solitaire.Interfaces.ICard;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -49,7 +48,7 @@ public class Card extends JPanel {
         setBorder(border);
 
         validate();
-        setFaceDown(isFaceUp);
+        flipCard(isFaceUp);
         createButton();
 
     }
@@ -87,7 +86,12 @@ public class Card extends JPanel {
         return isFaceUp;
     }
 
-    public void setFaceDown(boolean isFaceUp) {
+    /**
+     * set the card to face up or down.
+     *
+     * @param isFaceUp card is face up or down.
+     */
+    public void flipCard(boolean isFaceUp) {
         this.isFaceUp = isFaceUp;
 
         suitButton.setVisible(isFaceUp);

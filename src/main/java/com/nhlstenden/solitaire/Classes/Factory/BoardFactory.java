@@ -23,6 +23,7 @@ public class BoardFactory {
         for(int i = 0; i < boardStacks.size(); i++){
             BoardStack boardStack = boardStacks.get(i);
             ArrayList<Card> cardsToAdd = cardObjectPool.getRandomCardStack(i + 1);
+
             boardStack.addCards(cardsToAdd);
         }
     }
