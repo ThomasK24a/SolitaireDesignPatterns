@@ -17,6 +17,8 @@ import java.util.ArrayList;
 public class GameBoard extends JFrame {
 
     private final int BOARD_STACKS_AMOUNT = 7;
+    private final int BOARD_START_X = 100;
+    private final int BOARD_START_Y = 150;
 
 
     private final ArrayList<BoardStack> boardStacks;
@@ -98,11 +100,20 @@ public class GameBoard extends JFrame {
 
     private void createPlayingBoard() {
 
-        for (BoardStack stack : boardStacks) {
-            for (int i = stack.getCards().size(); i > 0; i--) {
-                stack.getCards().get(i-1).setPosition(200, 200 + (60 * i + 1));
-                add(stack.getCards().get(i-1), stack.getCards().size() - i);
-                stack.getCards().get(i-1).flipCard(true);
+        for (int k = boardStacks.size(); k > 0; k--) {
+
+            for (int i = boardStacks.get(k - 1).getCards().size(); i > 0; i--) {
+
+
+                boardStacks.get(k - 1).getCards().get(i - 1).setPosition(BOARD_START_X + (80 * k + 1), BOARD_START_Y + (60 * i + 1));
+
+                add(boardStacks.get(k - 1).getCards().get(i - 1), boardStacks.get(k - 1).getCards().size() - i);
+
+
+                if (i == boardStacks.get(k - 1).getCards().size()) {
+
+                    boardStacks.get(k - 1).getCards().get(i - 1).flipCard(true);
+                }
             }
         }
         validate();
