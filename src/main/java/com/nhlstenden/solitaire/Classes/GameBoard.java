@@ -63,7 +63,7 @@ public class GameBoard extends JFrame {
         add(card0, 1);
 
         setLayout(null);
-        setBackground(Color.darkGray);
+        setBackground(Color.cyan);
         setSize(900,750);
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -96,9 +96,5 @@ public class GameBoard extends JFrame {
             finishStacks.add(new FinishStack(suit));
         }
         return finishStacks;
-    }
-
-    private void createGame(){
-
     }
 }
