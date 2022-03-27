@@ -19,8 +19,6 @@ public class Card extends JPanel implements ICard {
     private final JButton suitButton;
     private final JLabel valueLabel;
     private final JLabel faceDownLabel;
-    private final JLabel faceUpLabel;
-
 
     private final Suit suit;
     private final Value value;
@@ -44,16 +42,12 @@ public class Card extends JPanel implements ICard {
         valueLabel = new JLabel();
         faceDownLabel = new JLabel();
 
-        faceUpLabel = new JLabel();
         faceDownLabel.setBounds(0, 0, CARD_SIZE_WIDTH, CARD_SIZE_HEIGHT);
-
         faceDownLabel.setIcon(backSprite);
 
         Border border = BorderUIResource.getBlackLineBorderUIResource();
-//        valueSprite = new ImageIcon("src/resources/card_sprites/ace_red.png");
-//
-//        suitSprite = new ImageIcon("src/resources/card_sprites/club.png");
         setBorder(border);
+
         validate();
         setFaceDown(isFaceUp);
         createButton();
@@ -73,13 +67,14 @@ public class Card extends JPanel implements ICard {
     }
 
     public void createButton() {
-       suitButton.addActionListener(new ActionListener() {
+        suitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                setPosition(400,400);
+                setPosition(400, 400);
             }
         });
     }
+
     public Suit getSuit() {
         return suit;
     }
@@ -120,6 +115,7 @@ public class Card extends JPanel implements ICard {
      * if this card is an ace the next value will be a two, three is after two, etc.
      * Ace is after None, jack is after ten, queen after jack, king and queen
      * for king the method will return true if the next value is none
+     *
      * @param value value of the card to check
      * @return return true if the given value is the next value
      */
@@ -148,7 +144,7 @@ public class Card extends JPanel implements ICard {
     }
 
     @Override
-    public void onCardMove(CardStack cardStack){
+    public void onCardMove(CardStack cardStack) {
         this.stackLocation = cardStack;
     }
 
