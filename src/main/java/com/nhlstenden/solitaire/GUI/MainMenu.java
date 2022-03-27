@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
 
 public class MainMenu {
     private final JFrame mainframe;
@@ -15,9 +16,10 @@ public class MainMenu {
 
     public MainMenu() {
 
-        ImageIcon icon = new ImageIcon("images/clock.png");
-        startButton.setBounds(50, 50, 300, 50);
-        startButton.setIcon(icon);
+        ImageIcon iconStart = new ImageIcon("src/resources/card_sprites/spade.png");
+        ImageIcon iconExit = new ImageIcon("src/resources/card_sprites/heart.png");
+        startButton.setIcon(iconStart);
+        exitButton.setIcon(iconExit);
 
         mainframe = new JFrame("Solitaire");
 
