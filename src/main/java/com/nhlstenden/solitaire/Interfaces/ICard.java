@@ -11,7 +11,7 @@ public interface ICard {
 
     boolean isFaceUp();
 
-    void setFaceDown(boolean isFaceUp);
+    void flipCard(boolean isFaceUp);
 
     boolean isBlack();
 

@@ -23,16 +23,14 @@ public class CardDecorator {
     }
 
     public void decorateCard(Card card) {
-
         card.setSuitSprite(getIcon(suitIconMap.get(card.getSuit())));
 
         if (card.isBlack()) {
             card.setValueSprite(getIcon(valueIconBlackMap.get(card.getValue())));
             return;
         }
+
         card.setValueSprite(getIcon(valueIconRedMap.get(card.getValue())));
-
-
     }
 
     private Color getColor(Card card) {
