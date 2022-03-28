@@ -28,6 +28,9 @@ public class DeckStack extends CardStack {
         List<ICard> drawnCards = cards.subList(cards.size() - 3, cards.size());
         wasteStack.addCards(drawnCards);
         cards = newDeck;
+        for (ICard card : drawnCards){
+            System.out.println(card.getSuit() + " " + card.getValue() + getClass());
+        }
 
         return drawnCards;
     }

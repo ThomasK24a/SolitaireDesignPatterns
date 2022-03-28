@@ -66,6 +66,7 @@ public class GameBoard extends JFrame {
 
         createPlayerCardsButtonListener();
     }
+
     /**
      * create listener for the deck.
      */
@@ -80,8 +81,8 @@ public class GameBoard extends JFrame {
                     drawnCards.get(i).setPosition(BOARD_START_X, BOARD_START_Y + (60 * i + 1));
                     drawnCards.get(i).flipCard(true);
                     add(drawnCards.get(i).getJCard(), i);
+                    validate();
                 }
-                validate();
             }
         });
     }

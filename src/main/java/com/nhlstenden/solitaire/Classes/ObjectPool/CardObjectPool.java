@@ -22,7 +22,6 @@ public class CardObjectPool {
     public ArrayList<ICard> getRandomCardStack(int cardStackSize) {
         ArrayList<ICard> cards = new ArrayList<>();
 
-        System.out.println(cardStackSize);
         for (int i = 0; i < cardStackSize; i++) {
             //if pool is empty return the cards gotten so far
             if (pool.size() == 0) return cards;

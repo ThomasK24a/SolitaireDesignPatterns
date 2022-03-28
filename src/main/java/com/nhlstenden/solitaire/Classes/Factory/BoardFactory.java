@@ -1,9 +1,8 @@
 package main.java.com.nhlstenden.solitaire.Classes.Factory;
 
-import main.java.com.nhlstenden.solitaire.Classes.Stacks.BoardStack;
-import main.java.com.nhlstenden.solitaire.Classes.Card;
-import main.java.com.nhlstenden.solitaire.Classes.Stacks.DeckStack;
 import main.java.com.nhlstenden.solitaire.Classes.ObjectPool.CardObjectPool;
+import main.java.com.nhlstenden.solitaire.Classes.Stacks.BoardStack;
+import main.java.com.nhlstenden.solitaire.Classes.Stacks.DeckStack;
 import main.java.com.nhlstenden.solitaire.Interfaces.ICard;
 
 import java.util.ArrayList;
@@ -23,7 +22,6 @@ public class BoardFactory {
         for(int i = 0; i < boardStacks.size(); i++){
             BoardStack boardStack = boardStacks.get(i);
             ArrayList<ICard> cardsToAdd = cardObjectPool.getRandomCardStack(i + 1);
-
             boardStack.addCards(cardsToAdd);
         }
     }
