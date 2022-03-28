@@ -10,7 +10,7 @@ public abstract class CardStack {
     protected List<ICard> cards;
 
     public CardStack() {
-        this.cards = new ArrayList<ICard>();
+        this.cards = new ArrayList<>();
     }
 
     public void addCards(List<ICard> cards) {
@@ -36,5 +36,12 @@ public abstract class CardStack {
             i++;
         }
         return -1;
+    }
+
+    public MoveStack getAllBelow(int startingIndex){
+        MoveStack moveStack = new MoveStack();
+        moveStack.getCards().addAll(cards.subList(startingIndex, cards.size()));
+        cards = cards.subList(0, startingIndex);
+        return moveStack;
     }
 }
