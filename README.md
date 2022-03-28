@@ -14,6 +14,6 @@ Start: 10/03/2022
 * Clone the repository
 * File > Project Structure ( Ctrl + Alt + Shift + S )
 * Expand src folder, mark the folder 'resources' as a resource.
-* Run the GameManger
+* Run the GameManager
 
 ![Class diagram](SolitaireDiagram.pdf)
