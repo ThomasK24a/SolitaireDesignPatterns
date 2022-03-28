@@ -1,9 +1,9 @@
 package main.java.com.nhlstenden.solitaire.Classes.ObjectPool;
 
 import main.java.com.nhlstenden.solitaire.Classes.Card;
+import main.java.com.nhlstenden.solitaire.Classes.Decorator.CardDecorator;
 import main.java.com.nhlstenden.solitaire.Enums.Suit;
 import main.java.com.nhlstenden.solitaire.Enums.Value;
-import main.java.com.nhlstenden.solitaire.Classes.Decorator.CardDecorator;
 import main.java.com.nhlstenden.solitaire.Interfaces.ICard;
 
 import java.util.ArrayList;

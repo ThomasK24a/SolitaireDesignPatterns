@@ -7,7 +7,6 @@ import main.java.com.nhlstenden.solitaire.Classes.Stacks.DeckStack;
 import main.java.com.nhlstenden.solitaire.Classes.Stacks.FinishStack;
 import main.java.com.nhlstenden.solitaire.Classes.Stacks.WasteStack;
 import main.java.com.nhlstenden.solitaire.Enums.Suit;
-import main.java.com.nhlstenden.solitaire.Enums.Value;
 
 import javax.swing.*;
 import javax.swing.plaf.ColorUIResource;

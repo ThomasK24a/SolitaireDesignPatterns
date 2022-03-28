@@ -12,6 +12,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Card class holds the logic for the JPanel component, and game object functionality.
+ */
 public class Card extends JPanel implements ICard {
     private final int CARD_SIZE_WIDTH = 65;
     private final int CARD_SIZE_HEIGHT = 90;
@@ -30,6 +33,13 @@ public class Card extends JPanel implements ICard {
 
     private CardStack stackLocation;
 
+    /**
+     * Initialize the Card with the proper Suit, Value, and if it is facing up or down.
+     *
+     * @param suit Suit enum.
+     * @param value Value enum.
+     * @param isFaceUp boolean.
+     */
     public Card(Suit suit, Value value, boolean isFaceUp) {
         this.suit = suit;
         this.value = value;
@@ -42,6 +52,11 @@ public class Card extends JPanel implements ICard {
         createButton();
     }
 
+    /**
+     * set the value Icon of the card.
+     *
+     * @param valueSprite Icon to be displayed as the Value of the card.
+     */
     public void setValueSprite(Icon valueSprite) {
         this.valueSprite = valueSprite;
         valueLabel.setIcon(valueSprite);
@@ -49,6 +64,11 @@ public class Card extends JPanel implements ICard {
         validate();
     }
 
+    /**
+     * set the suit Icon of the card.
+     *
+     * @param suitSprite Icon to be displayed as the Suit of the card.
+     */
     public void setSuitSprite(Icon suitSprite) {
         this.suitSprite = suitSprite;
         suitButton.setIcon(this.suitSprite);
@@ -56,6 +76,9 @@ public class Card extends JPanel implements ICard {
         validate();
     }
 
+    /**
+     * create listener for the suit button.
+     */
     public void createButton() {
         suitButton.addActionListener(new ActionListener() {
             @Override
@@ -65,18 +88,38 @@ public class Card extends JPanel implements ICard {
         });
     }
 
+    /**
+     * returns the Suit enum of the card.
+     *
+     * @return Suit enum.
+     */
     public Suit getSuit() {
         return suit;
     }
 
+    /**
+     * returns the Value enum of the card.
+     *
+     * @return Value enum.
+     */
     public Value getValue() {
         return value;
     }
 
+    /**
+     * returns true if the card is facing up.
+     *
+     * @return boolean
+     */
     public boolean isFaceUp() {
         return isFaceUp;
     }
 
+    /**
+     * returns the JPanel component that makes up the card.
+     *
+     * @return JComponent
+     */
     public JPanel getJCard(){
         return this;
     }
@@ -106,6 +149,11 @@ public class Card extends JPanel implements ICard {
         validate();
     }
 
+    /**
+     * return true if the card has a black suit.
+     *
+     * @return boolean.
+     */
     public boolean isBlack() {
         return suit.equals(Suit.CLUB) || suit.equals(Suit.SPADE);
     }
@@ -125,7 +173,12 @@ public class Card extends JPanel implements ICard {
         return intValue == intValueToCompare + 1;
     }
 
-
+    /**
+     * Move the panel to the given x and y coordinates.
+     *
+     * @param x coordinate
+     * @param y coordinate
+     */
     public void setPosition(int x, int y) {
         valueLabel.setBounds(0, 0, 50, 20);
         suitButton.setBounds(50, 50, 50, 20);
@@ -135,20 +188,36 @@ public class Card extends JPanel implements ICard {
         revalidate();
     }
 
+    /**
+     * Change the stack where the card is located. e.g. BoardStack or FinishStack.
+     *
+     * @param cardStack CardStack Abstract Class.
+     */
     public void onCardMove(CardStack cardStack) {
         this.stackLocation = cardStack;
     }
 
+    /**
+     * Returns the stack where the card is located. e.g. BoardStack.
+     *
+     * @return CardStack abstract class.
+     */
     public CardStack getStackLocation() {
         return this.stackLocation;
     }
 
+    /**
+     * Set the boarder of the JPanel.
+     */
     private void setBorder(){
         Border border = BorderUIResource.getBlackLineBorderUIResource();
         this.setBorder(border);
         validate();
     }
 
+    /**
+     * Set the Icon for the back of the card.
+     */
     private void setFaceDownLabel(){
         faceDownLabel.setBounds(0, 0, CARD_SIZE_WIDTH, CARD_SIZE_HEIGHT);
         faceDownLabel.setIcon(BACK_SPRITE);
