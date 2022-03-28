@@ -1,12 +1,8 @@
 package main.java.com.nhlstenden.solitaire.GUI;
 
-import main.java.com.nhlstenden.solitaire.Classes.*;
+import main.java.com.nhlstenden.solitaire.Classes.GameBoard;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.net.URL;
 
 public class MainMenu {
     private final JFrame mainframe;
@@ -41,11 +37,6 @@ public class MainMenu {
     }
 
     public void createStartButton() {
-        startButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new GameBoard();
-            }
-        });
+        startButton.addActionListener(e -> GameBoard.getInstance());
     }
 }

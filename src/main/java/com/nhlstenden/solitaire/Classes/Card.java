@@ -9,8 +9,6 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.plaf.BorderUIResource;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * Card class holds the logic for the JPanel component, and game object functionality.
@@ -44,7 +42,6 @@ public class Card extends JPanel implements ICard {
         this.suit = suit;
         this.value = value;
         this.isFaceUp = isFaceUp;
-
         setFaceDownLabel();
         setBorder();
         flipCard(isFaceUp);
@@ -80,10 +77,13 @@ public class Card extends JPanel implements ICard {
      * create listener for the suit button.
      */
     public void createButton() {
-        suitButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setPosition(400, 400);
+        suitButton.addActionListener(e -> {
+            Object obj = e.getSource();
+            if (obj instanceof JButton cb) {
+                Component component = cb.getParent();
+                if (component instanceof Card card) {
+                    GameBoard.getInstance().onSelectCard(card);
+                }
             }
         });
     }
