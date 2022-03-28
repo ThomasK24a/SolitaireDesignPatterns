@@ -1,9 +1,9 @@
 package main.java.com.nhlstenden.solitaire.Classes.Decorator;
 
-import main.java.com.nhlstenden.solitaire.Classes.Card;
 import main.java.com.nhlstenden.solitaire.Enums.Suit;
 import main.java.com.nhlstenden.solitaire.Enums.Value;
 import main.java.com.nhlstenden.solitaire.Exceptions.ResourceNotFoundException;
+import main.java.com.nhlstenden.solitaire.Interfaces.ICard;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,20 +22,18 @@ public class CardDecorator {
         fillValueIconMap("black.png", valueIconBlackMap);
     }
 
-    public void decorateCard(Card card) {
-
+    public void decorateCard(ICard card) {
         card.setSuitSprite(getIcon(suitIconMap.get(card.getSuit())));
 
         if (card.isBlack()) {
             card.setValueSprite(getIcon(valueIconBlackMap.get(card.getValue())));
             return;
         }
+
         card.setValueSprite(getIcon(valueIconRedMap.get(card.getValue())));
-
-
     }
 
-    private Color getColor(Card card) {
+    private Color getColor(ICard card) {
         if (card.isBlack()) return Color.BLACK;
         else return Color.RED;
     }

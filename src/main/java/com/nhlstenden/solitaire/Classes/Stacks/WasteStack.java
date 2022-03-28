@@ -1,7 +1,7 @@
 package main.java.com.nhlstenden.solitaire.Classes.Stacks;
 
 import main.java.com.nhlstenden.solitaire.Abstract.CardStack;
-import main.java.com.nhlstenden.solitaire.Classes.Card;
+import main.java.com.nhlstenden.solitaire.Interfaces.ICard;
 
 import java.util.List;
 
@@ -16,8 +16,8 @@ public class WasteStack extends CardStack {
         return false;
     }
 
-    public List<Card> getAndClearAll(){
-        List<Card> cards = this.cards;
+    public List<ICard> getAndClearAll(){
+        List<ICard> cards = this.cards;
         this.cards.clear();
         return cards;
     }

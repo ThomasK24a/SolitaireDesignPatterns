@@ -19,7 +19,7 @@ public class FinishStack extends CardStack {
         if(moveStack.size() != 1){
             return false;
         }
-        Card cardToAdd = moveStack.getFirstCard();
+        ICard cardToAdd = moveStack.getFirstCard();
         //Can only accept cards with the same suit as the finish stack
         if(!cardToAdd.getSuit().equals(suit)){
             return false;
@@ -34,7 +34,7 @@ public class FinishStack extends CardStack {
     }
 
     public boolean isComplete(){
-        Card lastCard = cards.get(cards.size() - 1);
+        ICard lastCard = cards.get(cards.size() - 1);
         return lastCard.getValue().equals(Value.KING);
     }
 }
