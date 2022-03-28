@@ -2,26 +2,27 @@ package main.java.com.nhlstenden.solitaire.Abstract;
 
 import main.java.com.nhlstenden.solitaire.Classes.Card;
 import main.java.com.nhlstenden.solitaire.Classes.Stacks.MoveStack;
+import main.java.com.nhlstenden.solitaire.Interfaces.ICard;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class CardStack {
-    protected ArrayList<Card> cards;
+    protected ArrayList<ICard> cards;
 
     public CardStack() {
         this.cards = new ArrayList<>();
     }
 
-    public void addCards(List<Card> cards) {
-        for(Card card : cards){
+    public void addCards(List<ICard> cards) {
+        for(ICard card : cards){
             card.onCardMove(this);
         }
 
         this.cards.addAll(cards);
     }
 
-    public ArrayList<Card> getCards() {
+    public ArrayList<ICard> getCards() {
         return cards;
     }
 
@@ -29,9 +30,9 @@ public abstract class CardStack {
 
     public abstract boolean isIntractable(int cardIndex);
 
-    public int findCardIndex(Card cardToFind){
+    public int findCardIndex(ICard cardToFind){
         int i = 0;
-        for(Card card : cards){
+        for(ICard card : cards){
             if(card == cardToFind) return i;
             i++;
         }

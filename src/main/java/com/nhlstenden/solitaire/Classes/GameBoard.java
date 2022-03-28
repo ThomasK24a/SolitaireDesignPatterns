@@ -107,7 +107,7 @@ public class GameBoard extends JFrame {
 
                 boardStacks.get(k - 1).getCards().get(i - 1).setPosition(BOARD_START_X + (80 * k + 1), BOARD_START_Y + (60 * i + 1));
 
-                add(boardStacks.get(k - 1).getCards().get(i - 1), boardStacks.get(k - 1).getCards().size() - i);
+                add(boardStacks.get(k - 1).getCards().get(i - 1).getJCard(), boardStacks.get(k - 1).getCards().size() - i);
 
 
                 if (i == boardStacks.get(k - 1).getCards().size()) {

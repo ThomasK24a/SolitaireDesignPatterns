@@ -4,12 +4,13 @@ import main.java.com.nhlstenden.solitaire.Classes.Card;
 import main.java.com.nhlstenden.solitaire.Enums.Suit;
 import main.java.com.nhlstenden.solitaire.Enums.Value;
 import main.java.com.nhlstenden.solitaire.Classes.Decorator.CardDecorator;
+import main.java.com.nhlstenden.solitaire.Interfaces.ICard;
 
 import java.util.ArrayList;
 import java.util.Random;
 
 public class CardObjectPool {
-    private final ArrayList<Card> pool;
+    private final ArrayList<ICard> pool;
     private final CardDecorator decorator;
 
     public CardObjectPool() {
@@ -18,8 +19,8 @@ public class CardObjectPool {
         pool = createFullDeck();
     }
 
-    public ArrayList<Card> getRandomCardStack(int cardStackSize) {
-        ArrayList<Card> cards = new ArrayList<>();
+    public ArrayList<ICard> getRandomCardStack(int cardStackSize) {
+        ArrayList<ICard> cards = new ArrayList<>();
 
         System.out.println(cardStackSize);
         for (int i = 0; i < cardStackSize; i++) {
@@ -32,7 +33,7 @@ public class CardObjectPool {
         return cards;
     }
 
-    public Card getRandomCard() {
+    public ICard getRandomCard() {
         //return null if pool is empty
         if (pool.size() == 0) return null;
 
@@ -40,7 +41,7 @@ public class CardObjectPool {
         Random random = new Random();
         int randomCardIndex = random.nextInt(pool.size());
 
-        Card card = pool.get(randomCardIndex);
+        ICard card = pool.get(randomCardIndex);
 
         //remove the card from the pool
         pool.remove(randomCardIndex);
@@ -48,20 +49,20 @@ public class CardObjectPool {
         return card;
     }
 
-    public ArrayList<Card> getRemainingCards() {
+    public ArrayList<ICard> getRemainingCards() {
         return getRandomCardStack(pool.size());
     }
 
-    public void returnCard(Card card) {
+    public void returnCard(ICard card) {
         pool.add(card);
     }
 
-    public void returnCards(ArrayList<Card> cards) {
+    public void returnCards(ArrayList<ICard> cards) {
         pool.addAll(cards);
     }
 
-    private ArrayList<Card> createFullDeck() {
-        ArrayList<Card> deck = new ArrayList<>();
+    private ArrayList<ICard> createFullDeck() {
+        ArrayList<ICard> deck = new ArrayList<>();
         for (Suit suit : Suit.class.getEnumConstants()) {
             for (Value value : Value.class.getEnumConstants()) {
                 if (!value.equals(Value.NONE)) {
@@ -72,8 +73,8 @@ public class CardObjectPool {
         return deck;
     }
 
-    private Card createDecoratedCard(Suit suit, Value value) {
-        Card card = new Card(suit, value, false);
+    private ICard createDecoratedCard(Suit suit, Value value) {
+        ICard card = new Card(suit, value, false);
         decorator.decorateCard(card);
         return card;
     }

@@ -26,10 +26,10 @@ public class DeckStack extends CardStack {
     }
 
     public void drawThree(){
-        List<Card> newDeck = cards.subList(0, cards.size() - 3);
-        List<Card> drawnCards = cards.subList(cards.size() - 3, cards.size());
+        List<ICard> newDeck = cards.subList(0, cards.size() - 3);
+        List<ICard> drawnCards = cards.subList(cards.size() - 3, cards.size());
         wasteStack.addCards(drawnCards);
-        cards = (ArrayList<Card>) newDeck;
+        cards = (ArrayList<ICard>) newDeck;
     }
 
     public void addWasteStack(){

@@ -4,6 +4,8 @@ import main.java.com.nhlstenden.solitaire.Abstract.CardStack;
 import main.java.com.nhlstenden.solitaire.Enums.Suit;
 import main.java.com.nhlstenden.solitaire.Enums.Value;
 
+import javax.swing.*;
+
 public interface ICard {
     Suit getSuit();
 
@@ -20,6 +22,12 @@ public interface ICard {
     void setPosition(int x, int y);
 
     void onCardMove(CardStack cardStack);
+
+    void setValueSprite(Icon valueSprite);
+
+    void setSuitSprite(Icon suitSprite);
+
+    JPanel getJCard();
 
     CardStack getStackLocation();
 }
