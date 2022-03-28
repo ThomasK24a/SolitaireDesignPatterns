@@ -20,8 +20,11 @@ import java.util.List;
 public class GameBoard extends JFrame {
 
     private final int BOARD_STACKS_AMOUNT = 7;
+    private final int FINISH_STACKS = 4;
     private final int BOARD_START_X = 100;
     private final int BOARD_START_Y = 150;
+    private final Icon DECK_ICON = new ImageIcon("src/resources/card_sprites/back_red_basic.png");
+    private final Icon ACE_ICON = new ImageIcon("src/resources/card_sprites/spade.png");
 
 
     private final ArrayList<BoardStack> boardStacks;
@@ -30,7 +33,6 @@ public class GameBoard extends JFrame {
     private final WasteStack waste;
     private final BoardFactory boardFactory;
     private CardLocation selectedCardLocation;
-
     private final JButton playerCardsButton;
 
     public GameBoard() {
@@ -42,22 +44,18 @@ public class GameBoard extends JFrame {
         waste = new WasteStack();
         deck = new DeckStack(waste);
 
+
         boardFactory.fillBoardStacks(boardStacks);
         boardFactory.fillDeck(deck);
 
-        Icon cardsButton = new ImageIcon("src/resources/card_sprites/back_red_basic.png");
         playerCardsButton = new JButton();
-        playerCardsButton.setIcon(cardsButton);
-        playerCardsButton.setVisible(true);
-        playerCardsButton.setBounds(BOARD_START_X, 50, 65, 90);
 
         JLayeredPane backGroundPanel = new JLayeredPane();
         backGroundPanel.setBackground(new ColorUIResource(0, 153, 153));
         setContentPane(backGroundPanel);
 
-        add(playerCardsButton);
-        createPlayingBoard();
 
+        createPlayingBoard();
         setLayout(null);
         setBackground(Color.cyan);
         setSize(900, 750);
@@ -65,6 +63,35 @@ public class GameBoard extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         createPlayerCardsButtonListener();
+        createDeckButton();
+        createFinishedDeckButtons();
+    }
+
+    private void createDeckButton() {
+        playerCardsButton.setIcon(DECK_ICON);
+        playerCardsButton.setVisible(true);
+        playerCardsButton.setBounds(BOARD_START_X, 50, 65, 90);
+        add(playerCardsButton);
+        validate();
+    }
+
+    private void createFinishedDeckButtons() {
+        for (int i = 0; i < FINISH_STACKS; i++) {
+            JButton stackButton = new JButton();
+            stackButton.setIcon(ACE_ICON);
+            stackButton.setVisible(true);
+            stackButton.setBounds(BOARD_START_X + (80 * (i + FINISH_STACKS)), 50, 65, 90);
+            add(stackButton);
+
+            stackButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    System.out.println("wu tang");
+                }
+            });
+        }
+
+        validate();
     }
 
     /**
@@ -77,12 +104,11 @@ public class GameBoard extends JFrame {
                 List<ICard> drawnCards = deck.drawThree();
 
                 for (int i = 0; i < drawnCards.size(); i++) {
-
                     drawnCards.get(i).setPosition(BOARD_START_X, BOARD_START_Y + (60 * i + 1));
                     drawnCards.get(i).flipCard(true);
                     add(drawnCards.get(i).getJCard(), i);
-                    validate();
                 }
+                validate();
             }
         });
     }
@@ -111,7 +137,11 @@ public class GameBoard extends JFrame {
     private ArrayList<FinishStack> createFinishStacks() {
         ArrayList<FinishStack> finishStacks = new ArrayList<>();
         for (Suit suit : Suit.class.getEnumConstants()) {
-            finishStacks.add(new FinishStack(suit));
+            FinishStack finishStack = new FinishStack(suit);
+            finishStacks.add(finishStack);
+            finishStack.setPosition(0,0);
+            finishStack.setVisible(true);
+            add(finishStack);
         }
         return finishStacks;
     }

@@ -1,17 +1,23 @@
 package main.java.com.nhlstenden.solitaire.Classes.Stacks;
 
 import main.java.com.nhlstenden.solitaire.Abstract.CardStack;
-import main.java.com.nhlstenden.solitaire.Classes.Card;
 import main.java.com.nhlstenden.solitaire.Enums.Suit;
 import main.java.com.nhlstenden.solitaire.Enums.Value;
 import main.java.com.nhlstenden.solitaire.Interfaces.ICard;
 
+import javax.swing.*;
+
 public class FinishStack extends CardStack {
     private final Suit suit;
+    private final JButton suitButton = new JButton();
 
     public FinishStack(Suit suit) {
         this.suit = suit;
+
+
     }
+
+
 
     @Override
     public boolean canAcceptStack(MoveStack moveStack) {
@@ -19,7 +25,9 @@ public class FinishStack extends CardStack {
         if(moveStack.size() != 1){
             return false;
         }
+
         ICard cardToAdd = moveStack.getFirstCard();
+
         //Can only accept cards with the same suit as the finish stack
         if(!cardToAdd.getSuit().equals(suit)){
             return false;
@@ -37,4 +45,5 @@ public class FinishStack extends CardStack {
         ICard lastCard = cards.get(cards.size() - 1);
         return lastCard.getValue().equals(Value.KING);
     }
+
 }

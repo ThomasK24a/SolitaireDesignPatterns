@@ -88,6 +88,14 @@ public class Card extends JPanel implements ICard {
         });
     }
 
+    public int getCardWidth() {
+        return CARD_SIZE_WIDTH;
+    }
+
+    public int getCardHeight() {
+        return CARD_SIZE_HEIGHT;
+    }
+
     /**
      * returns the Suit enum of the card.
      *
