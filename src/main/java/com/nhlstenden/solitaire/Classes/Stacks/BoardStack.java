@@ -5,22 +5,12 @@ import main.java.com.nhlstenden.solitaire.Enums.Value;
 import main.java.com.nhlstenden.solitaire.Interfaces.ICard;
 import main.java.com.nhlstenden.solitaire.Interfaces.IOrderedStack;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class BoardStack extends CardStack implements IOrderedStack {
 
-    public MoveStack getAllBelow(int startingIndex){
-        if(isStackInOrder(startingIndex)) {
-            throw new RuntimeException(); //TODO: do something with this
-        }
-        MoveStack moveStack = new MoveStack();
-        moveStack.cards.addAll(cards.subList(startingIndex, cards.size()));
-        cards = (ArrayList<ICard>) cards.subList(0, startingIndex);
-        return moveStack;
-    }
-
     public boolean isStackInOrder(int startingIndex){
-        ArrayList<ICard> toCheckStack = (ArrayList<ICard>) cards.subList(startingIndex, cards.size());
+        List<ICard> toCheckStack = cards.subList(startingIndex, cards.size());
         //set is last card black to the opposite of the first card, so it always passes the check;
         boolean isLastCardBlack = !cards.get(startingIndex).isBlack();
         for(ICard card : toCheckStack){
@@ -57,4 +47,5 @@ public class BoardStack extends CardStack implements IOrderedStack {
         if(cards.size() == 0) return null;
         return cards.get(cards.size() - 1);
     }
+
 }

@@ -19,6 +19,7 @@ public abstract class CardStack extends JPanel {
     private static final Icon BACK_SPRITE = new ImageIcon("src/resources/card_sprites/back_red_basic.png");
 
     public CardStack() {
+        this.cards = new ArrayList<>();
         this.cards = new ArrayList<ICard>();
         suitButton.setIcon(BACK_SPRITE);
         this.setBorder();
@@ -74,5 +75,12 @@ public abstract class CardStack extends JPanel {
             i++;
         }
         return -1;
+    }
+
+    public MoveStack getAllBelow(int startingIndex){
+        MoveStack moveStack = new MoveStack();
+        moveStack.getCards().addAll(cards.subList(startingIndex, cards.size()));
+        cards = cards.subList(0, startingIndex);
+        return moveStack;
     }
 }

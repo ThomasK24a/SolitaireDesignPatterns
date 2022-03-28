@@ -8,6 +8,10 @@ import java.util.ArrayList;
 public class MoveStack implements IOrderedStack {
     protected ArrayList<ICard> cards;
 
+    public MoveStack() {
+        this.cards = new ArrayList<>();
+    }
+
     @Override
     public boolean isStackInOrder(int startingIndex) {
         return false;
@@ -19,5 +23,9 @@ public class MoveStack implements IOrderedStack {
 
     public int size(){
         return cards.size();
+    }
+
+    public ArrayList<ICard> getCards() {
+        return cards;
     }
 }

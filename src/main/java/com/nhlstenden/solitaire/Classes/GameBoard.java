@@ -1,23 +1,19 @@
 package main.java.com.nhlstenden.solitaire.Classes;
 
-import main.java.com.nhlstenden.solitaire.Abstract.CardStack;
 import main.java.com.nhlstenden.solitaire.Classes.Factory.BoardFactory;
-import main.java.com.nhlstenden.solitaire.Classes.Stacks.BoardStack;
-import main.java.com.nhlstenden.solitaire.Classes.Stacks.DeckStack;
-import main.java.com.nhlstenden.solitaire.Classes.Stacks.FinishStack;
-import main.java.com.nhlstenden.solitaire.Classes.Stacks.WasteStack;
+import main.java.com.nhlstenden.solitaire.Classes.Stacks.*;
 import main.java.com.nhlstenden.solitaire.Enums.Suit;
 import main.java.com.nhlstenden.solitaire.Interfaces.ICard;
 
 import javax.swing.*;
 import javax.swing.plaf.ColorUIResource;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
 public class GameBoard extends JFrame {
+
+    protected static GameBoard instance;
 
     private final int BOARD_STACKS_AMOUNT = 7;
     private final int FINISH_STACKS = 4;
@@ -25,7 +21,6 @@ public class GameBoard extends JFrame {
     private final int BOARD_START_Y = 150;
     private final Icon DECK_ICON = new ImageIcon("src/resources/card_sprites/back_red_basic.png");
     private final Icon ACE_ICON = new ImageIcon("src/resources/card_sprites/spade.png");
-
 
     private final ArrayList<BoardStack> boardStacks;
     private final ArrayList<FinishStack> finishStacks;
@@ -98,16 +93,14 @@ public class GameBoard extends JFrame {
      * create listener for the deck.
      */
     public void createPlayerCardsButtonListener() {
-        playerCardsButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                List<ICard> drawnCards = deck.drawThree();
+        playerCardsButton.addActionListener(e -> {
+            List<ICard> drawnCards = deck.drawThree();
 
-                for (int i = 0; i < drawnCards.size(); i++) {
-                    drawnCards.get(i).setPosition(BOARD_START_X, BOARD_START_Y + (60 * i + 1));
-                    drawnCards.get(i).flipCard(true);
-                    add(drawnCards.get(i).getJCard(), i);
-                }
+            for (int i = 0; i < drawnCards.size(); i++) {
+
+                drawnCards.get(i).setPosition(BOARD_START_X, BOARD_START_Y + (60 * i + 1));
+                drawnCards.get(i).flipCard(true);
+                add(drawnCards.get(i).getJCard(), i);
                 validate();
             }
         });
@@ -146,31 +139,53 @@ public class GameBoard extends JFrame {
         return finishStacks;
     }
 
-    private void onSelectCard(Card card) {
-        CardStack stackLocation = card.getStackLocation();
-        int index = stackLocation.findCardIndex(card);
-        if (index == -1) throw new RuntimeException(); // TODO: add custom exception
-        selectedCardLocation = new CardLocation(stackLocation, index);
+    public void onSelectCard(ICard card) {
+        CardLocation cardLocation = new CardLocation(card);
+        if(selectedCardLocation == null){
+            selectCard(cardLocation);
+        }else{
+            moveCard(cardLocation);
+        }
+    }
+
+    private void selectCard(CardLocation cardLocation){
+        if(cardLocation.isIntractable()){
+            selectedCardLocation = cardLocation;
+        }else{
+            throw new RuntimeException("Card cannot be selected"); //TODO: add custom exception
+        }
+    }
+
+    private void moveCard(CardLocation targetCardLocation){
+        if(!targetCardLocation.isIntractable() || !selectedCardLocation.isIntractable()){
+            selectedCardLocation = null;
+            throw new RuntimeException("Card cannot be selected"); //TODO: add custom exception
+        }
+
+        MoveStack moveStack = selectedCardLocation.getStack().getAllBelow(selectedCardLocation.getIndexStack());
+        if(selectedCardLocation.getStack().canAcceptStack(moveStack)){
+            selectedCardLocation.getStack().addCards(moveStack.getCards());
+        }
     }
 
     private void createPlayingBoard() {
-
         for (int k = boardStacks.size(); k > 0; k--) {
-
             for (int i = boardStacks.get(k - 1).getCards().size(); i > 0; i--) {
-
-
                 boardStacks.get(k - 1).getCards().get(i - 1).setPosition(BOARD_START_X + (80 * k + 1), BOARD_START_Y + (60 * i + 1));
-
                 add(boardStacks.get(k - 1).getCards().get(i - 1).getJCard(), boardStacks.get(k - 1).getCards().size() - i);
-
-
                 if (i == boardStacks.get(k - 1).getCards().size()) {
-
                     boardStacks.get(k - 1).getCards().get(i - 1).flipCard(true);
                 }
             }
         }
         validate();
     }
+
+    public static GameBoard getInstance(){
+        if (instance == null)
+            instance = new GameBoard();
+
+        return instance;
+    }
+
 }
