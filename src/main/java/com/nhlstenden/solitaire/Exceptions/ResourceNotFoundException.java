@@ -5,4 +5,3 @@ public class ResourceNotFoundException extends RuntimeException {
         super(String.format("Could not find resource %s ", resourceName));
     }
 }
-}
