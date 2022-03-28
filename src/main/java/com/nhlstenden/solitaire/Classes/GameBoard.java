@@ -7,11 +7,15 @@ import main.java.com.nhlstenden.solitaire.Classes.Stacks.DeckStack;
 import main.java.com.nhlstenden.solitaire.Classes.Stacks.FinishStack;
 import main.java.com.nhlstenden.solitaire.Classes.Stacks.WasteStack;
 import main.java.com.nhlstenden.solitaire.Enums.Suit;
+import main.java.com.nhlstenden.solitaire.Interfaces.ICard;
 
 import javax.swing.*;
 import javax.swing.plaf.ColorUIResource;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.List;
 
 public class GameBoard extends JFrame {
 
@@ -45,7 +49,7 @@ public class GameBoard extends JFrame {
         playerCardsButton = new JButton();
         playerCardsButton.setIcon(cardsButton);
         playerCardsButton.setVisible(true);
-        playerCardsButton.setBounds(100, 50, 65, 90);
+        playerCardsButton.setBounds(BOARD_START_X, 50, 65, 90);
 
         JLayeredPane backGroundPanel = new JLayeredPane();
         backGroundPanel.setBackground(new ColorUIResource(0, 153, 153));
@@ -59,6 +63,27 @@ public class GameBoard extends JFrame {
         setSize(900, 750);
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        createPlayerCardsButtonListener();
+    }
+    /**
+     * create listener for the deck.
+     */
+    public void createPlayerCardsButtonListener() {
+        playerCardsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                List<ICard> drawnCards = deck.drawThree();
+
+                for (int i = 0; i < drawnCards.size(); i++) {
+
+                    drawnCards.get(i).setPosition(BOARD_START_X, BOARD_START_Y + (60 * i + 1));
+                    drawnCards.get(i).flipCard(true);
+                    add(drawnCards.get(i).getJCard(), i);
+                }
+                validate();
+            }
+        });
     }
 
     public void onCardMoved() {
