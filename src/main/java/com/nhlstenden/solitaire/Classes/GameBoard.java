@@ -134,6 +134,9 @@ public class GameBoard extends JFrame {
     }
 
     public void moveCard(CardLocation targetCardLocation) {
+
+        Coordinates previousLastCard = targetCardLocation.getStack().getLastCard().getCardCoordinates();
+
         if (!targetCardLocation.isIntractable() || !selectedCardLocation.isIntractable()) {
             selectedCardLocation = null;
             throw new RuntimeException("Card cannot be selected"); //TODO: add custom exception
@@ -150,11 +153,12 @@ public class GameBoard extends JFrame {
 
             selectedCardLocation.getStack().removeAllBelow(selectedCardLocation.getIndexStack());
 
-            moveStack.moveCardSprites(targetCardLocation.getStack());
+            moveStack.moveCardSprites(previousLastCard);
         }else{
             System.out.println("Didn't move a " + moveStack.getFirstCard().toString());
 //            System.out.println("Can't move a " + moveStack.getFirstCard().toString() + " to a " + targetCardLocation.getCard().toString());
         }
+
         selectedCardLocation = null;
     }
 

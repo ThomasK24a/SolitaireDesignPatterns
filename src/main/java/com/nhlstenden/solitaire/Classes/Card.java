@@ -194,7 +194,7 @@ public class Card extends JPanel implements ICard {
 
         setBounds(x, y, CARD_SIZE_WIDTH, CARD_SIZE_HEIGHT);
         setBackground(Color.lightGray);
-        revalidate();
+        validate();
     }
 
     /**
@@ -248,4 +248,6 @@ public class Card extends JPanel implements ICard {
     public String toString(){
         return this.getValue() + " of " + this.getSuit() + "s";
     }
+
+
 }
