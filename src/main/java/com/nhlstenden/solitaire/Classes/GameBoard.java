@@ -172,7 +172,6 @@ public class GameBoard extends JFrame {
 
             moveCardSprites(moveStack.getFirstCard(),targetCardLocation.getStack());
             flipCard(selectedCardLocation.getStack());
-
         } else {
             System.out.println("Didn't move a " + moveStack.getFirstCard().toString());
 //            System.out.println("Can't move a " + moveStack.getFirstCard().toString() + " to a " + targetCardLocation.getCard().toString());
