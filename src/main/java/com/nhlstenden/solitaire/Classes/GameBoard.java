@@ -36,8 +36,8 @@ public class GameBoard extends JFrame {
         boardStacks = createBoardStacks();
         finishStacks = createFinishStacks();
         boardFactory = new BoardFactory();
-        waste = new WasteStack(new Coordinates(0,0));
-        deck = new DeckStack(waste, new Coordinates(0,0));
+        waste = new WasteStack(new Coordinates(BOARD_START_X + 80,10));
+        deck = new DeckStack(waste, new Coordinates(BOARD_START_X,10));
 
         boardFactory.fillBoardStacks(boardStacks);
         boardFactory.fillDeck(deck);
@@ -74,18 +74,18 @@ public class GameBoard extends JFrame {
     private void createFinishedDeckButtons() {
         for (int i = 0; i < finishStacks.size(); i++) {
 
-            Stack stack = new Stack(finishStacks.get(i));
+            StackButton stackButton = new StackButton(finishStacks.get(i));
 
             String iconString = DecoratorLibrary.getInstance().suitIconMap.get(finishStacks.get(i).getSuit());
 
             Icon icon = DecoratorLibrary.getInstance().getIcon(iconString);
-            stack.setIconImage(icon);
-            stack.setVisible(true);
-            stack.setBounds(BOARD_START_X + (80 * (i + finishStacks.size())), 10, 65, 90);
-            add(stack);
+            stackButton.setIconImage(icon);
+            stackButton.setVisible(true);
+            stackButton.setBounds(BOARD_START_X + (80 * (i + finishStacks.size())), 10, 65, 90);
+            add(stackButton);
 
-            stack.getStackButton().addActionListener(e ->  {
-                moveCard(new CardLocation(stack.getCardStack(), -1));
+            stackButton.getStackButton().addActionListener(e ->  {
+                moveCard(new CardLocation(stackButton.getCardStack(), -1));
             });
         }
 
@@ -124,7 +124,7 @@ public class GameBoard extends JFrame {
     private ArrayList<BoardStack> createBoardStacks() {
         ArrayList<BoardStack> boardStacks = new ArrayList<>();
         for (int i = 0; i < BOARD_STACKS_AMOUNT; i++) {
-            boardStacks.add(new BoardStack(new Coordinates(BOARD_START_X + (80 * i + 1),BOARD_START_Y - 49)));
+            boardStacks.add(new BoardStack(new Coordinates(BOARD_START_X + (80 * i + 1),BOARD_START_Y + 49)));
         }
         return boardStacks;
     }
@@ -169,7 +169,8 @@ public class GameBoard extends JFrame {
             selectedCardLocation.getStack().removeAllBelow(selectedCardLocation.getIndexStack());
             moveStack.moveCardSprites(targetCardLocation.getStack());
 
-            selectedCardLocation.getStack().getLastCard().flipCard(true);
+
+
         }else{
             System.out.println("Didn't move a " + moveStack.getFirstCard().toString());
 //            System.out.println("Can't move a " + moveStack.getFirstCard().toString() + " to a " + targetCardLocation.getCard().toString());
@@ -179,26 +180,13 @@ public class GameBoard extends JFrame {
 
     private void createPlayingBoard() {
         for(BoardStack boardStack : boardStacks){
-            int cardIndex = boardStack.getCards().size();
             for(ICard card : boardStack.getCards()){
+                int cardIndex = boardStack.findCardIndex(card);
+                int cardLayer = boardStack.getCards().size() - cardIndex;
                 card.setPosition(boardStack.getCoordsOfCard(cardIndex));
-                add(card.getJCard(), cardIndex);
-                cardIndex--;
+                add(card.getJCard(), cardLayer);
             }
-        }
-
-
-        for (int k = boardStacks.size(); k > 0; k--) {
-            BoardStack boardStack = boardStacks.get(k - 1);
-            int stackSize = boardStack.getCards().size();
-            for (int i = stackSize; i > 0; i--) {
-                ICard card = boardStack.getCards().get(i - 1);
-                card.setPosition(boardStack.getCoordsOfCard(i));
-                add(card.getJCard(), stackSize - i);
-                if (i == stackSize) {
-                    boardStack.getCards().get(i - 1).flipCard(true);
-                }
-            }
+            boardStack.getLastCard().flipCard(true);
         }
         validate();
     }

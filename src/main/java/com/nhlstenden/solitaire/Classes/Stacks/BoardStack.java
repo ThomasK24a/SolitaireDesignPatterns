@@ -24,6 +24,7 @@ public class BoardStack extends CardStack implements IOrderedStack {
             if(card.isBlack() == isLastCardBlack){
                 return false;
             }
+            isLastCardBlack = card.isBlack();
         }
         return true;
     }

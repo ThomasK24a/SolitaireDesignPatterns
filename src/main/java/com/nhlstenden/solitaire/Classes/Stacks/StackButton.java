@@ -7,11 +7,11 @@ import main.java.com.nhlstenden.solitaire.Classes.GameBoard;
 import javax.swing.*;
 import java.awt.*;
 
-public class Stack extends JPanel {
+public class StackButton extends JPanel {
     JButton stackButton = new JButton();
     CardStack cardStack;
 
-    public Stack(CardStack stack) {
+    public StackButton(CardStack stack) {
         this.cardStack = stack;
         Icon icon = new ImageIcon("src/resources/card_sprites/blank_front_with_num_boarders.png");
         stackButton.setIcon(icon);

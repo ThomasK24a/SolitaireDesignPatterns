@@ -58,6 +58,10 @@ public abstract class CardStack implements ActionListener
 
     public void removeAllBelow(int startingIndex){
         cards = cards.subList(0, startingIndex);
+        //flip the last card if the one above it got removed
+        if(!cards.isEmpty()){
+            getLastCard().flipCard(true);
+        }
     }
 
     public Coordinates getCoordsOfCard(int index){
