@@ -40,4 +40,9 @@ public class Stack extends JPanel {
     public CardStack getCardStack() {
         return cardStack;
     }
+
+    public void setIconImage(Icon icon){
+        stackButton.setIcon(icon);
+        validate();
+    }
 }

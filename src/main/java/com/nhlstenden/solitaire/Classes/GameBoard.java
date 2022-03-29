@@ -81,7 +81,7 @@ public class GameBoard extends JFrame {
             String iconString = DecoratorLibrary.getInstance().suitIconMap.get(finishStacks.get(i).getSuit());
 
             Icon icon = DecoratorLibrary.getInstance().getIcon(iconString);
-
+            stack.setIconImage(icon);
             stack.setVisible(true);
             stack.setBounds(BOARD_START_X + (80 * (i + finishStacks.size())), 10, 65, 90);
             add(stack);
