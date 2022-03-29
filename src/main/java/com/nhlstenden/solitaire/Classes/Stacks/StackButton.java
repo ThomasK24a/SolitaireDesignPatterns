@@ -2,6 +2,8 @@ package main.java.com.nhlstenden.solitaire.Classes.Stacks;
 
 import main.java.com.nhlstenden.solitaire.Abstract.CardStack;
 import main.java.com.nhlstenden.solitaire.Classes.Card;
+import main.java.com.nhlstenden.solitaire.Classes.CardLocation;
+import main.java.com.nhlstenden.solitaire.Classes.DecoratorLibrary;
 import main.java.com.nhlstenden.solitaire.Classes.GameBoard;
 
 import javax.swing.*;
@@ -11,25 +13,25 @@ public class StackButton extends JPanel {
     JButton stackButton = new JButton();
     CardStack cardStack;
 
-    public StackButton(CardStack stack) {
+    public StackButton(CardStack stack, Icon buttonIcon) {
         this.cardStack = stack;
-        Icon icon = new ImageIcon("src/resources/card_sprites/blank_front_with_num_boarders.png");
-        stackButton.setIcon(icon);
+        Icon cardIcon = new ImageIcon("src/resources/card_sprites/blank_front_with_num_boarders.png");
+        stackButton.setIcon(cardIcon);
+        initializeButton(buttonIcon);
         add(stackButton);
     }
 
     /**
-     * create listener for the suit button.
+     * add icon and create listener for the button.
      */
-    public void createButton() {
-        stackButton.addActionListener(e -> {
-            Object obj = e.getSource();
-            if (obj instanceof JButton cb) {
-                Component component = cb.getParent();
-                if (component instanceof Card card) {
-                    GameBoard.getInstance().onCardButtonClick(card);
-                }
-            }
+    public void initializeButton(Icon icon) {
+        this.setIconImage(icon);
+        this.setVisible(true);
+
+
+
+        stackButton.addActionListener(e ->  {
+            GameBoard.getInstance().moveCard(new CardLocation(getCardStack(), -1));
         });
     }
 

@@ -2,22 +2,36 @@ package main.java.com.nhlstenden.solitaire.Classes.Stacks;
 
 import main.java.com.nhlstenden.solitaire.Abstract.CardStack;
 import main.java.com.nhlstenden.solitaire.Classes.Coordinates;
+import main.java.com.nhlstenden.solitaire.Classes.DecoratorLibrary;
 import main.java.com.nhlstenden.solitaire.Enums.Suit;
 import main.java.com.nhlstenden.solitaire.Enums.Value;
 import main.java.com.nhlstenden.solitaire.Interfaces.ICard;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 
 public class FinishStack extends CardStack {
     private final Suit suit;
 
+    private StackButton stackButton;
+
     public FinishStack(Suit suit, Coordinates stackCoordinates) {
         super(stackCoordinates);
         this.suit = suit;
+
+        String iconString = DecoratorLibrary.getInstance().getSuitIconMap().get(getSuit());
+        Icon icon = DecoratorLibrary.getInstance().getIcon(iconString);
+
+        this.stackButton = new StackButton(this, icon);
+        stackButton.setBounds(stackCoordinates.getX(), stackCoordinates.getY(), 65, 90);
     }
 
     public Suit getSuit() {
         return suit;
+    }
+
+    public StackButton getStackButton() {
+        return stackButton;
     }
 
     @Override

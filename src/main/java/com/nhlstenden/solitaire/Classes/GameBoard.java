@@ -51,16 +51,16 @@ public class GameBoard extends JFrame {
         JLayeredPane backGroundPanel = new JLayeredPane();
         setContentPane(backGroundPanel);
 
-        createPlayingBoard();
         setLayout(null);
         setBackground(new ColorUIResource(0, 153, 153));
         setSize(900, 750);
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        createPlayingBoard();
         createPlayerCardsButtonListener();
-        createDeckButton();
         createFinishedDeckButtons();
+        createDeckButton();
     }
 
     private void createDeckButton() {
@@ -72,23 +72,9 @@ public class GameBoard extends JFrame {
     }
 
     private void createFinishedDeckButtons() {
-        for (int i = 0; i < finishStacks.size(); i++) {
-
-            StackButton stackButton = new StackButton(finishStacks.get(i));
-
-            String iconString = DecoratorLibrary.getInstance().suitIconMap.get(finishStacks.get(i).getSuit());
-
-            Icon icon = DecoratorLibrary.getInstance().getIcon(iconString);
-            stackButton.setIconImage(icon);
-            stackButton.setVisible(true);
-            stackButton.setBounds(BOARD_START_X + (80 * (i + finishStacks.size())), 10, 65, 90);
-            add(stackButton);
-
-            stackButton.getStackButton().addActionListener(e ->  {
-                moveCard(new CardLocation(stackButton.getCardStack(), -1));
-            });
+        for (FinishStack finishStack : finishStacks) {
+            add(finishStack.getStackButton());
         }
-
         validate();
     }
 
@@ -131,8 +117,11 @@ public class GameBoard extends JFrame {
 
     private ArrayList<FinishStack> createFinishStacks() {
         ArrayList<FinishStack> finishStacks = new ArrayList<>();
+        int i = 0;
         for (Suit suit : Suit.class.getEnumConstants()) {
-            finishStacks.add(new FinishStack(suit, new Coordinates(0,0)));
+            FinishStack finishStack = new FinishStack(suit, new Coordinates(BOARD_START_X + 320 + (80 * i), 10));
+            finishStacks.add(finishStack);
+            i++;
         }
         return finishStacks;
     }
@@ -155,7 +144,7 @@ public class GameBoard extends JFrame {
         }
     }
 
-    private void moveCard(CardLocation targetCardLocation) {
+    public void moveCard(CardLocation targetCardLocation) {
         if (!targetCardLocation.isIntractable() || !selectedCardLocation.isIntractable()) {
             selectedCardLocation = null;
             throw new RuntimeException("Card cannot be selected"); //TODO: add custom exception
