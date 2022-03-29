@@ -46,7 +46,10 @@ public abstract class CardStack implements ActionListener
     public MoveStack getAllBelow(int startingIndex){
         MoveStack moveStack = new MoveStack();
         moveStack.getCards().addAll(cards.subList(startingIndex, cards.size()));
-        cards = cards.subList(0, startingIndex);
         return moveStack;
+    }
+
+    public void removeAllBelow(int startingIndex){
+        cards = cards.subList(0, startingIndex);
     }
 }

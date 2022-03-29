@@ -136,20 +136,6 @@ public class GameBoard extends JFrame {
 
     public void onSelectCard(ICard card) {
 
-        String iconString = null;
-
-        if (card.isBlack()) {
-            iconString = DecoratorLibrary.getInstance().valueIconBlackMap.get(card.getValue());
-        } else {
-            iconString = DecoratorLibrary.getInstance().valueIconRedMap.get(card.getValue());
-        }
-
-        Icon icon = DecoratorLibrary.getInstance().getIcon(iconString);
-
-        currentSelectedCard.setIcon(icon);
-        currentSelectedCard.setVisible(true);
-        add(currentSelectedCard);
-        revalidate();
         CardLocation cardLocation = new CardLocation(card);
         if (selectedCardLocation == null) {
             selectCard(cardLocation);
@@ -173,9 +159,14 @@ public class GameBoard extends JFrame {
         }
 
         MoveStack moveStack = selectedCardLocation.getStack().getAllBelow(selectedCardLocation.getIndexStack());
-        if (selectedCardLocation.getStack().canAcceptStack(moveStack)) {
-            selectedCardLocation.getStack().addCards(moveStack.getCards());
+        if(targetCardLocation.getStack().canAcceptStack(moveStack)){
+            System.out.println("Moved a " + moveStack.getFirstCard().getValue() + " of " + moveStack.getFirstCard().getSuit() + " to a " + targetCardLocation.getCard().getValue() + " of " + targetCardLocation.getCard().getSuit());
+            targetCardLocation.getStack().addCards(moveStack.getCards());
+            selectedCardLocation.getStack().removeAllBelow(selectedCardLocation.getIndexStack());
+        }else{
+            System.out.println("Can't move a " + moveStack.getFirstCard().getValue() + " of " + moveStack.getFirstCard().getSuit() + " to a " + targetCardLocation.getCard().getValue() + " of " + targetCardLocation.getCard().getSuit());
         }
+        selectedCardLocation = null;
     }
 
     private void createPlayingBoard() {
