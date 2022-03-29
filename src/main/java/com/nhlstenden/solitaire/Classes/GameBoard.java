@@ -39,8 +39,8 @@ public class GameBoard extends JFrame {
         boardStacks = createBoardStacks();
         finishStacks = createFinishStacks();
         boardFactory = new BoardFactory();
-        waste = new WasteStack(new Coordinates(BOARD_START_X + 80,10));
-        deck = new DeckStack(waste, new Coordinates(BOARD_START_X,10));
+        waste = new WasteStack(new Coordinates(BOARD_START_X + 80, 10));
+        deck = new DeckStack(waste, new Coordinates(BOARD_START_X, 10));
 
         boardFactory.fillBoardStacks(boardStacks);
         boardFactory.fillDeck(deck);
@@ -70,10 +70,14 @@ public class GameBoard extends JFrame {
      * create listener for the deck.
      */
     public void addDeckButtonToPanel() {
-
+        deckButton.setBounds(BOARD_START_X, BOARD_START_Y - 90, 65, 90);
+        add(deckButton);
+        deckButton.addActionListener(e -> {
+            onDeckButtonClick();
+        });
     }
 
-    public void onDeckButtonClick(){
+    public void onDeckButtonClick() {
         List<ICard> drawnCards = deck.drawThree();
 
         for (int i = 0; i < drawnCards.size(); i++) {
@@ -99,7 +103,7 @@ public class GameBoard extends JFrame {
     private ArrayList<BoardStack> createBoardStacks() {
         ArrayList<BoardStack> boardStacks = new ArrayList<>();
         for (int i = 0; i < BOARD_STACKS_AMOUNT; i++) {
-            boardStacks.add(new BoardStack(new Coordinates(BOARD_START_X + 110 + (80 * i),BOARD_START_Y + 50)));
+            boardStacks.add(new BoardStack(new Coordinates(BOARD_START_X + 110 + (80 * i), BOARD_START_Y + 50)));
         }
         return boardStacks;
     }
@@ -154,7 +158,7 @@ public class GameBoard extends JFrame {
             selectedCardLocation.getStack().removeAllBelow(selectedCardLocation.getIndexStack());
 
             moveStack.moveCardSprites(previousLastCard);
-        }else{
+        } else {
             System.out.println("Didn't move a " + moveStack.getFirstCard().toString());
 //            System.out.println("Can't move a " + moveStack.getFirstCard().toString() + " to a " + targetCardLocation.getCard().toString());
         }
@@ -163,8 +167,8 @@ public class GameBoard extends JFrame {
     }
 
     private void addBoardStackCardsToPanel() {
-        for(BoardStack boardStack : boardStacks){
-            for (ICard card : boardStack.getCards()){
+        for (BoardStack boardStack : boardStacks) {
+            for (ICard card : boardStack.getCards()) {
                 int cardIndex = boardStack.findCardIndex(card);
                 int cardLayer = boardStack.getCards().size() - cardIndex;
                 card.setCardCoordinates(boardStack.getCoordsOfCard(cardIndex));
