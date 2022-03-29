@@ -82,7 +82,7 @@ public class Card extends JPanel implements ICard {
             if (obj instanceof JButton cb) {
                 Component component = cb.getParent();
                 if (component instanceof Card card) {
-                    GameBoard.getInstance().onSelectCard(card);
+                    GameBoard.getInstance().onCardButtonClick(card);
                 }
             }
         });
@@ -230,5 +230,10 @@ public class Card extends JPanel implements ICard {
         faceDownLabel.setBounds(0, 0, CARD_SIZE_WIDTH, CARD_SIZE_HEIGHT);
         faceDownLabel.setIcon(BACK_SPRITE);
         this.add(faceDownLabel);
+    }
+
+    @Override
+    public String toString(){
+        return this.getValue() + " of " + this.getSuit() + "s";
     }
 }

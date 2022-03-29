@@ -1,5 +1,6 @@
 package main.java.com.nhlstenden.solitaire.Classes;
 
+import main.java.com.nhlstenden.solitaire.Abstract.CardStack;
 import main.java.com.nhlstenden.solitaire.Classes.Factory.BoardFactory;
 import main.java.com.nhlstenden.solitaire.Classes.Stacks.*;
 import main.java.com.nhlstenden.solitaire.Enums.Suit;
@@ -30,16 +31,14 @@ public class GameBoard extends JFrame {
     private final JButton playerCardsButton;
     private final JButton currentSelectedCard;
 
-    private ICard currentCard;
-
     public GameBoard() {
         super("Solitaire");
 
         boardStacks = createBoardStacks();
         finishStacks = createFinishStacks();
         boardFactory = new BoardFactory();
-        waste = new WasteStack();
-        deck = new DeckStack(waste);
+        waste = new WasteStack(new Coordinates(0,0));
+        deck = new DeckStack(waste, new Coordinates(0,0));
 
         boardFactory.fillBoardStacks(boardStacks);
         boardFactory.fillDeck(deck);
@@ -126,7 +125,7 @@ public class GameBoard extends JFrame {
     private ArrayList<BoardStack> createBoardStacks() {
         ArrayList<BoardStack> boardStacks = new ArrayList<>();
         for (int i = 0; i < BOARD_STACKS_AMOUNT; i++) {
-            boardStacks.add(new BoardStack());
+            boardStacks.add(new BoardStack(new Coordinates(0,0)));
         }
         return boardStacks;
     }
@@ -134,12 +133,12 @@ public class GameBoard extends JFrame {
     private ArrayList<FinishStack> createFinishStacks() {
         ArrayList<FinishStack> finishStacks = new ArrayList<>();
         for (Suit suit : Suit.class.getEnumConstants()) {
-            finishStacks.add(new FinishStack(suit));
+            finishStacks.add(new FinishStack(suit, new Coordinates(0,0)));
         }
         return finishStacks;
     }
 
-    public void onSelectCard(ICard card) {
+    public void onCardButtonClick(ICard card) {
 
         CardLocation cardLocation = new CardLocation(card);
         if (selectedCardLocation == null) {
@@ -164,12 +163,15 @@ public class GameBoard extends JFrame {
         }
 
         MoveStack moveStack = selectedCardLocation.getStack().getAllBelow(selectedCardLocation.getIndexStack());
-        if (targetCardLocation.getStack().canAcceptStack(moveStack)) {
-            System.out.println("Moved a " + moveStack.getFirstCard().getValue() + " of " + moveStack.getFirstCard().getSuit() + " to a " + targetCardLocation.getCard().getValue() + " of " + targetCardLocation.getCard().getSuit());
+        if(targetCardLocation.getStack().canAcceptStack(moveStack)){
+            System.out.println("Moved a " + moveStack.getFirstCard().toString());
+            //System.out.println("Moved a " + moveStack.getFirstCard().toString() + " to a " + targetCardLocation.getCard().toString());
             targetCardLocation.getStack().addCards(moveStack.getCards());
             selectedCardLocation.getStack().removeAllBelow(selectedCardLocation.getIndexStack());
-        } else {
-            System.out.println("Can't move a " + moveStack.getFirstCard().getValue() + " of " + moveStack.getFirstCard().getSuit() + " to a " + targetCardLocation.getCard().getValue() + " of " + targetCardLocation.getCard().getSuit());
+            moveStack.moveCardSprites(targetCardLocation.getStack());
+        }else{
+            System.out.println("Didn't move a " + moveStack.getFirstCard().toString());
+//            System.out.println("Can't move a " + moveStack.getFirstCard().toString() + " to a " + targetCardLocation.getCard().toString());
         }
         selectedCardLocation = null;
     }

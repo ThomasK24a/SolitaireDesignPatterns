@@ -1,6 +1,7 @@
 package main.java.com.nhlstenden.solitaire.Classes.Stacks;
 
 import main.java.com.nhlstenden.solitaire.Abstract.CardStack;
+import main.java.com.nhlstenden.solitaire.Classes.Coordinates;
 import main.java.com.nhlstenden.solitaire.Interfaces.ICard;
 
 import java.awt.event.ActionEvent;
@@ -9,7 +10,8 @@ import java.util.List;
 public class DeckStack extends CardStack {
     WasteStack wasteStack;
 
-    public DeckStack(WasteStack wasteStack) {
+    public DeckStack(WasteStack wasteStack, Coordinates stackCoordinates) {
+        super(stackCoordinates);
         this.wasteStack = wasteStack;
     }
 
@@ -22,6 +24,11 @@ public class DeckStack extends CardStack {
     public boolean isIntractable(int cardIndex) {
         //only the last card is intractable and needs to be face up
         return cardIndex == cards.size() - 1 && cards.get(cardIndex).isFaceUp();
+    }
+
+    @Override
+    protected Coordinates getOffset() {
+        return new Coordinates(0,0);
     }
 
     public List<ICard> drawThree() {

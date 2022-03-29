@@ -1,6 +1,7 @@
 package main.java.com.nhlstenden.solitaire.Classes.Stacks;
 
 import main.java.com.nhlstenden.solitaire.Abstract.CardStack;
+import main.java.com.nhlstenden.solitaire.Classes.Coordinates;
 import main.java.com.nhlstenden.solitaire.Enums.Suit;
 import main.java.com.nhlstenden.solitaire.Enums.Value;
 import main.java.com.nhlstenden.solitaire.Interfaces.ICard;
@@ -10,7 +11,8 @@ import java.awt.event.ActionEvent;
 public class FinishStack extends CardStack {
     private final Suit suit;
 
-    public FinishStack(Suit suit) {
+    public FinishStack(Suit suit, Coordinates stackCoordinates) {
+        super(stackCoordinates);
         this.suit = suit;
     }
 
@@ -31,13 +33,24 @@ public class FinishStack extends CardStack {
         if (!cardToAdd.getSuit().equals(suit)) {
             return false;
         }
-        return cardToAdd.isNextValue(cards.get(cards.size() - 1).getValue());
+        Value nextValue;
+        if(cards.size() == 0){
+            nextValue = Value.NONE;
+        }else{
+            nextValue = cards.get(cards.size() - 1).getValue();
+        }
+        return cardToAdd.isNextValue(nextValue);
     }
 
     @Override
     public boolean isIntractable(int cardIndex) {
         //only the last card is intractable
         return cardIndex == cards.size() - 1;
+    }
+
+    @Override
+    protected Coordinates getOffset() {
+        return new Coordinates(0,0);
     }
 
     public boolean isComplete() {
