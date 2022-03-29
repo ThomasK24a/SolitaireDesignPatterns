@@ -1,6 +1,5 @@
 package main.java.com.nhlstenden.solitaire.Classes;
 
-import main.java.com.nhlstenden.solitaire.Abstract.CardStack;
 import main.java.com.nhlstenden.solitaire.Classes.Factory.BoardFactory;
 import main.java.com.nhlstenden.solitaire.Classes.Stacks.*;
 import main.java.com.nhlstenden.solitaire.Enums.Suit;
@@ -101,7 +100,7 @@ public class GameBoard extends JFrame {
             List<ICard> drawnCards = deck.drawThree();
 
             for (int i = 0; i < drawnCards.size(); i++) {
-                drawnCards.get(i).setPosition(BOARD_START_X, BOARD_START_Y + (60 * i + 1));
+                drawnCards.get(i).setPosition(BOARD_START_X, BOARD_START_Y + (60 * i));
                 drawnCards.get(i).flipCard(true);
                 add(drawnCards.get(i).getJCard(), i);
                 validate();
@@ -169,6 +168,8 @@ public class GameBoard extends JFrame {
             targetCardLocation.getStack().addCards(moveStack.getCards());
             selectedCardLocation.getStack().removeAllBelow(selectedCardLocation.getIndexStack());
             moveStack.moveCardSprites(targetCardLocation.getStack());
+
+            selectedCardLocation.getStack().getLastCard().flipCard(true);
         }else{
             System.out.println("Didn't move a " + moveStack.getFirstCard().toString());
 //            System.out.println("Can't move a " + moveStack.getFirstCard().toString() + " to a " + targetCardLocation.getCard().toString());
@@ -179,7 +180,7 @@ public class GameBoard extends JFrame {
     private void createPlayingBoard() {
         for (int k = boardStacks.size(); k > 0; k--) {
             for (int i = boardStacks.get(k - 1).getCards().size(); i > 0; i--) {
-                boardStacks.get(k - 1).getCards().get(i - 1).setPosition(BOARD_START_X + (80 * k + 1), (BOARD_START_Y - 50) + (60 * i + 1));
+                boardStacks.get(k - 1).getCards().get(i - 1).setPosition(BOARD_START_X + (80 * k), (BOARD_START_Y - 50) + (60 * i));
                 add(boardStacks.get(k - 1).getCards().get(i - 1).getJCard(), boardStacks.get(k - 1).getCards().size() - i);
                 if (i == boardStacks.get(k - 1).getCards().size()) {
                     boardStacks.get(k - 1).getCards().get(i - 1).flipCard(true);
