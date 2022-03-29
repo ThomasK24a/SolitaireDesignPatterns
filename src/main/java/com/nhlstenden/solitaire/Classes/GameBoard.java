@@ -140,11 +140,16 @@ public class GameBoard extends JFrame {
         }
 
         MoveStack moveStack = selectedCardLocation.getStack().getAllBelow(selectedCardLocation.getIndexStack());
+
         if (targetCardLocation.getStack().canAcceptStack(moveStack)) {
             System.out.println("Moved a " + moveStack.getFirstCard().toString());
+
             //System.out.println("Moved a " + moveStack.getFirstCard().toString() + " to a " + targetCardLocation.getCard().toString());
+
             targetCardLocation.getStack().addCards(moveStack.getCards());
+
             selectedCardLocation.getStack().removeAllBelow(selectedCardLocation.getIndexStack());
+
             moveStack.moveCardSprites(targetCardLocation.getStack());
         }else{
             System.out.println("Didn't move a " + moveStack.getFirstCard().toString());
@@ -158,7 +163,7 @@ public class GameBoard extends JFrame {
             for (ICard card : boardStack.getCards()){
                 int cardIndex = boardStack.findCardIndex(card);
                 int cardLayer = boardStack.getCards().size() - cardIndex;
-                card.setPosition(boardStack.getCoordsOfCard(cardIndex));
+                card.setCardCoordinates(boardStack.getCoordsOfCard(cardIndex));
                 add(card.getJCard(), cardLayer);
             }
             boardStack.getLastCard().flipCard(true);

@@ -96,8 +96,8 @@ public class DecoratorLibrary {
     }
 
     /**
-     * Get the instance of this [DecoratorLibrary]
-     * @return this Decorator library.
+     * Get the instance of this <code>DecoratorLibrary</code>
+     * @return <code>DecoratorLibrary</code>.
      */
     public static DecoratorLibrary getInstance() {
         if (instance == null)

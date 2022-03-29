@@ -32,7 +32,7 @@ public class MoveStack implements IOrderedStack {
 
     public void moveCardSprites(CardStack targetStack) {
         for(ICard card : cards){
-//            card.setPosition(tar);
+            card.setPosition(targetStack.getStackCoordinates().getX(), targetStack.getStackCoordinates().getY());
         }
     }
 }

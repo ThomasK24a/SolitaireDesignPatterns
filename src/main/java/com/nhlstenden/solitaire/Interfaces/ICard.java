@@ -32,5 +32,7 @@ public interface ICard {
 
     CardStack getStackLocation();
 
-    void setPosition(Coordinates coordsOfCard);
+    void setCardCoordinates(Coordinates coordsOfCard);
+
+    Coordinates getCardCoordinates();
 }

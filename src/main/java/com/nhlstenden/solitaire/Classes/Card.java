@@ -11,7 +11,7 @@ import javax.swing.plaf.BorderUIResource;
 import java.awt.*;
 
 /**
- * Card class holds the logic for the JPanel component, and game object functionality.
+ * Card class holds the logic for the JPanel component, and <code>Card</code> game object functionality.
  */
 public class Card extends JPanel implements ICard {
     private final int CARD_SIZE_WIDTH = 65;
@@ -30,7 +30,7 @@ public class Card extends JPanel implements ICard {
     private Icon suitSprite;
 
     private CardStack stackLocation;
-
+    private Coordinates cardCoordinates;
     /**
      * Initialize the Card with the proper Suit, Value, and if it is facing up or down.
      *
@@ -42,6 +42,7 @@ public class Card extends JPanel implements ICard {
         this.suit = suit;
         this.value = value;
         this.isFaceUp = isFaceUp;
+
         setFaceDownLabel();
         setBorder();
         flipCard(isFaceUp);
@@ -215,8 +216,14 @@ public class Card extends JPanel implements ICard {
     }
 
     @Override
-    public void setPosition(Coordinates coordsOfCard) {
+    public void setCardCoordinates(Coordinates coordsOfCard) {
         setPosition(coordsOfCard.getX(), coordsOfCard.getY());
+        this.cardCoordinates = coordsOfCard;
+    }
+
+    @Override
+    public Coordinates getCardCoordinates() {
+        return this.cardCoordinates;
     }
 
     /**

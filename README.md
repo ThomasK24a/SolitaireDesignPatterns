@@ -10,6 +10,10 @@ Start: 10/03/2022
 * Ramon Gonzalez
 * Ian Donker
 
+## Prerequisites
+
+* JDK 17
+
 ## Run the project
 * Clone the repository
 * File > Project Structure ( Ctrl + Alt + Shift + S )
