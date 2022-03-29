@@ -51,9 +51,4 @@ public class BoardStack extends CardStack implements IOrderedStack {
     protected Coordinates getOffset() {
         return new Coordinates(0, 60);
     }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
-    }
 }

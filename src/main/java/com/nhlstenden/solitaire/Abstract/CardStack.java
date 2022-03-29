@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class CardStack implements ActionListener
+public abstract class CardStack
 {
     protected List<ICard> cards;
     private final JButton suitButton = new JButton();

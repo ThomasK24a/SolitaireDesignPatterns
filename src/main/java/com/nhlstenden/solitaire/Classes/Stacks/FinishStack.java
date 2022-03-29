@@ -1,8 +1,10 @@
 package main.java.com.nhlstenden.solitaire.Classes.Stacks;
 
 import main.java.com.nhlstenden.solitaire.Abstract.CardStack;
+import main.java.com.nhlstenden.solitaire.Classes.CardLocation;
 import main.java.com.nhlstenden.solitaire.Classes.Coordinates;
 import main.java.com.nhlstenden.solitaire.Classes.DecoratorLibrary;
+import main.java.com.nhlstenden.solitaire.Classes.GameBoard;
 import main.java.com.nhlstenden.solitaire.Enums.Suit;
 import main.java.com.nhlstenden.solitaire.Enums.Value;
 import main.java.com.nhlstenden.solitaire.Interfaces.ICard;
@@ -18,12 +20,18 @@ public class FinishStack extends CardStack {
     public FinishStack(Suit suit, Coordinates stackCoordinates) {
         super(stackCoordinates);
         this.suit = suit;
+        initializeStackButton(stackCoordinates);
+    }
 
+    private void initializeStackButton(Coordinates stackCoordinates){
         String iconString = DecoratorLibrary.getInstance().getSuitIconMap().get(getSuit());
         Icon icon = DecoratorLibrary.getInstance().getIcon(iconString);
-
         this.stackButton = new StackButton(this, icon);
         stackButton.setBounds(stackCoordinates.getX(), stackCoordinates.getY(), 65, 90);
+
+        stackButton.stackButton.addActionListener(e ->  {
+            GameBoard.getInstance().moveCard(new CardLocation(stackButton.getCardStack(), -1));
+        });
     }
 
     public Suit getSuit() {
@@ -70,10 +78,5 @@ public class FinishStack extends CardStack {
     public boolean isComplete() {
         ICard lastCard = cards.get(cards.size() - 1);
         return lastCard.getValue().equals(Value.KING);
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
     }
 }

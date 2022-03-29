@@ -27,12 +27,6 @@ public class StackButton extends JPanel {
     public void initializeButton(Icon icon) {
         this.setIconImage(icon);
         this.setVisible(true);
-
-
-
-        stackButton.addActionListener(e ->  {
-            GameBoard.getInstance().moveCard(new CardLocation(getCardStack(), -1));
-        });
     }
 
     public JButton getStackButton() {

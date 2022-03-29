@@ -33,8 +33,4 @@ public class WasteStack extends CardStack {
         return cards;
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
-    }
 }
