@@ -27,7 +27,7 @@ public class Stack extends JPanel {
             if (obj instanceof JButton cb) {
                 Component component = cb.getParent();
                 if (component instanceof Card card) {
-                    GameBoard.getInstance().onSelectCard(card);
+                    GameBoard.getInstance().onCardButtonClick(card);
                 }
             }
         });

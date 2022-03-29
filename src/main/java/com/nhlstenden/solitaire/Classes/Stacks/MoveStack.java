@@ -1,5 +1,6 @@
 package main.java.com.nhlstenden.solitaire.Classes.Stacks;
 
+import main.java.com.nhlstenden.solitaire.Abstract.CardStack;
 import main.java.com.nhlstenden.solitaire.Interfaces.ICard;
 import main.java.com.nhlstenden.solitaire.Interfaces.IOrderedStack;
 
@@ -27,5 +28,11 @@ public class MoveStack implements IOrderedStack {
 
     public ArrayList<ICard> getCards() {
         return cards;
+    }
+
+    public void moveCardSprites(CardStack targetStack) {
+        for(ICard card : cards){
+            //card.setPosition(tar);
+        }
     }
 }

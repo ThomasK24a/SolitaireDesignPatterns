@@ -1,6 +1,7 @@
 package main.java.com.nhlstenden.solitaire.Classes.Stacks;
 
 import main.java.com.nhlstenden.solitaire.Abstract.CardStack;
+import main.java.com.nhlstenden.solitaire.Classes.Coordinates;
 import main.java.com.nhlstenden.solitaire.Enums.Value;
 import main.java.com.nhlstenden.solitaire.Interfaces.ICard;
 import main.java.com.nhlstenden.solitaire.Interfaces.IOrderedStack;
@@ -9,6 +10,10 @@ import java.awt.event.ActionEvent;
 import java.util.List;
 
 public class BoardStack extends CardStack implements IOrderedStack {
+
+    public BoardStack(Coordinates stackCoordinates) {
+        super(stackCoordinates);
+    }
 
     public boolean isStackInOrder(int startingIndex){
         List<ICard> toCheckStack = cards.subList(startingIndex, cards.size());
@@ -38,6 +43,11 @@ public class BoardStack extends CardStack implements IOrderedStack {
             return isStackInOrder(cardIndex);
         }
         return false;
+    }
+
+    @Override
+    protected Coordinates getOffset() {
+        return new Coordinates(0, 60);
     }
 
     /**
