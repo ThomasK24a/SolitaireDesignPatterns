@@ -1,6 +1,7 @@
 package main.java.com.nhlstenden.solitaire.Interfaces;
 
 import main.java.com.nhlstenden.solitaire.Abstract.CardStack;
+import main.java.com.nhlstenden.solitaire.Classes.Coordinates;
 import main.java.com.nhlstenden.solitaire.Enums.Suit;
 import main.java.com.nhlstenden.solitaire.Enums.Value;
 
@@ -30,4 +31,6 @@ public interface ICard {
     JPanel getJCard();
 
     CardStack getStackLocation();
+
+    void setPosition(Coordinates coordsOfCard);
 }

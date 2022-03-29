@@ -1,6 +1,5 @@
 package main.java.com.nhlstenden.solitaire.Classes;
 
-import main.java.com.nhlstenden.solitaire.Abstract.CardStack;
 import main.java.com.nhlstenden.solitaire.Classes.Factory.BoardFactory;
 import main.java.com.nhlstenden.solitaire.Classes.Stacks.*;
 import main.java.com.nhlstenden.solitaire.Enums.Suit;
@@ -125,7 +124,7 @@ public class GameBoard extends JFrame {
     private ArrayList<BoardStack> createBoardStacks() {
         ArrayList<BoardStack> boardStacks = new ArrayList<>();
         for (int i = 0; i < BOARD_STACKS_AMOUNT; i++) {
-            boardStacks.add(new BoardStack(new Coordinates(0,0)));
+            boardStacks.add(new BoardStack(new Coordinates(BOARD_START_X + (80 * i + 1),BOARD_START_Y - 49)));
         }
         return boardStacks;
     }
@@ -177,12 +176,25 @@ public class GameBoard extends JFrame {
     }
 
     private void createPlayingBoard() {
+        for(BoardStack boardStack : boardStacks){
+            int cardIndex = boardStack.getCards().size();
+            for(ICard card : boardStack.getCards()){
+                card.setPosition(boardStack.getCoordsOfCard(cardIndex));
+                add(card.getJCard(), cardIndex);
+                cardIndex--;
+            }
+        }
+
+
         for (int k = boardStacks.size(); k > 0; k--) {
-            for (int i = boardStacks.get(k - 1).getCards().size(); i > 0; i--) {
-                boardStacks.get(k - 1).getCards().get(i - 1).setPosition(BOARD_START_X + (80 * k + 1), (BOARD_START_Y - 50) + (60 * i + 1));
-                add(boardStacks.get(k - 1).getCards().get(i - 1).getJCard(), boardStacks.get(k - 1).getCards().size() - i);
-                if (i == boardStacks.get(k - 1).getCards().size()) {
-                    boardStacks.get(k - 1).getCards().get(i - 1).flipCard(true);
+            BoardStack boardStack = boardStacks.get(k - 1);
+            int stackSize = boardStack.getCards().size();
+            for (int i = stackSize; i > 0; i--) {
+                ICard card = boardStack.getCards().get(i - 1);
+                card.setPosition(boardStack.getCoordsOfCard(i));
+                add(card.getJCard(), stackSize - i);
+                if (i == stackSize) {
+                    boardStack.getCards().get(i - 1).flipCard(true);
                 }
             }
         }

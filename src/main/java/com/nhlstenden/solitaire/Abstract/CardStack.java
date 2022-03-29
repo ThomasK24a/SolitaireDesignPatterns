@@ -22,7 +22,7 @@ public abstract class CardStack implements ActionListener
     }
 
     public Coordinates getStackCoordinates() {
-        return stackCoordinates;
+        return new Coordinates(stackCoordinates.getX(), stackCoordinates.getY());
     }
 
     public void addCards(List<ICard> cards) {
@@ -60,7 +60,7 @@ public abstract class CardStack implements ActionListener
         cards = cards.subList(0, startingIndex);
     }
 
-    public Coordinates getCoords(int index){
+    public Coordinates getCoordsOfCard(int index){
         Coordinates cardCoordinates = getStackCoordinates();
         for(int i = 0; i < index; i++){
             cardCoordinates.addCoordinates(getOffset());

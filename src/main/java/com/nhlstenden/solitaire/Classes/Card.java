@@ -214,6 +214,11 @@ public class Card extends JPanel implements ICard {
         return this.stackLocation;
     }
 
+    @Override
+    public void setPosition(Coordinates coordsOfCard) {
+        setPosition(coordsOfCard.getX(), coordsOfCard.getY());
+    }
+
     /**
      * Set the boarder of the JPanel.
      */
