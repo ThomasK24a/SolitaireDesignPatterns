@@ -27,7 +27,7 @@ public class BoardStack extends CardStack implements IOrderedStack {
         if(getLastCard() == null){
             return moveStack.getFirstCard().isNextValue(Value.NONE);
         }
-        return moveStack.getFirstCard().isNextValue(getLastCard().getValue()) &&
+        return getLastCard().isNextValue(moveStack.getFirstCard().getValue()) &&
              moveStack.getFirstCard().isBlack() != getLastCard().isBlack();
     }
 

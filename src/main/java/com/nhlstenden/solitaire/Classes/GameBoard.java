@@ -132,9 +132,14 @@ public class GameBoard extends JFrame {
         }
 
         MoveStack moveStack = selectedCardLocation.getStack().getAllBelow(selectedCardLocation.getIndexStack());
-        if(selectedCardLocation.getStack().canAcceptStack(moveStack)){
-            selectedCardLocation.getStack().addCards(moveStack.getCards());
+        if(targetCardLocation.getStack().canAcceptStack(moveStack)){
+            System.out.println("Moved a " + moveStack.getFirstCard().getValue() + " of " + moveStack.getFirstCard().getSuit() + " to a " + targetCardLocation.getCard().getValue() + " of " + targetCardLocation.getCard().getSuit());
+            targetCardLocation.getStack().addCards(moveStack.getCards());
+            selectedCardLocation.getStack().removeAllBelow(selectedCardLocation.getIndexStack());
+        }else{
+            System.out.println("Can't move a " + moveStack.getFirstCard().getValue() + " of " + moveStack.getFirstCard().getSuit() + " to a " + targetCardLocation.getCard().getValue() + " of " + targetCardLocation.getCard().getSuit());
         }
+        selectedCardLocation = null;
     }
 
     private void createPlayingBoard() {
