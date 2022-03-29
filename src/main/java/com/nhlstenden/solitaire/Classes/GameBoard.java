@@ -1,5 +1,6 @@
 package main.java.com.nhlstenden.solitaire.Classes;
 
+import main.java.com.nhlstenden.solitaire.Abstract.CardStack;
 import main.java.com.nhlstenden.solitaire.Classes.Factory.BoardFactory;
 import main.java.com.nhlstenden.solitaire.Classes.Stacks.*;
 import main.java.com.nhlstenden.solitaire.Enums.Suit;
@@ -36,8 +37,8 @@ public class GameBoard extends JFrame {
         boardStacks = createBoardStacks();
         finishStacks = createFinishStacks();
         boardFactory = new BoardFactory();
-        waste = new WasteStack(new Coordinates(0,0));
-        deck = new DeckStack(waste, new Coordinates(0,0));
+        waste = new WasteStack(new Coordinates(0, 0));
+        deck = new DeckStack(waste, new Coordinates(0, 0));
 
         boardFactory.fillBoardStacks(boardStacks);
         boardFactory.fillDeck(deck);
@@ -82,9 +83,10 @@ public class GameBoard extends JFrame {
             stack.setIconImage(icon);
             stack.setVisible(true);
             stack.setBounds(BOARD_START_X + (80 * (i + finishStacks.size())), 10, 65, 90);
+            finishStacks.get(i).setStackCoordinates(BOARD_START_X + (80 * (i + finishStacks.size())), 10);
             add(stack);
 
-            stack.getStackButton().addActionListener(e ->  {
+            stack.getStackButton().addActionListener(e -> {
                 moveCard(new CardLocation(stack.getCardStack(), -1));
             });
         }
@@ -124,7 +126,7 @@ public class GameBoard extends JFrame {
     private ArrayList<BoardStack> createBoardStacks() {
         ArrayList<BoardStack> boardStacks = new ArrayList<>();
         for (int i = 0; i < BOARD_STACKS_AMOUNT; i++) {
-            boardStacks.add(new BoardStack(new Coordinates(BOARD_START_X + (80 * i + 1),BOARD_START_Y - 49)));
+            boardStacks.add(new BoardStack(new Coordinates(BOARD_START_X + (80 * i + 1), BOARD_START_Y - 49)));
         }
         return boardStacks;
     }
@@ -132,7 +134,7 @@ public class GameBoard extends JFrame {
     private ArrayList<FinishStack> createFinishStacks() {
         ArrayList<FinishStack> finishStacks = new ArrayList<>();
         for (Suit suit : Suit.class.getEnumConstants()) {
-            finishStacks.add(new FinishStack(suit, new Coordinates(0,0)));
+            finishStacks.add(new FinishStack(suit, new Coordinates(0, 0)));
         }
         return finishStacks;
     }
@@ -162,15 +164,16 @@ public class GameBoard extends JFrame {
         }
 
         MoveStack moveStack = selectedCardLocation.getStack().getAllBelow(selectedCardLocation.getIndexStack());
-        if(targetCardLocation.getStack().canAcceptStack(moveStack)){
+        if (targetCardLocation.getStack().canAcceptStack(moveStack)) {
             System.out.println("Moved a " + moveStack.getFirstCard().toString());
             //System.out.println("Moved a " + moveStack.getFirstCard().toString() + " to a " + targetCardLocation.getCard().toString());
             targetCardLocation.getStack().addCards(moveStack.getCards());
             selectedCardLocation.getStack().removeAllBelow(selectedCardLocation.getIndexStack());
-            moveStack.moveCardSprites(targetCardLocation.getStack());
 
-            selectedCardLocation.getStack().getLastCard().flipCard(true);
-        }else{
+            moveCardSprites(moveStack.getFirstCard(),targetCardLocation.getStack());
+            flipCard(selectedCardLocation.getStack());
+
+        } else {
             System.out.println("Didn't move a " + moveStack.getFirstCard().toString());
 //            System.out.println("Can't move a " + moveStack.getFirstCard().toString() + " to a " + targetCardLocation.getCard().toString());
         }
@@ -178,9 +181,9 @@ public class GameBoard extends JFrame {
     }
 
     private void createPlayingBoard() {
-        for(BoardStack boardStack : boardStacks){
+        for (BoardStack boardStack : boardStacks) {
             int cardIndex = boardStack.getCards().size();
-            for(ICard card : boardStack.getCards()){
+            for (ICard card : boardStack.getCards()) {
                 card.setPosition(boardStack.getCoordsOfCard(cardIndex));
                 add(card.getJCard(), cardIndex);
                 cardIndex--;
@@ -210,4 +213,14 @@ public class GameBoard extends JFrame {
         return instance;
     }
 
+    private void flipCard(CardStack stack) {
+        if (stack.getLastCard() != null)
+            stack.getLastCard().flipCard(true);
+
+        System.out.println(stack.getStackCoordinates().x + " " + stack.getStackCoordinates().x);
+    }
+
+    private void moveCardSprites(ICard cardToMove, CardStack stackTarget){
+        cardToMove.setPosition(stackTarget.getStackCoordinates().x, stackTarget.getStackCoordinates().y);
+    }
 }

@@ -14,7 +14,7 @@ public abstract class CardStack implements ActionListener
     protected List<ICard> cards;
     private final JButton suitButton = new JButton();
     private static final Icon BACK_SPRITE = new ImageIcon("src/resources/card_sprites/back_red_basic.png");
-    private final Coordinates stackCoordinates;
+    private Coordinates stackCoordinates;
 
     public CardStack(Coordinates stackCoordinates) {
         this.cards = new ArrayList<>();
@@ -23,6 +23,10 @@ public abstract class CardStack implements ActionListener
 
     public Coordinates getStackCoordinates() {
         return new Coordinates(stackCoordinates.getX(), stackCoordinates.getY());
+    }
+
+    public void setStackCoordinates(int x, int y) {
+        this.stackCoordinates = new Coordinates(x,y);
     }
 
     public void addCards(List<ICard> cards) {
