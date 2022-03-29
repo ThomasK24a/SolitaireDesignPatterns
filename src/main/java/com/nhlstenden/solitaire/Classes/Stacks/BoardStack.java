@@ -50,15 +50,6 @@ public class BoardStack extends CardStack implements IOrderedStack {
         return new Coordinates(0, 60);
     }
 
-    /**
-     * Will get the last card from this board stack
-     * @return the last card, null if the stack is empty
-     */
-    private ICard getLastCard(){
-        if(cards.size() == 0) return null;
-        return cards.get(cards.size() - 1);
-    }
-
     @Override
     public void actionPerformed(ActionEvent e) {
 

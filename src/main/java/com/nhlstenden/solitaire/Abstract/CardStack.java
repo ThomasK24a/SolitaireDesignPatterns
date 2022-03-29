@@ -68,5 +68,14 @@ public abstract class CardStack implements ActionListener
         return cardCoordinates;
     }
 
+    /**
+     * Will get the last card from this board stack
+     * @return the last card, null if the stack is empty
+     */
+    public ICard getLastCard(){
+        if(cards.size() == 0) return null;
+        return cards.get(cards.size() - 1);
+    }
+
     protected abstract Coordinates getOffset();
 }

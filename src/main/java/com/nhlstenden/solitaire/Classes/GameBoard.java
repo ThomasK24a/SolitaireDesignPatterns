@@ -100,7 +100,7 @@ public class GameBoard extends JFrame {
             List<ICard> drawnCards = deck.drawThree();
 
             for (int i = 0; i < drawnCards.size(); i++) {
-                drawnCards.get(i).setPosition(BOARD_START_X, BOARD_START_Y + (60 * i + 1));
+                drawnCards.get(i).setPosition(BOARD_START_X, BOARD_START_Y + (60 * i));
                 drawnCards.get(i).flipCard(true);
                 add(drawnCards.get(i).getJCard(), i);
                 validate();
@@ -168,6 +168,8 @@ public class GameBoard extends JFrame {
             targetCardLocation.getStack().addCards(moveStack.getCards());
             selectedCardLocation.getStack().removeAllBelow(selectedCardLocation.getIndexStack());
             moveStack.moveCardSprites(targetCardLocation.getStack());
+
+            selectedCardLocation.getStack().getLastCard().flipCard(true);
         }else{
             System.out.println("Didn't move a " + moveStack.getFirstCard().toString());
 //            System.out.println("Can't move a " + moveStack.getFirstCard().toString() + " to a " + targetCardLocation.getCard().toString());
