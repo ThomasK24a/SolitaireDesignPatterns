@@ -30,6 +30,7 @@ public class GameBoard extends JFrame {
     private final JButton playerCardsButton;
     private final JButton currentSelectedCard;
 
+    private ICard currentCard;
 
     public GameBoard() {
         super("Solitaire");
@@ -75,7 +76,7 @@ public class GameBoard extends JFrame {
     private void createFinishedDeckButtons() {
         for (int i = 0; i < finishStacks.size(); i++) {
 
-            Stack stack = new Stack();
+            Stack stack = new Stack(finishStacks.get(i));
 
             String iconString = DecoratorLibrary.getInstance().suitIconMap.get(finishStacks.get(i).getSuit());
 
@@ -84,6 +85,10 @@ public class GameBoard extends JFrame {
             stack.setVisible(true);
             stack.setBounds(BOARD_START_X + (80 * (i + finishStacks.size())), 10, 65, 90);
             add(stack);
+
+            stack.getStackButton().addActionListener(e ->  {
+                moveCard(new CardLocation(stack.getCardStack(), -1));
+            });
         }
 
         validate();
@@ -159,11 +164,11 @@ public class GameBoard extends JFrame {
         }
 
         MoveStack moveStack = selectedCardLocation.getStack().getAllBelow(selectedCardLocation.getIndexStack());
-        if(targetCardLocation.getStack().canAcceptStack(moveStack)){
+        if (targetCardLocation.getStack().canAcceptStack(moveStack)) {
             System.out.println("Moved a " + moveStack.getFirstCard().getValue() + " of " + moveStack.getFirstCard().getSuit() + " to a " + targetCardLocation.getCard().getValue() + " of " + targetCardLocation.getCard().getSuit());
             targetCardLocation.getStack().addCards(moveStack.getCards());
             selectedCardLocation.getStack().removeAllBelow(selectedCardLocation.getIndexStack());
-        }else{
+        } else {
             System.out.println("Can't move a " + moveStack.getFirstCard().getValue() + " of " + moveStack.getFirstCard().getSuit() + " to a " + targetCardLocation.getCard().getValue() + " of " + targetCardLocation.getCard().getSuit());
         }
         selectedCardLocation = null;

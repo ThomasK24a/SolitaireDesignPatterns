@@ -7,6 +7,11 @@ public class CardLocation {
     private final CardStack stack;
     private final int indexStack;
 
+    public CardLocation(CardStack stack, int index) {
+        this.stack = stack;
+        this.indexStack = index;
+    }
+
     public CardLocation(ICard card){
         CardStack stackLocation = card.getStackLocation();
         int index = stackLocation.findCardIndex(card);
