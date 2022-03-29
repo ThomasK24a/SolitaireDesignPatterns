@@ -5,6 +5,7 @@ import main.java.com.nhlstenden.solitaire.Enums.Value;
 import main.java.com.nhlstenden.solitaire.Interfaces.ICard;
 import main.java.com.nhlstenden.solitaire.Interfaces.IOrderedStack;
 
+import java.awt.event.ActionEvent;
 import java.util.List;
 
 public class BoardStack extends CardStack implements IOrderedStack {
@@ -48,4 +49,8 @@ public class BoardStack extends CardStack implements IOrderedStack {
         return cards.get(cards.size() - 1);
     }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+    }
 }

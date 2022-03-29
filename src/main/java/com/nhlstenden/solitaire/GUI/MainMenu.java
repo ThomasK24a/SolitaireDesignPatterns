@@ -3,6 +3,7 @@ package main.java.com.nhlstenden.solitaire.GUI;
 import main.java.com.nhlstenden.solitaire.Classes.GameBoard;
 
 import javax.swing.*;
+import javax.swing.plaf.ColorUIResource;
 
 public class MainMenu {
     private final JFrame mainframe;
@@ -21,8 +22,9 @@ public class MainMenu {
 
         mainframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainframe.setContentPane(this.mainPanel);
-        mainframe.setSize(800,500);
+        mainframe.setSize(800, 500);
         mainframe.pack();
+        mainPanel.setBackground(new ColorUIResource(0, 153, 153));
         mainframe.setVisible(true);
 
         createStartButton();

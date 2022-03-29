@@ -3,6 +3,7 @@ package main.java.com.nhlstenden.solitaire.Classes.Stacks;
 import main.java.com.nhlstenden.solitaire.Abstract.CardStack;
 import main.java.com.nhlstenden.solitaire.Interfaces.ICard;
 
+import java.awt.event.ActionEvent;
 import java.util.List;
 
 public class WasteStack extends CardStack {
@@ -20,5 +21,10 @@ public class WasteStack extends CardStack {
         List<ICard> cards = this.cards;
         this.cards.clear();
         return cards;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
     }
 }
