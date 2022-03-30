@@ -198,9 +198,9 @@ public class Card extends JPanel implements ICard {
     }
 
     /**
-     * Change the stack where the card is located. e.g. BoardStack or FinishStack.
+     * Change the stack where the card is located. e.g. <code>BoardStack</code> or <code>FinishStack</code>.
      *
-     * @param cardStack CardStack Abstract Class.
+     * @param cardStack <code>CardStack</code> Abstract Class.
      */
     public void onCardMove(CardStack cardStack) {
         this.stackLocation = cardStack;
