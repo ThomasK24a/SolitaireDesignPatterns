@@ -164,7 +164,7 @@ public class GameBoard extends JFrame {
 
             selectedCardLocation.getStack().removeAllBelow(selectedCardLocation.getIndexStack());
 
-            moveStack.moveCardSprites(previousLocation);
+            moveStack.moveCardSprites(targetCardLocation.getStack());
         } else {
             System.out.println("Didn't move a " + moveStack.getFirstCard().toString());
 //            System.out.println("Can't move a " + moveStack.getFirstCard().toString() + " to a " + targetCardLocation.getCard().toString());
