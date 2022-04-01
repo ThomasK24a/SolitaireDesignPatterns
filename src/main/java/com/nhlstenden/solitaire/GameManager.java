@@ -6,6 +6,8 @@ import main.java.com.nhlstenden.solitaire.Enums.GameStates;
 import javax.swing.*;
 
 public class GameManager {
+    public static GameManager instance;
+
     static GameStateMachine stateMachine;
     private JFrame currentJFrame;
 
@@ -13,15 +15,22 @@ public class GameManager {
         stateMachine = GameStateMachine.getInstance();
     }
 
-    public void restartGame(){
+    public void restartGame() {
         stateMachine.setGameState(GameStates.PRE_GAME_STATE);
     }
 
-    public void startGame(){
+    public void startGame() {
         stateMachine.setGameState(GameStates.RUNNING_STATE);
     }
 
-    public void exitGame(){
+    public void exitGame() {
         stateMachine.setGameState(GameStates.POST_GAME_STATE);
+    }
+
+    public static GameManager getInstance() {
+        if (instance == null)
+            instance = new GameManager();
+
+        return instance;
     }
 }

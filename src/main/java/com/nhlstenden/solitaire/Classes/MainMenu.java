@@ -1,5 +1,7 @@
 package main.java.com.nhlstenden.solitaire.Classes;
 
+import main.java.com.nhlstenden.solitaire.GameManager;
+
 import javax.swing.*;
 import javax.swing.plaf.ColorUIResource;
 import java.awt.event.ActionEvent;
@@ -23,7 +25,7 @@ public class MainMenu extends JFrame {
         iconStart = new ImageIcon("src/resources/card_sprites/spade.png");
         iconExit = new ImageIcon("src/resources/card_sprites/heart.png");
 
-        setSize(800, 500);
+        setSize(500, 500);
         JLayeredPane backGroundPanel = new JLayeredPane();
         setContentPane(backGroundPanel);
 
@@ -39,8 +41,9 @@ public class MainMenu extends JFrame {
     public void createExitButton() {
 
         exitButton.setIcon(iconExit);
-        exitButton.setBounds(200, 400, 80, 50);
+        exitButton.setBounds(300, 200, 100, 50);
         exitButton.setVisible(true);
+        exitButton.setText("Exit");
         add(exitButton);
         validate();
         exitButton.addActionListener(e ->
@@ -50,14 +53,16 @@ public class MainMenu extends JFrame {
 
     public void createStartButton() {
         startButton.setIcon(iconStart);
-        startButton.setBounds(100, 400, 80, 50);
+        startButton.setBounds(100, 200, 100, 50);
         startButton.setVisible(true);
+        startButton.setText("Start");
         add(startButton);
         validate();
+
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                GameBoard.getInstance();
+                GameManager.getInstance().startGame();
             }
         });
     }

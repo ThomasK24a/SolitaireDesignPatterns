@@ -3,12 +3,14 @@ package main.java.com.nhlstenden.solitaire.Classes;
 import main.java.com.nhlstenden.solitaire.Classes.Factory.BoardFactory;
 import main.java.com.nhlstenden.solitaire.Classes.Stacks.*;
 import main.java.com.nhlstenden.solitaire.Enums.Suit;
+import main.java.com.nhlstenden.solitaire.GameManager;
 import main.java.com.nhlstenden.solitaire.Interfaces.ICard;
 
 import javax.swing.*;
 import javax.swing.plaf.ColorUIResource;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.List;
 
 public class GameBoard extends JFrame {
 
@@ -24,10 +26,13 @@ public class GameBoard extends JFrame {
     private final WasteStack waste;
     private final BoardFactory boardFactory;
     private CardLocation selectedCardLocation;
-    private final JButton currentSelectedCard;
+    private JButton currentSelectedCard;
+    private JButton restartButton;
 
     public GameBoard() {
         super("Solitaire");
+
+        instance = this;
 
         setLayout(null);
         setBackground(new ColorUIResource(0, 153, 153));
@@ -43,18 +48,33 @@ public class GameBoard extends JFrame {
 
         boardFactory.fillBoardStacks(boardStacks);
         boardFactory.fillDeck(deck);
-
-        currentSelectedCard = new JButton();
-        currentSelectedCard.setBounds(BOARD_START_X, BOARD_START_Y * 2, 65, 90);
-        currentSelectedCard.setVisible(false);
-        add(currentSelectedCard);
         JLayeredPane backGroundPanel = new JLayeredPane();
         setContentPane(backGroundPanel);
 
+        currentSelectedCard = new JButton();
+        currentSelectedCard.setBounds(BOARD_START_X, 500, 65, 90);
+        currentSelectedCard.setVisible(false);
+        add(currentSelectedCard);
+
+       addRestartButton();
         addBoardStackCardsToPanel();
         addDeckButtonToPanel();
         addFinishStackButtonsToPanel();
         validate();
+    }
+
+    private void addRestartButton() {
+        restartButton = new JButton();
+        restartButton.setBounds(100,600,80,50);
+        restartButton.setText("Restart");
+        add(restartButton, 5);
+
+        restartButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                GameManager.getInstance().restartGame();
+            }
+        });
     }
 
     private void addFinishStackButtonsToPanel() {
