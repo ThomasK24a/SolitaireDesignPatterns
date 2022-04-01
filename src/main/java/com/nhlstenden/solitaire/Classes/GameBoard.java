@@ -161,14 +161,14 @@ public class GameBoard extends JFrame {
             setCurrentCard(selectedCardLocation.getCard());
             validate();
         } else {
-            throw new RuntimeException("Card cannot be selected"); //TODO: add custom exception
+            throw new RuntimeException("Card cannot be selected");
         }
     }
 
     public void moveCard(CardLocation targetCardLocation) {
         if (!targetCardLocation.isIntractable() || !selectedCardLocation.isIntractable()) {
             selectedCardLocation = null;
-            throw new RuntimeException("Card cannot be selected"); //TODO: add custom exception
+            throw new RuntimeException("Card cannot be selected");
         }
 
         MoveStack moveStack = selectedCardLocation.getStack().getAllBelow(selectedCardLocation.getIndexStack());
