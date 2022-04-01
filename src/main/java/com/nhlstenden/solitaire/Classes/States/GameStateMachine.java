@@ -15,20 +15,21 @@ public class GameStateMachine {
         runningState = new RunningState();
         postgameState = new PostgameState();
 
-        this.currentGameState = GameStates.PRE_GAME_STATE;
+        setGameState(GameStates.PRE_GAME_STATE);
     }
 
-    public void setGameState(GameStates gameState){
+    public void setGameState(GameStates gameState) {
         //do nothing if state remains the same
-        if(currentGameState == gameState) return;
+        if (currentGameState == gameState) return;
 
-        getCurrentGameState().onStateExit();
+        if (currentGameState != null)
+            getCurrentGameState().onStateExit();
 
         currentGameState = gameState;
         getCurrentGameState().onStateEnter();
     }
 
-    public GameState getCurrentGameState(){
+    public GameState getCurrentGameState() {
         return switch (currentGameState) {
             case PRE_GAME_STATE -> this.pregameState;
             case RUNNING_STATE -> this.runningState;

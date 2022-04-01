@@ -45,7 +45,7 @@ public class GameBoard extends JFrame {
         boardFactory.fillDeck(deck);
 
         currentSelectedCard = new JButton();
-        currentSelectedCard.setBounds(BOARD_START_X, BOARD_START_Y * 4, 65, 90);
+        currentSelectedCard.setBounds(BOARD_START_X, BOARD_START_Y * 2, 65, 90);
         currentSelectedCard.setVisible(false);
         add(currentSelectedCard);
         JLayeredPane backGroundPanel = new JLayeredPane();
@@ -69,6 +69,7 @@ public class GameBoard extends JFrame {
     public void addDeckButtonToPanel() {
         add(deck.getStackButton());
     }
+
 
     public void onCardMoved() {
         if (areFinishStacksComplete()) {
@@ -103,7 +104,6 @@ public class GameBoard extends JFrame {
     }
 
     public void onCardButtonClick(ICard card) {
-
         CardLocation cardLocation = new CardLocation(card);
         if (selectedCardLocation == null) {
             selectCard(cardLocation);
@@ -116,6 +116,8 @@ public class GameBoard extends JFrame {
         System.out.println(cardLocation.getCard().toString());
         if (cardLocation.isIntractable()) {
             selectedCardLocation = cardLocation;
+            currentSelectedCard.setVisible(true);
+            validate();
         } else {
             throw new RuntimeException("Card cannot be selected"); //TODO: add custom exception
         }

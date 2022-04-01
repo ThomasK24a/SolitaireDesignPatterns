@@ -4,6 +4,8 @@ import main.java.com.nhlstenden.solitaire.Classes.GameBoard;
 
 import javax.swing.*;
 import javax.swing.plaf.ColorUIResource;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class MainMenu {
     private final JFrame mainframe;
@@ -39,6 +41,12 @@ public class MainMenu {
     }
 
     public void createStartButton() {
-        startButton.addActionListener(e -> GameBoard.getInstance());
+
+        startButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                GameBoard.getInstance();
+            }
+        });
     }
 }

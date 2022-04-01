@@ -17,13 +17,13 @@ public class DeckStack extends CardStack {
         initializeStackButton(stackCoordinates);
     }
 
-    private void initializeStackButton(Coordinates stackCoordinates){
+    private void initializeStackButton(Coordinates stackCoordinates) {
         ImageIcon deckIcon = new ImageIcon("src/resources/card_sprites/back_red_basic.png");
         this.stackButton = new StackButton(this, deckIcon);
-        stackButton.setBounds(stackCoordinates.getX(), stackCoordinates.getY(), 65, 90);
+        stackButton.setBounds(stackCoordinates.getX(), stackCoordinates.getY(), 65, 95);
 
-        stackButton.stackButton.addActionListener(e ->  {
-            if(cards.size() == 0){
+        stackButton.getStackButton().addActionListener(e -> {
+            if (cards.size() == 0) {
                 addWasteStack();
             }else{
                 MoveStack moveStack = drawThree();
@@ -46,7 +46,7 @@ public class DeckStack extends CardStack {
 
     @Override
     protected Coordinates getOffset() {
-        return new Coordinates(0,0);
+        return new Coordinates(0, 0);
     }
 
     public MoveStack drawThree() {
@@ -55,7 +55,7 @@ public class DeckStack extends CardStack {
         List<ICard> drawnCards = cards.subList(cards.size() - toDraw, cards.size());
         MoveStack moveStack = new MoveStack(drawnCards);
         cards = newDeck;
-        for (ICard card : drawnCards){
+        for (ICard card : drawnCards) {
             System.out.println(card.toString());
         }
 
@@ -74,5 +74,9 @@ public class DeckStack extends CardStack {
 
     public StackButton getStackButton(){
         return stackButton;
+    }
+
+    public StackButton getButton() {
+        return this.stackButton;
     }
 }
