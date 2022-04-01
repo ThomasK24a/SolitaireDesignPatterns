@@ -3,12 +3,12 @@ package main.java.com.nhlstenden.solitaire.Classes;
 import main.java.com.nhlstenden.solitaire.Classes.Factory.BoardFactory;
 import main.java.com.nhlstenden.solitaire.Classes.Stacks.*;
 import main.java.com.nhlstenden.solitaire.Enums.Suit;
+import main.java.com.nhlstenden.solitaire.GameManager;
 import main.java.com.nhlstenden.solitaire.Interfaces.ICard;
 
 import javax.swing.*;
 import javax.swing.plaf.ColorUIResource;
 import java.util.ArrayList;
-import java.util.List;
 
 public class GameBoard extends JFrame {
 
@@ -24,15 +24,18 @@ public class GameBoard extends JFrame {
     private final WasteStack waste;
     private final BoardFactory boardFactory;
     private CardLocation selectedCardLocation;
-//    private final JButton currentSelectedCard;
+    private JButton currentSelectedCard;
+    private JButton restartButton;
 
     public GameBoard() {
         super("Solitaire");
+        instance = this;
 
         setLayout(null);
         setBackground(new ColorUIResource(0, 153, 153));
         setSize(900, 750);
         setVisible(true);
+        setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         boardStacks = createBoardStacks();
@@ -44,17 +47,50 @@ public class GameBoard extends JFrame {
         boardFactory.fillBoardStacks(boardStacks);
         boardFactory.fillDeck(deck);
 
-//        currentSelectedCard = new JButton();
-//        currentSelectedCard.setBounds(BOARD_START_X, BOARD_START_Y * 2, 65, 90);
-//        currentSelectedCard.setVisible(false);
-//        add(currentSelectedCard);
         JLayeredPane backGroundPanel = new JLayeredPane();
         setContentPane(backGroundPanel);
 
+        addCurrentCard();
+        addRestartButton();
         addBoardStackCardsToPanel();
         addDeckButtonToPanel();
         addFinishStackButtonsToPanel();
         validate();
+    }
+
+    private void setCurrentCard(ICard card) {
+        DecoratorLibrary dl = DecoratorLibrary.getInstance();
+
+        String iconPath;
+        ImageIcon icon;
+
+        if (card.isBlack()) {
+            iconPath = dl.getValueIconBlackMap().get(card.getValue());
+        } else {
+            iconPath = dl.getValueIconRedMap().get(card.getValue());
+        }
+
+        icon = dl.getIcon(iconPath);
+        currentSelectedCard.setIcon(icon);
+        currentSelectedCard.setVisible(true);
+        validate();
+    }
+
+    private void addCurrentCard() {
+        currentSelectedCard = new JButton();
+        currentSelectedCard.setBounds(BOARD_START_X, 400, 65, 90);
+        currentSelectedCard.setVisible(false);
+
+        add(currentSelectedCard);
+    }
+
+    private void addRestartButton() {
+        restartButton = new JButton();
+        restartButton.setBounds(100, 600, 80, 50);
+        restartButton.setText("Restart");
+        add(restartButton, 5);
+
+        restartButton.addActionListener(e -> GameManager.getInstance().restartGame());
     }
 
     private void addFinishStackButtonsToPanel() {
@@ -77,7 +113,7 @@ public class GameBoard extends JFrame {
         }
 
         if (areFinishStacksComplete()) {
-            //set state to post game state
+            GameManager.getInstance().finishGame();
         }
     }
 
@@ -122,7 +158,7 @@ public class GameBoard extends JFrame {
         System.out.println(cardLocation.getCard().toString());
         if (cardLocation.isIntractable()) {
             selectedCardLocation = cardLocation;
-//            currentSelectedCard.setVisible(true);
+            setCurrentCard(selectedCardLocation.getCard());
             validate();
         } else {
             throw new RuntimeException("Card cannot be selected"); //TODO: add custom exception
@@ -145,6 +181,7 @@ public class GameBoard extends JFrame {
         } else {
             System.out.println("Didn't move a " + moveStack.getFirstCard().toString());
         }
+        currentSelectedCard.setVisible(false);
 
         selectedCardLocation = null;
         onCardMoved();
@@ -171,13 +208,13 @@ public class GameBoard extends JFrame {
 
     public void redrawWasteStack() {
         int i = waste.getCards().size();
-        for(ICard card : waste.getCards()){
+        for (ICard card : waste.getCards()) {
             card.setCardCoordinates(waste.getCoordsOfCard(waste.findCardIndex(card)));
             remove(card.getJCard());
             add(card.getJCard(), i);
             i--;
         }
-        for(ICard card : deck.getCards()){
+        for (ICard card : deck.getCards()) {
             remove(card.getJCard());
         }
         validate();

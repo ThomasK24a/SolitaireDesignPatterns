@@ -4,6 +4,7 @@ import main.java.com.nhlstenden.solitaire.Abstract.GameState;
 import main.java.com.nhlstenden.solitaire.Enums.GameStates;
 
 public class GameStateMachine {
+    public static GameStateMachine instance;
     GameStates currentGameState;
 
     PregameState pregameState;
@@ -35,5 +36,12 @@ public class GameStateMachine {
             case RUNNING_STATE -> this.runningState;
             case POST_GAME_STATE -> this.postgameState;
         };
+    }
+
+    public static GameStateMachine getInstance() {
+        if (instance == null)
+            instance = new GameStateMachine();
+
+        return instance;
     }
 }
