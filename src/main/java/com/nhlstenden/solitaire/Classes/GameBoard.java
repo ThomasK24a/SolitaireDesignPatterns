@@ -38,7 +38,7 @@ public class GameBoard extends JFrame {
         boardStacks = createBoardStacks();
         finishStacks = createFinishStacks();
         boardFactory = new BoardFactory();
-        waste = new WasteStack(new Coordinates(BOARD_START_X + 80, 10));
+        waste = new WasteStack(new Coordinates(BOARD_START_X, 100));
         deck = new DeckStack(waste, new Coordinates(BOARD_START_X, 10));
 
         boardFactory.fillBoardStacks(boardStacks);
@@ -67,22 +67,9 @@ public class GameBoard extends JFrame {
      * create listener for the deck.
      */
     public void addDeckButtonToPanel() {
-        add(deck.getButton());
-
-        deck.getButton().getStackButton().addActionListener(e ->{
-            onDeckButtonClick();
-        });
+        add(deck.getStackButton());
     }
 
-    public void onDeckButtonClick() {
-        List<ICard> drawnCards = deck.drawThree();
-
-        for (int i = 0; i < drawnCards.size(); i++) {
-            drawnCards.get(i).setPosition(BOARD_START_X, BOARD_START_Y + (60 * i));
-            drawnCards.get(i).flipCard(true);
-            add(drawnCards.get(i).getJCard(), i);
-        }
-    }
 
     public void onCardMoved() {
         if (areFinishStacksComplete()) {
@@ -137,9 +124,6 @@ public class GameBoard extends JFrame {
     }
 
     public void moveCard(CardLocation targetCardLocation) {
-
-        Coordinates previousLocation;
-
         if (!targetCardLocation.isIntractable() || !selectedCardLocation.isIntractable()) {
             selectedCardLocation = null;
             throw new RuntimeException("Card cannot be selected"); //TODO: add custom exception
@@ -149,17 +133,11 @@ public class GameBoard extends JFrame {
 
         if (targetCardLocation.getStack().canAcceptStack(moveStack)) {
             System.out.println("Moved a " + moveStack.getFirstCard().toString());
-
-            //System.out.println("Moved a " + moveStack.getFirstCard().toString() + " to a " + targetCardLocation.getCard().toString());
-
             targetCardLocation.getStack().addCards(moveStack.getCards());
-
             selectedCardLocation.getStack().removeAllBelow(selectedCardLocation.getIndexStack());
-
             moveStack.moveCardSprites(targetCardLocation.getStack());
         } else {
             System.out.println("Didn't move a " + moveStack.getFirstCard().toString());
-//            System.out.println("Can't move a " + moveStack.getFirstCard().toString() + " to a " + targetCardLocation.getCard().toString());
         }
 
         selectedCardLocation = null;
@@ -182,5 +160,18 @@ public class GameBoard extends JFrame {
             instance = new GameBoard();
 
         return instance;
+    }
+
+    public void redrawWasteStack() {
+        int i = waste.getCards().size();
+        for(ICard card : waste.getCards()){
+            card.setCardCoordinates(waste.getCoordsOfCard(waste.findCardIndex(card)));
+            remove(card.getJCard());
+            add(card.getJCard(), i);
+            i--;
+        }
+        for(ICard card : deck.getCards()){
+            remove(card.getJCard());
+        }
     }
 }

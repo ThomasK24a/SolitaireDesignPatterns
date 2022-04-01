@@ -2,20 +2,20 @@ package main.java.com.nhlstenden.solitaire.Classes.Stacks;
 
 import main.java.com.nhlstenden.solitaire.Abstract.CardStack;
 import main.java.com.nhlstenden.solitaire.Classes.Coordinates;
+import main.java.com.nhlstenden.solitaire.Classes.GameBoard;
 import main.java.com.nhlstenden.solitaire.Interfaces.ICard;
 
 import javax.swing.*;
+import java.util.Collections;
 import java.util.List;
 
 public class DeckStack extends CardStack {
     WasteStack wasteStack;
     StackButton stackButton;
-    WasteStack drawnCards;
 
     public DeckStack(WasteStack wasteStack, Coordinates stackCoordinates) {
         super(stackCoordinates);
         this.wasteStack = wasteStack;
-        drawnCards = new WasteStack(stackCoordinates);
         initializeStackButton(stackCoordinates);
     }
 
@@ -27,11 +27,12 @@ public class DeckStack extends CardStack {
         stackButton.getStackButton().addActionListener(e -> {
             if (cards.size() == 0) {
                 addWasteStack();
+            }else{
+                MoveStack moveStack = drawThree();
+                this.wasteStack.addCards(moveStack.getCards());
+                moveStack.moveCardSprites(wasteStack);
+                GameBoard.getInstance().redrawWasteStack();
             }
-            System.out.println(cards.size());
-            System.out.println(wasteStack.getCards().size());
-            //TODO: implement cards getting added to waste
-
         });
     }
 
@@ -51,24 +52,33 @@ public class DeckStack extends CardStack {
         return new Coordinates(0, 0);
     }
 
-    public List<ICard> drawThree() {
+    public MoveStack drawThree() {
         int toDraw = Math.min(cards.size(), 3);
         List<ICard> newDeck = cards.subList(0, cards.size() - toDraw);
         List<ICard> drawnCards = cards.subList(cards.size() - toDraw, cards.size());
-        wasteStack.addCards(drawnCards);
+        //Reverse drawn cards to keep correct order
+        Collections.reverse(drawnCards);
+        MoveStack moveStack = new MoveStack(drawnCards);
         cards = newDeck;
         for (ICard card : drawnCards) {
             System.out.println(card.toString());
         }
 
-        return drawnCards;
+        return moveStack;
     }
 
     public void addWasteStack() {
-        cards.addAll(wasteStack.getAndClearAll());
+        MoveStack moveStack = wasteStack.getAndClearAll();
+        cards.addAll(moveStack.getCards());
+        //Reverse waste stack to keep correct order
+        Collections.reverse(cards);
+        moveStack.moveCardSprites(this);
+        for(ICard card : moveStack.getCards()){
+            card.flipCard(false);
+        }
     }
 
-    public StackButton getButton() {
-        return this.stackButton;
+    public StackButton getStackButton(){
+        return stackButton;
     }
 }
