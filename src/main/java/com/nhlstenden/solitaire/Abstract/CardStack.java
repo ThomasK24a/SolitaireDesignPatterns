@@ -68,7 +68,7 @@ public abstract class CardStack
 
     public Coordinates getCoordsOfCard(int index){
         Coordinates cardCoordinates = getStackCoordinates();
-        for(int i = 0; i < index; i++){
+        for(int i = 0; i <= index; i++){
             cardCoordinates.addCoordinates(getOffset());
         }
         return cardCoordinates;

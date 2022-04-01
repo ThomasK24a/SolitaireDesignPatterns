@@ -76,7 +76,10 @@ public class FinishStack extends CardStack {
     }
 
     public boolean isComplete() {
-        ICard lastCard = cards.get(cards.size() - 1);
-        return lastCard.getValue().equals(Value.KING);
+        if(cards.size() != 0){
+            ICard lastCard = cards.get(cards.size() - 1);
+            return lastCard.getValue().equals(Value.KING);
+        }
+        return false;
     }
 }

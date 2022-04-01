@@ -53,6 +53,7 @@ public class DecoratorLibrary {
      * Fills the Suit EnumMap.
      */
     private void fillSuitIconMap() {
+        suitIconMap.put(Suit.NONE, "blank_front_with_num_boarders.png");
         suitIconMap.put(Suit.HEART, "heart.png");
         suitIconMap.put(Suit.SPADE, "spade.png");
         suitIconMap.put(Suit.DIAMOND, "diamond.png");
@@ -65,6 +66,7 @@ public class DecoratorLibrary {
      * @param valueMap
      */
     private void fillValueIconMap(String mapColor, EnumMap<Value, String> valueMap) {
+        valueMap.put(Value.NONE, "ace_");
         valueMap.put(Value.ACE, "ace_" + mapColor);
         valueMap.put(Value.TWO, "2_" + mapColor);
         valueMap.put(Value.THREE, "3_" + mapColor);

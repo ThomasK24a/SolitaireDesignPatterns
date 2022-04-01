@@ -24,7 +24,7 @@ public class GameBoard extends JFrame {
     private final WasteStack waste;
     private final BoardFactory boardFactory;
     private CardLocation selectedCardLocation;
-    private final JButton currentSelectedCard;
+//    private final JButton currentSelectedCard;
 
     public GameBoard() {
         super("Solitaire");
@@ -44,10 +44,10 @@ public class GameBoard extends JFrame {
         boardFactory.fillBoardStacks(boardStacks);
         boardFactory.fillDeck(deck);
 
-        currentSelectedCard = new JButton();
-        currentSelectedCard.setBounds(BOARD_START_X, BOARD_START_Y * 2, 65, 90);
-        currentSelectedCard.setVisible(false);
-        add(currentSelectedCard);
+//        currentSelectedCard = new JButton();
+//        currentSelectedCard.setBounds(BOARD_START_X, BOARD_START_Y * 2, 65, 90);
+//        currentSelectedCard.setVisible(false);
+//        add(currentSelectedCard);
         JLayeredPane backGroundPanel = new JLayeredPane();
         setContentPane(backGroundPanel);
 
@@ -59,7 +59,7 @@ public class GameBoard extends JFrame {
 
     private void addFinishStackButtonsToPanel() {
         for (FinishStack finishStack : finishStacks) {
-            add(finishStack.getStackButton());
+            add(finishStack.getStackButton(), 0);
         }
     }
 
@@ -72,6 +72,10 @@ public class GameBoard extends JFrame {
 
 
     public void onCardMoved() {
+        for(FinishStack finishStack : finishStacks){
+            redrawFinishStack(finishStack);
+        }
+
         if (areFinishStacksComplete()) {
             //set state to post game state
         }
@@ -96,9 +100,11 @@ public class GameBoard extends JFrame {
         ArrayList<FinishStack> finishStacks = new ArrayList<>();
         int i = 0;
         for (Suit suit : Suit.class.getEnumConstants()) {
-            FinishStack finishStack = new FinishStack(suit, new Coordinates(BOARD_START_X + 320 + (80 * i), 10));
-            finishStacks.add(finishStack);
-            i++;
+            if(!suit.equals(Suit.NONE)){
+                FinishStack finishStack = new FinishStack(suit, new Coordinates(BOARD_START_X + 320 + (80 * i), 10));
+                finishStacks.add(finishStack);
+                i++;
+            }
         }
         return finishStacks;
     }
@@ -116,7 +122,7 @@ public class GameBoard extends JFrame {
         System.out.println(cardLocation.getCard().toString());
         if (cardLocation.isIntractable()) {
             selectedCardLocation = cardLocation;
-            currentSelectedCard.setVisible(true);
+//            currentSelectedCard.setVisible(true);
             validate();
         } else {
             throw new RuntimeException("Card cannot be selected"); //TODO: add custom exception
@@ -141,6 +147,7 @@ public class GameBoard extends JFrame {
         }
 
         selectedCardLocation = null;
+        onCardMoved();
     }
 
     private void addBoardStackCardsToPanel() {
@@ -173,5 +180,18 @@ public class GameBoard extends JFrame {
         for(ICard card : deck.getCards()){
             remove(card.getJCard());
         }
+        validate();
+    }
+
+    private void redrawFinishStack(FinishStack finishStack){
+        int i = 1;
+        for(ICard card : finishStack.getCards()){
+            remove(card.getJCard());
+            if(i == finishStack.getCards().size()){
+                add(card.getJCard(), i);
+            }
+            i++;
+        }
+        validate();
     }
 }

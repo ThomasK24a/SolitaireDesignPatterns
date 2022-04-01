@@ -63,9 +63,11 @@ public class CardObjectPool {
     private ArrayList<ICard> createFullDeck() {
         ArrayList<ICard> deck = new ArrayList<>();
         for (Suit suit : Suit.class.getEnumConstants()) {
-            for (Value value : Value.class.getEnumConstants()) {
-                if (!value.equals(Value.NONE)) {
-                    deck.add(createDecoratedCard(suit, value));
+            if(!suit.equals(Suit.NONE)){
+                for (Value value : Value.class.getEnumConstants()) {
+                    if (!value.equals(Value.NONE)) {
+                        deck.add(createDecoratedCard(suit, value));
+                    }
                 }
             }
         }
