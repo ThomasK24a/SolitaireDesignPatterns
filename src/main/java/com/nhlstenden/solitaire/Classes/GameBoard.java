@@ -74,7 +74,7 @@ public class GameBoard extends JFrame {
         });
     }
 
-    public void onDeckButtonClick() {0
+    public void onDeckButtonClick() {
         List<ICard> drawnCards = deck.drawThree();
 
         for (int i = 0; i < drawnCards.size(); i++) {
