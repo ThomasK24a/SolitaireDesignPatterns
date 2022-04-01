@@ -3,13 +3,10 @@ package main.java.com.nhlstenden.solitaire;
 import main.java.com.nhlstenden.solitaire.Classes.States.GameStateMachine;
 import main.java.com.nhlstenden.solitaire.Enums.GameStates;
 
-import javax.swing.*;
-
 public class GameManager {
     public static GameManager instance;
 
     static GameStateMachine stateMachine;
-    private JFrame currentJFrame;
 
     public GameManager() {
         stateMachine = GameStateMachine.getInstance();

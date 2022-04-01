@@ -10,7 +10,6 @@ import main.java.com.nhlstenden.solitaire.Enums.Value;
 import main.java.com.nhlstenden.solitaire.Interfaces.ICard;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
 
 public class FinishStack extends CardStack {
     private final Suit suit;

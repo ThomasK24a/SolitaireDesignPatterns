@@ -1,13 +1,8 @@
 package main.java.com.nhlstenden.solitaire.Classes.Stacks;
 
 import main.java.com.nhlstenden.solitaire.Abstract.CardStack;
-import main.java.com.nhlstenden.solitaire.Classes.Card;
-import main.java.com.nhlstenden.solitaire.Classes.CardLocation;
-import main.java.com.nhlstenden.solitaire.Classes.DecoratorLibrary;
-import main.java.com.nhlstenden.solitaire.Classes.GameBoard;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class StackButton extends JPanel {
     JButton stackButton = new JButton();

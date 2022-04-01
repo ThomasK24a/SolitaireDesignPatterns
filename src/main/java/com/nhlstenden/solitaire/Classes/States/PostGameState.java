@@ -4,7 +4,7 @@ import main.java.com.nhlstenden.solitaire.Abstract.GameState;
 import main.java.com.nhlstenden.solitaire.Enums.GameStates;
 import main.java.com.nhlstenden.solitaire.FinishedGame;
 
-public class PostgameState extends GameState {
+public class PostGameState extends GameState {
     FinishedGame finishedGame;
     @Override
     public void onStateEnter() {

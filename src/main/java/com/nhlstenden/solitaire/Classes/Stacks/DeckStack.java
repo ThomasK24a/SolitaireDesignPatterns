@@ -60,9 +60,6 @@ public class DeckStack extends CardStack {
         Collections.reverse(drawnCards);
         MoveStack moveStack = new MoveStack(drawnCards);
         cards = newDeck;
-        for (ICard card : drawnCards) {
-            System.out.println(card.toString());
-        }
 
         return moveStack;
     }

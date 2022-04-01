@@ -4,16 +4,12 @@ import main.java.com.nhlstenden.solitaire.Classes.Coordinates;
 import main.java.com.nhlstenden.solitaire.Classes.Stacks.MoveStack;
 import main.java.com.nhlstenden.solitaire.Interfaces.ICard;
 
-import javax.swing.*;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class CardStack
 {
     protected List<ICard> cards;
-    private final JButton suitButton = new JButton();
-    private static final Icon BACK_SPRITE = new ImageIcon("src/resources/card_sprites/back_red_basic.png");
     private Coordinates stackCoordinates;
 
     public CardStack(Coordinates stackCoordinates) {
@@ -23,10 +19,6 @@ public abstract class CardStack
 
     public Coordinates getStackCoordinates() {
         return new Coordinates(stackCoordinates.getX(), stackCoordinates.getY());
-    }
-
-    public void setStackCoordinates(int x, int y) {
-        this.stackCoordinates = new Coordinates(x,y);
     }
 
     public void addCards(List<ICard> cards) {

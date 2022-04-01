@@ -62,8 +62,6 @@ public class DecoratorLibrary {
 
     /**
      * Fills the Value EnumMaps with red or black values for the cards.
-     * @param mapColor
-     * @param valueMap
      */
     private void fillValueIconMap(String mapColor, EnumMap<Value, String> valueMap) {
         valueMap.put(Value.NONE, "ace_" + mapColor);

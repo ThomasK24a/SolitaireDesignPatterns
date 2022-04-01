@@ -155,7 +155,6 @@ public class GameBoard extends JFrame {
     }
 
     private void selectCard(CardLocation cardLocation) {
-        System.out.println(cardLocation.getCard().toString());
         if (cardLocation.isIntractable()) {
             selectedCardLocation = cardLocation;
             setCurrentCard(selectedCardLocation.getCard());

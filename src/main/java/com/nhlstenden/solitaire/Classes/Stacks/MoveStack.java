@@ -5,7 +5,6 @@ import main.java.com.nhlstenden.solitaire.Classes.Coordinates;
 import main.java.com.nhlstenden.solitaire.Interfaces.ICard;
 import main.java.com.nhlstenden.solitaire.Interfaces.IOrderedStack;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MoveStack implements IOrderedStack {

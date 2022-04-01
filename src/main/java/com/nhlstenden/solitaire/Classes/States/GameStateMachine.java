@@ -9,12 +9,12 @@ public class GameStateMachine {
 
     PregameState pregameState;
     RunningState runningState;
-    PostgameState postgameState;
+    PostGameState postgameState;
 
     public GameStateMachine() {
         pregameState = new PregameState();
         runningState = new RunningState();
-        postgameState = new PostgameState();
+        postgameState = new PostGameState();
 
         setGameState(GameStates.PRE_GAME_STATE);
     }

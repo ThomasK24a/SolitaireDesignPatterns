@@ -6,7 +6,7 @@ Start: 10/03/2022
 
 ## Members
 
-* Thomas koops
+* Thomas Koops
 * Ramon Gonzalez
 * Ian Donker
 
