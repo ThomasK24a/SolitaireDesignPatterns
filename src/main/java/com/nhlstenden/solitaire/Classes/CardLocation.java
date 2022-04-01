@@ -34,6 +34,7 @@ public class CardLocation {
     }
 
     public boolean isIntractable(){
+        System.out.println(stack);
         return stack.isIntractable(indexStack);
     }
 }

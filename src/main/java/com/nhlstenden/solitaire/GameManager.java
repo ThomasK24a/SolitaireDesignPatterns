@@ -1,9 +1,9 @@
 package main.java.com.nhlstenden.solitaire;
 
-import main.java.com.nhlstenden.solitaire.GUI.MainMenu;
+import main.java.com.nhlstenden.solitaire.Classes.States.GameStateMachine;
 
 public class GameManager {
     public static void main(String[] args) {
-        MainMenu menu = new MainMenu();
+        GameStateMachine stateMachine = new GameStateMachine();
     }
 }

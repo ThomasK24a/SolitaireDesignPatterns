@@ -24,7 +24,6 @@ public class GameBoard extends JFrame {
     private final WasteStack waste;
     private final BoardFactory boardFactory;
     private CardLocation selectedCardLocation;
-    private final JButton deckButton;
     private final JButton currentSelectedCard;
 
     public GameBoard() {
@@ -45,10 +44,8 @@ public class GameBoard extends JFrame {
         boardFactory.fillBoardStacks(boardStacks);
         boardFactory.fillDeck(deck);
 
-        deckButton = new JButton();
-
         currentSelectedCard = new JButton();
-        currentSelectedCard.setBounds(BOARD_START_X, BOARD_START_Y * 4, 65, 90);
+        currentSelectedCard.setBounds(BOARD_START_X, BOARD_START_Y * 2, 65, 90);
         currentSelectedCard.setVisible(false);
         add(currentSelectedCard);
         JLayeredPane backGroundPanel = new JLayeredPane();
@@ -70,14 +67,14 @@ public class GameBoard extends JFrame {
      * create listener for the deck.
      */
     public void addDeckButtonToPanel() {
-        deckButton.setBounds(BOARD_START_X, BOARD_START_Y - 90, 65, 90);
-        add(deckButton);
-        deckButton.addActionListener(e -> {
+        add(deck.getButton());
+
+        deck.getButton().getStackButton().addActionListener(e ->{
             onDeckButtonClick();
         });
     }
 
-    public void onDeckButtonClick() {
+    public void onDeckButtonClick() {0
         List<ICard> drawnCards = deck.drawThree();
 
         for (int i = 0; i < drawnCards.size(); i++) {
@@ -120,7 +117,6 @@ public class GameBoard extends JFrame {
     }
 
     public void onCardButtonClick(ICard card) {
-
         CardLocation cardLocation = new CardLocation(card);
         if (selectedCardLocation == null) {
             selectCard(cardLocation);
@@ -133,6 +129,8 @@ public class GameBoard extends JFrame {
         System.out.println(cardLocation.getCard().toString());
         if (cardLocation.isIntractable()) {
             selectedCardLocation = cardLocation;
+            currentSelectedCard.setVisible(true);
+            validate();
         } else {
             throw new RuntimeException("Card cannot be selected"); //TODO: add custom exception
         }
@@ -145,12 +143,6 @@ public class GameBoard extends JFrame {
         if (!targetCardLocation.isIntractable() || !selectedCardLocation.isIntractable()) {
             selectedCardLocation = null;
             throw new RuntimeException("Card cannot be selected"); //TODO: add custom exception
-        }
-
-        if (targetCardLocation.getStack().getLastCard() != null) {
-            previousLocation = targetCardLocation.getStack().getLastCard().getCardCoordinates();
-        } else {
-            previousLocation = targetCardLocation.getStack().getStackCoordinates();
         }
 
         MoveStack moveStack = selectedCardLocation.getStack().getAllBelow(selectedCardLocation.getIndexStack());

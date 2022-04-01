@@ -32,7 +32,6 @@ public class MoveStack implements IOrderedStack {
     }
 
     public void moveCardSprites(CardStack targetStack) {
-        System.out.println(cards.size());
         int count = targetStack.getCards().size() - cards.size();
         for (ICard card : cards) {
             Coordinates cardCoordinates = targetStack.getCoordsOfCard(count);

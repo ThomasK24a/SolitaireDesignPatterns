@@ -1,37 +1,37 @@
 package main.java.com.nhlstenden.solitaire.Classes.Stacks;
 
 import main.java.com.nhlstenden.solitaire.Abstract.CardStack;
-import main.java.com.nhlstenden.solitaire.Classes.CardLocation;
 import main.java.com.nhlstenden.solitaire.Classes.Coordinates;
-import main.java.com.nhlstenden.solitaire.Classes.DecoratorLibrary;
-import main.java.com.nhlstenden.solitaire.Classes.GameBoard;
 import main.java.com.nhlstenden.solitaire.Interfaces.ICard;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
 import java.util.List;
 
 public class DeckStack extends CardStack {
     WasteStack wasteStack;
     StackButton stackButton;
+    WasteStack drawnCards;
 
     public DeckStack(WasteStack wasteStack, Coordinates stackCoordinates) {
         super(stackCoordinates);
         this.wasteStack = wasteStack;
+        drawnCards = new WasteStack(stackCoordinates);
         initializeStackButton(stackCoordinates);
     }
 
-    private void initializeStackButton(Coordinates stackCoordinates){
+    private void initializeStackButton(Coordinates stackCoordinates) {
         ImageIcon deckIcon = new ImageIcon("src/resources/card_sprites/back_red_basic.png");
         this.stackButton = new StackButton(this, deckIcon);
-        stackButton.setBounds(stackCoordinates.getX(), stackCoordinates.getY(), 65, 90);
+        stackButton.setBounds(stackCoordinates.getX(), stackCoordinates.getY(), 65, 95);
 
-        stackButton.stackButton.addActionListener(e ->  {
-            if(cards.size() == 0){
+        stackButton.getStackButton().addActionListener(e -> {
+            if (cards.size() == 0) {
                 addWasteStack();
-            }else{
-                //TODO: implement cards getting added to waste
             }
+            System.out.println(cards.size());
+            System.out.println(wasteStack.getCards().size());
+            //TODO: implement cards getting added to waste
+
         });
     }
 
@@ -48,7 +48,7 @@ public class DeckStack extends CardStack {
 
     @Override
     protected Coordinates getOffset() {
-        return new Coordinates(0,0);
+        return new Coordinates(0, 0);
     }
 
     public List<ICard> drawThree() {
@@ -57,7 +57,7 @@ public class DeckStack extends CardStack {
         List<ICard> drawnCards = cards.subList(cards.size() - toDraw, cards.size());
         wasteStack.addCards(drawnCards);
         cards = newDeck;
-        for (ICard card : drawnCards){
+        for (ICard card : drawnCards) {
             System.out.println(card.toString());
         }
 
@@ -66,5 +66,9 @@ public class DeckStack extends CardStack {
 
     public void addWasteStack() {
         cards.addAll(wasteStack.getAndClearAll());
+    }
+
+    public StackButton getButton() {
+        return this.stackButton;
     }
 }
