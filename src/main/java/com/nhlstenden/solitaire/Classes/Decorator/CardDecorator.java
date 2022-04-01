@@ -21,6 +21,9 @@ public class CardDecorator {
     }
 
     public void decorateCard(ICard card) {
+        if(card.getSuit().equals(Suit.NONE)){
+            System.out.println("dasd");
+        }
         card.setSuitSprite(DecoratorLibrary.getInstance().getIcon(suitIconMap.get(card.getSuit())));
 
         if (card.isBlack()) {

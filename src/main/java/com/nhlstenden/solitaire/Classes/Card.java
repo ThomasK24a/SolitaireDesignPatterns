@@ -46,8 +46,8 @@ public class Card extends JPanel implements ICard {
         setFaceDownLabel();
         setBorder();
         flipCard(isFaceUp);
-
         createButton();
+
     }
 
     /**
@@ -177,9 +177,9 @@ public class Card extends JPanel implements ICard {
      * @return return true if the given value is the next value
      */
     public boolean isNextValue(Value value) {
-        int intValue = getValue().ordinal();
-        int intValueToCompare = value.ordinal();
-        return intValue == intValueToCompare + 1;
+        int intValue = getValue().ordinal() % 12;
+        int intValueToCompare = (value.ordinal() + 1) % 12;
+        return intValue == intValueToCompare;
     }
 
     /**

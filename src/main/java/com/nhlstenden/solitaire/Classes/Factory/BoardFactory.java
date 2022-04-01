@@ -9,6 +9,7 @@ import main.java.com.nhlstenden.solitaire.Enums.Value;
 import main.java.com.nhlstenden.solitaire.Interfaces.ICard;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class BoardFactory {
     private final CardObjectPool cardObjectPool;
@@ -24,8 +25,8 @@ public class BoardFactory {
     public void fillBoardStacks(ArrayList<BoardStack> boardStacks) {
         for(int i = 0; i < boardStacks.size(); i++){
             BoardStack boardStack = boardStacks.get(i);
-//            ICard emptyCard = new Card(Suit.NONE, Value.NONE, false);
-//            boardStack.getCards().add(emptyCard);
+            ICard emptyCard = cardObjectPool.createEmptyDecoratedCard();
+            boardStack.addCards(Collections.singletonList(emptyCard));
             ArrayList<ICard> cardsToAdd = cardObjectPool.getRandomCardStack(i + 1);
             boardStack.addCards(cardsToAdd);
         }

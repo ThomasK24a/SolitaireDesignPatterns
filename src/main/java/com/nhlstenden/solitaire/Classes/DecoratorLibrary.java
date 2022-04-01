@@ -66,7 +66,7 @@ public class DecoratorLibrary {
      * @param valueMap
      */
     private void fillValueIconMap(String mapColor, EnumMap<Value, String> valueMap) {
-        valueMap.put(Value.NONE, "ace_");
+        valueMap.put(Value.NONE, "ace_" + mapColor);
         valueMap.put(Value.ACE, "ace_" + mapColor);
         valueMap.put(Value.TWO, "2_" + mapColor);
         valueMap.put(Value.THREE, "3_" + mapColor);

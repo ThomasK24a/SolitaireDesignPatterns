@@ -2,6 +2,7 @@ package main.java.com.nhlstenden.solitaire.Classes.Stacks;
 
 import main.java.com.nhlstenden.solitaire.Abstract.CardStack;
 import main.java.com.nhlstenden.solitaire.Classes.Coordinates;
+import main.java.com.nhlstenden.solitaire.Enums.Suit;
 import main.java.com.nhlstenden.solitaire.Enums.Value;
 import main.java.com.nhlstenden.solitaire.Interfaces.ICard;
 import main.java.com.nhlstenden.solitaire.Interfaces.IOrderedStack;
@@ -31,7 +32,7 @@ public class BoardStack extends CardStack implements IOrderedStack {
 
     @Override
     public boolean canAcceptStack(MoveStack moveStack) {
-        if(getLastCard() == null){
+        if(getLastCard().getSuit().equals(Suit.NONE)){
             return moveStack.getFirstCard().isNextValue(Value.NONE);
         }
         return getLastCard().isNextValue(moveStack.getFirstCard().getValue()) &&

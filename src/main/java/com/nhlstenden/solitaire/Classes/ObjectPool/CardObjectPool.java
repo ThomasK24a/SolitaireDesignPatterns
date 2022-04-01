@@ -79,4 +79,10 @@ public class CardObjectPool {
         decorator.decorateCard(card);
         return card;
     }
+
+    public ICard createEmptyDecoratedCard(){
+        ICard card = new Card(Suit.NONE, Value.NONE, false);
+        decorator.decorateCard(card);
+        return card;
+    }
 }
