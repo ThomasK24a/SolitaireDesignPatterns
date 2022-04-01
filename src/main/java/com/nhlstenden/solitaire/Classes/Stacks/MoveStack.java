@@ -6,12 +6,13 @@ import main.java.com.nhlstenden.solitaire.Interfaces.ICard;
 import main.java.com.nhlstenden.solitaire.Interfaces.IOrderedStack;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MoveStack implements IOrderedStack {
-    protected ArrayList<ICard> cards;
+    protected List<ICard> cards;
 
-    public MoveStack() {
-        this.cards = new ArrayList<>();
+    public MoveStack(List<ICard> cards) {
+        this.cards = cards;
     }
 
     @Override
@@ -27,7 +28,7 @@ public class MoveStack implements IOrderedStack {
         return cards.size();
     }
 
-    public ArrayList<ICard> getCards() {
+    public List<ICard> getCards() {
         return cards;
     }
 

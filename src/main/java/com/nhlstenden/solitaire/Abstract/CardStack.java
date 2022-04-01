@@ -55,9 +55,7 @@ public abstract class CardStack
     }
 
     public MoveStack getAllBelow(int startingIndex){
-        MoveStack moveStack = new MoveStack();
-        moveStack.getCards().addAll(cards.subList(startingIndex, cards.size()));
-        return moveStack;
+        return new MoveStack(cards.subList(startingIndex, cards.size()));
     }
 
     public void removeAllBelow(int startingIndex){

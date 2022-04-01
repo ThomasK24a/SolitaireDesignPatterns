@@ -1,14 +1,10 @@
 package main.java.com.nhlstenden.solitaire.Classes.Stacks;
 
 import main.java.com.nhlstenden.solitaire.Abstract.CardStack;
-import main.java.com.nhlstenden.solitaire.Classes.CardLocation;
 import main.java.com.nhlstenden.solitaire.Classes.Coordinates;
-import main.java.com.nhlstenden.solitaire.Classes.DecoratorLibrary;
-import main.java.com.nhlstenden.solitaire.Classes.GameBoard;
 import main.java.com.nhlstenden.solitaire.Interfaces.ICard;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
 import java.util.List;
 
 public class DeckStack extends CardStack {
@@ -30,7 +26,9 @@ public class DeckStack extends CardStack {
             if(cards.size() == 0){
                 addWasteStack();
             }else{
-                //TODO: implement cards getting added to waste
+                MoveStack moveStack = drawThree();
+                this.wasteStack.addCards(moveStack.getCards());
+                moveStack.moveCardSprites(wasteStack);
             }
         });
     }
@@ -51,20 +49,30 @@ public class DeckStack extends CardStack {
         return new Coordinates(0,0);
     }
 
-    public List<ICard> drawThree() {
+    public MoveStack drawThree() {
         int toDraw = Math.min(cards.size(), 3);
         List<ICard> newDeck = cards.subList(0, cards.size() - toDraw);
         List<ICard> drawnCards = cards.subList(cards.size() - toDraw, cards.size());
-        wasteStack.addCards(drawnCards);
+        MoveStack moveStack = new MoveStack(drawnCards);
         cards = newDeck;
         for (ICard card : drawnCards){
             System.out.println(card.toString());
         }
 
-        return drawnCards;
+        return moveStack;
     }
 
     public void addWasteStack() {
-        cards.addAll(wasteStack.getAndClearAll());
+        MoveStack moveStack = wasteStack.getAndClearAll();
+        cards.addAll(moveStack.getCards());
+        moveStack.moveCardSprites(this);
+        for(ICard card : moveStack.getCards()){
+            card.flipCard(false);
+        }
+
+    }
+
+    public StackButton getStackButton(){
+        return stackButton;
     }
 }

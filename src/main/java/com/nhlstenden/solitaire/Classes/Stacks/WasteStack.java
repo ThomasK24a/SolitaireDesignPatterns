@@ -5,6 +5,7 @@ import main.java.com.nhlstenden.solitaire.Classes.Coordinates;
 import main.java.com.nhlstenden.solitaire.Interfaces.ICard;
 
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 import java.util.List;
 
 public class WasteStack extends CardStack {
@@ -27,10 +28,10 @@ public class WasteStack extends CardStack {
         return new Coordinates(0,0);
     }
 
-    public List<ICard> getAndClearAll(){
-        List<ICard> cards = this.cards;
-        this.cards.clear();
-        return cards;
+    public MoveStack getAndClearAll(){
+        MoveStack moveStack = new MoveStack(this.cards);
+        this.cards = new ArrayList<>();
+        return moveStack;
     }
 
 }
