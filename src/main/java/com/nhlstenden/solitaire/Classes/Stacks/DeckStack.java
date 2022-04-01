@@ -2,9 +2,11 @@ package main.java.com.nhlstenden.solitaire.Classes.Stacks;
 
 import main.java.com.nhlstenden.solitaire.Abstract.CardStack;
 import main.java.com.nhlstenden.solitaire.Classes.Coordinates;
+import main.java.com.nhlstenden.solitaire.Classes.GameBoard;
 import main.java.com.nhlstenden.solitaire.Interfaces.ICard;
 
 import javax.swing.*;
+import java.util.Collections;
 import java.util.List;
 
 public class DeckStack extends CardStack {
@@ -29,6 +31,7 @@ public class DeckStack extends CardStack {
                 MoveStack moveStack = drawThree();
                 this.wasteStack.addCards(moveStack.getCards());
                 moveStack.moveCardSprites(wasteStack);
+                GameBoard.getInstance().redrawWasteStack();
             }
         });
     }
@@ -53,6 +56,8 @@ public class DeckStack extends CardStack {
         int toDraw = Math.min(cards.size(), 3);
         List<ICard> newDeck = cards.subList(0, cards.size() - toDraw);
         List<ICard> drawnCards = cards.subList(cards.size() - toDraw, cards.size());
+        //Reverse drawn cards to keep correct order
+        Collections.reverse(drawnCards);
         MoveStack moveStack = new MoveStack(drawnCards);
         cards = newDeck;
         for (ICard card : drawnCards) {
@@ -65,18 +70,15 @@ public class DeckStack extends CardStack {
     public void addWasteStack() {
         MoveStack moveStack = wasteStack.getAndClearAll();
         cards.addAll(moveStack.getCards());
+        //Reverse waste stack to keep correct order
+        Collections.reverse(cards);
         moveStack.moveCardSprites(this);
         for(ICard card : moveStack.getCards()){
             card.flipCard(false);
         }
-
     }
 
     public StackButton getStackButton(){
         return stackButton;
-    }
-
-    public StackButton getButton() {
-        return this.stackButton;
     }
 }

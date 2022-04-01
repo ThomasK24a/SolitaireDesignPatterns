@@ -161,4 +161,17 @@ public class GameBoard extends JFrame {
 
         return instance;
     }
+
+    public void redrawWasteStack() {
+        int i = waste.getCards().size();
+        for(ICard card : waste.getCards()){
+            card.setCardCoordinates(waste.getCoordsOfCard(waste.findCardIndex(card)));
+            remove(card.getJCard());
+            add(card.getJCard(), i);
+            i--;
+        }
+        for(ICard card : deck.getCards()){
+            remove(card.getJCard());
+        }
+    }
 }
