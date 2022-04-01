@@ -31,13 +31,13 @@ public class GameBoard extends JFrame {
 
     public GameBoard() {
         super("Solitaire");
-
         instance = this;
 
         setLayout(null);
         setBackground(new ColorUIResource(0, 153, 153));
         setSize(900, 750);
         setVisible(true);
+        setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         boardStacks = createBoardStacks();
@@ -51,21 +51,27 @@ public class GameBoard extends JFrame {
         JLayeredPane backGroundPanel = new JLayeredPane();
         setContentPane(backGroundPanel);
 
-        currentSelectedCard = new JButton();
-        currentSelectedCard.setBounds(BOARD_START_X, 500, 65, 90);
-        currentSelectedCard.setVisible(false);
-        add(currentSelectedCard);
-
-       addRestartButton();
+        addCurrentCard();
+        addRestartButton();
         addBoardStackCardsToPanel();
         addDeckButtonToPanel();
         addFinishStackButtonsToPanel();
         validate();
     }
 
+    private void setCurrentCard(){}
+
+    private void addCurrentCard() {
+        currentSelectedCard = new JButton();
+        currentSelectedCard.setBounds(BOARD_START_X, 400, 65, 90);
+        currentSelectedCard.setVisible(false);
+
+        add(currentSelectedCard);
+    }
+
     private void addRestartButton() {
         restartButton = new JButton();
-        restartButton.setBounds(100,600,80,50);
+        restartButton.setBounds(100, 600, 80, 50);
         restartButton.setText("Restart");
         add(restartButton, 5);
 
@@ -93,7 +99,7 @@ public class GameBoard extends JFrame {
 
     public void onCardMoved() {
         if (areFinishStacksComplete()) {
-            //set state to post game state
+            GameManager.getInstance().finishGame();
         }
     }
 
@@ -159,6 +165,7 @@ public class GameBoard extends JFrame {
         } else {
             System.out.println("Didn't move a " + moveStack.getFirstCard().toString());
         }
+        currentSelectedCard.setVisible(false);
 
         selectedCardLocation = null;
     }
@@ -184,13 +191,13 @@ public class GameBoard extends JFrame {
 
     public void redrawWasteStack() {
         int i = waste.getCards().size();
-        for(ICard card : waste.getCards()){
+        for (ICard card : waste.getCards()) {
             card.setCardCoordinates(waste.getCoordsOfCard(waste.findCardIndex(card)));
             remove(card.getJCard());
             add(card.getJCard(), i);
             i--;
         }
-        for(ICard card : deck.getCards()){
+        for (ICard card : deck.getCards()) {
             remove(card.getJCard());
         }
     }

@@ -23,7 +23,7 @@ public class GameManager {
         stateMachine.setGameState(GameStates.RUNNING_STATE);
     }
 
-    public void exitGame() {
+    public void finishGame() {
         stateMachine.setGameState(GameStates.POST_GAME_STATE);
     }
 
@@ -33,4 +33,5 @@ public class GameManager {
 
         return instance;
     }
+
 }

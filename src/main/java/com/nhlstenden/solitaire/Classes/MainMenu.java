@@ -21,6 +21,7 @@ public class MainMenu extends JFrame {
         setSize(900, 750);
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
 
         iconStart = new ImageIcon("src/resources/card_sprites/spade.png");
         iconExit = new ImageIcon("src/resources/card_sprites/heart.png");
