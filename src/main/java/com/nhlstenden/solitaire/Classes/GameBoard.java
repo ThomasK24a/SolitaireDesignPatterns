@@ -48,6 +48,7 @@ public class GameBoard extends JFrame {
 
         boardFactory.fillBoardStacks(boardStacks);
         boardFactory.fillDeck(deck);
+
         JLayeredPane backGroundPanel = new JLayeredPane();
         setContentPane(backGroundPanel);
 
@@ -59,7 +60,23 @@ public class GameBoard extends JFrame {
         validate();
     }
 
-    private void setCurrentCard(){}
+    private void setCurrentCard(ICard card) {
+        DecoratorLibrary dl = DecoratorLibrary.getInstance();
+
+        String iconPath;
+        ImageIcon icon;
+
+        if (card.isBlack()) {
+            iconPath = dl.getValueIconBlackMap().get(card.getValue());
+        } else {
+            iconPath = dl.getValueIconRedMap().get(card.getValue());
+        }
+
+        icon = dl.getIcon(iconPath);
+        currentSelectedCard.setIcon(icon);
+        currentSelectedCard.setVisible(true);
+        validate();
+    }
 
     private void addCurrentCard() {
         currentSelectedCard = new JButton();
@@ -142,7 +159,7 @@ public class GameBoard extends JFrame {
         System.out.println(cardLocation.getCard().toString());
         if (cardLocation.isIntractable()) {
             selectedCardLocation = cardLocation;
-            currentSelectedCard.setVisible(true);
+            setCurrentCard(selectedCardLocation.getCard());
             validate();
         } else {
             throw new RuntimeException("Card cannot be selected"); //TODO: add custom exception
